@@ -28,4 +28,4 @@ function minMax(array) {
     return array
 }
 
-console.log(minMax([ 1, -10000] ))
+console.log(minMax([5, 7, 2, 9, 100, 6, 3, 1, 0] ))

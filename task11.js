@@ -1,7 +1,7 @@
 // Дана строка. Написать функцию, которая определит, содержит ли строка только символы 'a', 'b', 'c' или нет.
 function checkSymbols(str) {
     let result = true
-    if (str === '') {
+    if (!str) {
         return false
     }
     for (let i = 0; i < str.length; i++) {
