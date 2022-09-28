@@ -8,26 +8,11 @@ function findEverywhere(arr1, arr2) {
             }
         }
     }
-    for (let j = resultArr.length - 1; j > 0; j--) {
-        for (let i = 0; i < j; i++) {
-            if (resultArr[i] > resultArr[i + 1]) {
-                const temp = resultArr[i];
-                resultArr[i] = resultArr[i + 1];
-                resultArr[i + 1] = temp;
-            }
-        }
-    }
-    for (let i = 0; i < resultArr.length; i++) {
-        if (resultArr[i] === resultArr[i + 1]) {
-            resultArr.splice(i + 1, 1)
-        }
-        if (resultArr[i] === resultArr[i - 1]) {
-            resultArr.splice(i - 1, 1)
-        }
-
-    }
-
-    return resultArr
+    let noRepeat = new Set()
+   resultArr.forEach(el => {
+       noRepeat.add(el)
+   })
+    return [...noRepeat]
 }
 
 console.log(findEverywhere([5, 2, 7, 3, 6, 8, 2, 9, 1, 4, 4], [4, 2, 9, 4, 5, 4]))
