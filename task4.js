@@ -2,7 +2,7 @@
 // Функция возвращает массив, который содержит все числа из диапазона, включая начальное и конечное.
 // Третий необязательный аргумент функции range() – шаг для построения массива. Убедитесь, что функция range() работает с отрицательным шагом.
 
-function range(start, end, step) {
+function range(start, end, step=1) {
     let arr = []
     if (start > end) {
         for (let i = start; i >= end; i = i + step) {
@@ -17,5 +17,5 @@ function range(start, end, step) {
     return arr
 }
 
-console.log(range(4, 16, 2))
+console.log(range(4, 16))
 
