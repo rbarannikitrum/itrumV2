@@ -2,14 +2,14 @@
 // Функция возвращает массив, который содержит все числа из диапазона, включая начальное и конечное.
 // Третий необязательный аргумент функции range() – шаг для построения массива. Убедитесь, что функция range() работает с отрицательным шагом.
 
-function range(...nums) {
+function range(start, end, step) {
     let arr = []
-    if (nums[0] > nums[1]) {
-        for (let i = nums[0]; i >= nums[1]; i = i + nums[2]) {
+    if (start > end) {
+        for (let i = start; i >= end; i = i + step) {
             arr.push(i)
         }
-    } else if (nums[0] < nums[1]) {
-        for (let i = nums[0]; i <= nums[1]; i = i + nums[2]) {
+    } else if (start < end) {
+        for (let i = start; i <= end; i = i + step) {
             arr.push(i)
         }
     }
