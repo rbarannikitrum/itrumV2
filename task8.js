@@ -1,8 +1,9 @@
 function address(str, obj) {
     let string = str + '?'
     for (const objKey in obj) {
-        string = string +`${objKey}=${obj[objKey]}`
+        string = string +`${objKey}=${obj[objKey]}&`
     }
+    string = string.slice(0, string.length - 1)
     return string
 }
 
