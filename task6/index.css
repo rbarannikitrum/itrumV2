@@ -1,0 +1,57 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.full {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.stripe {
+    max-height: 5px;
+    width: 500px;
+    background-color: #CFCFCF;
+    z-index: -999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.active {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: #B9D152;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.now {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: #A05199;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.disabled {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: #CDCDCD;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.number {
+
+}
