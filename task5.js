@@ -16,5 +16,4 @@ function odd(arr) {
 }
 
 export default odd()
-
 console.log(odd([5, 8, 2, 4, 5, 4, 2, 4, 2, 5, 2, 4, 5]))
