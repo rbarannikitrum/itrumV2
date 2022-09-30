@@ -1,0 +1,60 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main {
+    display: inline-block;
+    left: -32%;
+    align-items: flex-end;
+    flex-direction: row;
+
+
+}
+.block {
+    display: flex;
+    align-items: flex-end;
+    margin-left: -1680px;
+    transition: margin-left 2s;
+}
+.woman_with_text {
+    background-color: #323232;
+    display: flex;
+    flex-direction: row;
+    max-width: 45%;
+
+}
+.woman_with_text img {
+    margin: 15px;
+}
+.text {
+    color: white;
+    font-size: 24px;
+    padding: 20px 20px 20px 10px;
+}
+
+.feedback {
+    background-color: #F8D145;
+    max-width: 30px;
+    min-height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 30px 30px 0;
+ }
+.feedback p {
+    transform: rotate(270deg);
+    white-space: nowrap;
+    font-size: 24px;
+}
+.feedback:hover .main {
+    left: 0;
+}
+.block:hover {
+    margin-left: -542px;
+}
