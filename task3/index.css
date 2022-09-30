@@ -1,0 +1,24 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.circle1 {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border:  40px solid #A2CB92;
+    border-right: 40px solid #D5E5C0;
+    background-color: #EEF5E6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.circle1 span {
+    font-size: 64px;
+}
