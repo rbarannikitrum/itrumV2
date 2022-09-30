@@ -6,9 +6,9 @@
 // Если пользователю приходит только минимальный, то нужно вывести все значения,
 // которые от минимального и выше. Если пользователю приходит только максимальный элемент, то нужно вывести все значения до максимального.
 // Если приходят оба значения вывести все значения от минимального и до максимального элемента.
-function getInterval(arr, min, max) {
-    return arr.filter(el => min === null ? {} : el >= min).filter(el => max === null ? {} : el <= max)
+function getInterval(arr, min = Number.MIN_VALUE, max = Number.MAX_VALUE) {
+    return arr.filter(el => el >= min).filter(el => el <= max)
 
 }
 
-console.log(getInterval([-4, 6, 7, 2, -5, 8], 3, null))
+console.log(getInterval([-4, 6, 7, 2, -5, 8], 3))
