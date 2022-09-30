@@ -1,0 +1,43 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.progress {
+    max-height: 20px;
+    max-width: 100%;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+
+}
+.gradient1 {
+    background: linear-gradient(to top, #989898, #323232);
+    display: flex;
+    flex-direction: row;
+    border-radius: 8px;
+
+
+}
+.gradient2 {
+    background : linear-gradient(to top, #6FBDF7, #3A91EC, #6FBDF7);
+    width: 33%;
+    max-height: 90%;
+    border-radius: 8px 0 0 8px;
+    border: 1px solid #3A91EC;
+    box-shadow: 2px 0 5px 3px rgba(0, 0, 0, 0.2);
+
+
+}
