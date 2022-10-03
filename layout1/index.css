@@ -1,0 +1,125 @@
+.container {
+    width: 1140px;
+    margin: auto;
+    display: block;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pages {
+    display: flex;
+    flex-direction: row;
+}
+
+.logo {
+    height: 6%;
+    width: 6%;
+    padding-top: 20px;
+
+}
+
+.text_page {
+    padding-top: 30px;
+    margin-left: 40px;
+    font: 16px "Open Sans", sans-serif;
+}
+
+.name {
+    display: flex;
+    justify-content: center;
+}
+
+.how_to_find_home {
+    margin: 40px 0 0;
+    font: 72px Meriweather, serif;
+    color: #0045BE;
+    font-weight: bold;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.family_photo {
+    height: 854px;
+    width: 854px;
+    border-radius: 50%;
+    margin: 40px auto 0;
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    justify-content: center;
+    margin-top: -239px;
+    width: 100%;
+    flex-wrap: wrap;
+
+}
+
+.card {
+    padding: 20px;
+    margin: 45px 45px 0 0;
+    width: 252px;
+    height: 322px;
+    background-color: white;
+    box-shadow: 1px 1px 10px 4px rgba(34, 60, 80, 0.15);
+}
+
+.internal_img {
+    margin: 25px 0 0;
+    padding: 0;
+    height: 76px;
+    width: 76px;
+}
+
+.head_text {
+    font: 24px Roboto, sans-serif;
+    font-weight: bold;
+    margin: 20px 0 0;
+    letter-spacing: 2px;
+    word-wrap: break-word;
+}
+
+.text {
+    font: 16px "Open Sans", sans-serif;
+    margin: 20px 0 0;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+.freepik {
+    font: 16px "Open Sans", sans-serif;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    letter-spacing: 1px;
+    margin-left: -45px;
+}
+.freepik a {
+    color: #0045be;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #0045BE;
+
+}
+.footer {
+    margin: -8px;
+    height: 263px;
+    background-color: #333333;
+    display: flex;
+    justify-content: center;
+}
+.footer a {
+    margin: 49px 0 0;
+    color: white;
+    font: 14px "Open Sans", sans-serif;
+    width: 417px;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    text-align: center;
+
+
+}
