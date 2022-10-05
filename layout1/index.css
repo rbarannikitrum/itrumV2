@@ -8,6 +8,10 @@
     display: flex;
     justify-content: space-between;
 }
+.burger {
+    display: none;
+    padding-top: 26px;
+}
 
 .pages {
     display: flex;
@@ -30,11 +34,13 @@
 .name {
     display: flex;
     justify-content: center;
+    width: 100%;
+    margin-top: 40px;
 }
 
 .how_to_find_home {
     margin: 40px 0 0;
-    font: 72px Meriweather, serif;
+    font: 72px Merriweather, serif;
     color: #0045BE;
     font-weight: bold;
 }
@@ -65,8 +71,8 @@
 .card {
     padding: 20px;
     margin: 45px 45px 0 0;
-    width: 252px;
     height: 322px;
+    width: 252px;
     background-color: white;
     box-shadow: 1px 1px 10px 4px rgba(34, 60, 80, 0.15);
 }
@@ -92,6 +98,7 @@
     line-height: 1.6;
     font-size: 1rem;
 }
+
 .freepik {
     font: 16px "Open Sans", sans-serif;
     margin-top: 30px;
@@ -99,12 +106,14 @@
     letter-spacing: 1px;
     margin-left: -45px;
 }
+
 .freepik a {
     color: #0045be;
     padding-bottom: 3px;
     border-bottom: 1px solid #0045BE;
 
 }
+
 .footer {
     margin: -8px;
     height: 263px;
@@ -112,6 +121,7 @@
     display: flex;
     justify-content: center;
 }
+
 .footer a {
     margin: 49px 0 0;
     color: white;
@@ -120,6 +130,94 @@
     font-size: 0.875rem;
     line-height: 1.6;
     text-align: center;
+}
+@media (max-width: 1200px) {
+    .card {
+       height: 347px;
+        width: 220px;
+    }
+    .container {
+        width: 940px;
+    }
+}
+@media (max-width: 992px) {
+    .card {
+        height: 312px;
+        width: 275px;
+    }
+    .container {
+        width: 720px;
+    }
+    .cards {
+        margin-top: -150px;
+    }
+    .how_to_find_home {
+        font: 48px Merriweather, serif;
+        font-weight: bold;
 
+    }
+    .family_photo {
+        height: 714px;
+        width: 714px;
+    }
+    .burger {
+        display: block;
+    }
+    .text_page {
+        display: none;
+    }
+}
+@media (max-width: 767px) {
+    .family_photo {
+        height: 531px;
+        width: 531px;
+    }
+    .card {
+        width: 215px;
+        height: 375px;
+        padding: 20px 15px;
+    }
+    .container {
+        width: 600px;
+    }
+    .name {
+        width: 401px;
+        margin-top: 51px;
+        margin-left: 120px;
+        margin-right: 69px;
 
+    }
+    .how_to_find_home {
+        max-width: 300px;
+        text-align: center;
+
+    }
+}
+@media (max-width: 576px) {
+    .container {
+        width: 560px;
+    }
+    .cards {
+        margin-left: 30px;
+        margin-top: -80px;
+    }
+    .card {
+        width: 310px;
+        height: 325px;
+    }
+    .family_photo {
+        height: 379px;
+        width: 379px;
+    }
+    .name {
+        width: 320px;
+        margin: 52px 120px 0;
+
+    }
+    .how_to_find_home {
+        font: 36px Merriweather, serif;
+        font-weight: bold;
+        max-width: 300px;
+        text-align: center;
+    }
 }
