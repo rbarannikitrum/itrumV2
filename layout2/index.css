@@ -1,0 +1,164 @@
+body {
+    margin: 0;
+}
+
+.container_header {
+    width: 1140px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.burger {
+    display: none;
+    padding-top: 26px;
+}
+
+.pages {
+    display: flex;
+    flex-direction: row;
+}
+
+.logo {
+    height: 6%;
+    width: 6%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+.text_page {
+    padding-top: 25px;
+    margin-right: 45px;
+    font: 16px "Open Sans", sans-serif;
+}
+
+.section {
+    background-color: #e5e5e5;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.container {
+    width: 1160px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+}
+
+.menu p {
+    margin: 40px 0 0;
+    font: 60px Oswald, sans-serif !important;
+    color: #f12c0e;
+    font-weight: bold;
+}
+.description {
+    display: flex;
+    justify-content: center;
+    width: 68%;
+    margin-left: 16%;
+}
+.description p {
+    font: 16px "Open Sans", sans-serif;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.6;
+}
+.cards {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.card {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    width: calc(50% - 60px);
+    height: 249px;
+    padding: 30px 0 30px 30px;
+    margin: 15px;
+
+
+}
+.card img {
+    max-width: 255px;
+    object-fit: cover;
+}
+.card_info {
+    display: flex;
+    flex-direction: column;
+    padding: 0 25px;
+}
+.card_name {
+    font: 30px Oswald, sans-serif;
+    margin: 20px 0 0;
+}
+.card_description {
+    font: 16px "Open Sans", sans-serif;
+    margin: 20px 0 0 auto;
+    font-style: italic;
+}
+.card_price {
+    font: 18px Roboto, sans-serif;
+    color: #f12c0e;
+    margin: 20px 0 0;
+    font-weight: 700;
+    width: 217px;
+}
+.buy {
+    font: 14px "Open Sans", sans-serif;
+    background: #e5e5e5;
+    margin: 20px 0 0;
+    padding: 10px 30px;
+
+    font-size: 0.875rem;
+}
+.name {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+}
+.freepik {
+    font: 16px "Open Sans", sans-serif;
+    margin-bottom: 60px;
+    letter-spacing: 1px;
+    margin-left: -45px;
+    margin-top: 22px;
+    font-weight: bold;
+}
+
+.freepik a {
+    color: #f05510;
+}
+.footer {
+    height: 165px;
+    background-color: #333333;
+    display: flex;
+    justify-content: center;
+}
+
+.footer a {
+    margin: 49px 0 0;
+    color: white;
+    font: 14px "Open Sans", sans-serif;
+    width: 417px;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    text-align: center;
+}
