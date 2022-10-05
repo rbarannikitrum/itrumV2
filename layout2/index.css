@@ -10,7 +10,6 @@ body {
 }
 
 
-
 .header {
     display: flex;
     justify-content: space-between;
@@ -19,7 +18,9 @@ body {
 
 .burger {
     display: none;
-    padding-top: 26px;
+    height: 35px;
+    width: 35px;
+    margin-top: 13px;
 }
 
 .pages {
@@ -28,8 +29,8 @@ body {
 }
 
 .logo {
-    height: 6%;
-    width: 6%;
+    height: 25px;
+    width: 50px;
     padding-top: 20px;
     padding-bottom: 20px;
 
@@ -45,6 +46,7 @@ body {
     background-color: #e5e5e5;
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 .container {
@@ -70,7 +72,6 @@ body {
     display: flex;
     justify-content: center;
     width: 68%;
-    margin-left: 16%;
 }
 .description p {
     font: 16px "Open Sans", sans-serif;
@@ -162,3 +163,95 @@ body {
     line-height: 1.6;
     text-align: center;
 }
+
+@media (max-width: 1199px) {
+    .container {
+        width: 940px;
+    }
+    .container_header {
+        width: 940px;
+    }
+    .card img {
+        max-width: 155px;
+    }
+    .description {
+        width: 793px;
+        margin: 0 auto;
+    }
+}
+@media (max-width: 991px) {
+   .burger {
+       display: block;
+   }
+    .text_page {
+        display: none;
+    }
+    .container {
+        width: 720px;
+    }
+    .container_header {
+        width: 720px;
+    }
+    .cards {
+        flex-direction: column;
+    }
+    .card {
+        width: 100%;
+    }
+    .card img {
+        max-width: 255px;
+    }
+    .card_description {
+        margin: 20px 0 0 42px;
+    }
+    .description {
+        width: 100%;
+    }
+    .buy {
+        max-width: 160px;
+    }
+}
+
+@media (max-width: 767px) {
+    .container_header {
+        width: 600px;
+    }
+    .container {
+        width: 600px;
+    }
+    .description {
+        width: 90%;
+    }
+    .card_description {
+        margin: 20px 0 0;
+    }
+    .card {
+        width: 90%;
+    }
+}
+ @media (max-width: 575px) {
+     .container {
+         width: 560px;
+     }
+     .container_header {
+         width: 560px;
+     }
+     .description {
+         width: 340px;
+     }
+     .card {
+         flex-direction: column;
+         width: 340px;
+         height: 468px;
+         padding: 5px;
+         margin: 10px;
+         justify-content: center;
+     }
+     .cards {
+         margin-left: 80px;
+     }
+     .card img {
+         min-width: 300px;
+         margin: 0 auto;
+     }
+ }

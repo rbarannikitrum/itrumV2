@@ -131,7 +131,7 @@
     line-height: 1.6;
     text-align: center;
 }
-@media (max-width: 1200px) {
+@media (max-width: 1199px) {
     .card {
        height: 347px;
         width: 220px;
@@ -140,7 +140,7 @@
         width: 940px;
     }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .card {
         height: 312px;
         width: 275px;
@@ -193,7 +193,7 @@
 
     }
 }
-@media (max-width: 576px) {
+@media (max-width: 575px) {
     .container {
         width: 560px;
     }
