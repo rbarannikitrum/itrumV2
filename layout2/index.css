@@ -50,11 +50,12 @@ body {
     justify-content: center;
 }
 .container {
-    width: 1160px;
+    width: 1140px;
     margin: auto;
     display: flex;
     justify-content: center;
     flex-direction: column;
+
 }
 
 .menu {
@@ -70,6 +71,7 @@ body {
 }
 .description {
     display: flex;
+    margin-left: 16%;
     justify-content: center;
     width: 68%;
 }
@@ -103,7 +105,7 @@ body {
 .card_info {
     display: flex;
     flex-direction: column;
-    padding: 0 25px;
+    padding: 0 19px;
 }
 .card_name {
     font: 30px Oswald, sans-serif;
@@ -119,7 +121,7 @@ body {
     color: #f12c0e;
     margin: 20px 0 0;
     font-weight: 700;
-    width: 217px;
+
 }
 .buy {
     font: 14px "Open Sans", sans-serif;
@@ -149,6 +151,7 @@ body {
 }
 .footer {
     height: 165px;
+    width: 100%;
     background-color: #333333;
     display: flex;
     justify-content: center;
@@ -175,7 +178,7 @@ body {
         max-width: 155px;
     }
     .description {
-        width: 793px;
+
         margin: 0 auto;
     }
 }
@@ -204,9 +207,7 @@ body {
     .card_description {
         margin: 20px 0 0 42px;
     }
-    .description {
-        width: 100%;
-    }
+
     .buy {
         max-width: 160px;
     }
@@ -231,27 +232,20 @@ body {
 }
  @media (max-width: 575px) {
      .container {
-         width: 560px;
+         width: 90%;
      }
      .container_header {
-         width: 560px;
-     }
-     .description {
-         width: 340px;
+         width: 90%;
      }
      .card {
          flex-direction: column;
-         width: 340px;
          height: 468px;
          padding: 5px;
-         margin: 10px;
          justify-content: center;
      }
-     .cards {
-         margin-left: 80px;
-     }
+
      .card img {
-         min-width: 300px;
+         max-width: 90%;
          margin: 0 auto;
      }
  }
