@@ -7,10 +7,12 @@
 .header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .burger {
     display: none;
-    padding-top: 26px;
+    max-width: 30px;
+    max-height: 30px;
 }
 
 .pages {
@@ -141,6 +143,7 @@
     }
 }
 @media (max-width: 991px) {
+
     .card {
         height: 312px;
         width: 275px;
