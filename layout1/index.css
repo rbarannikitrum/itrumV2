@@ -1,0 +1,225 @@
+.container {
+    width: 1140px;
+    margin: auto;
+    display: block;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.burger {
+    display: none;
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.pages {
+    display: flex;
+    flex-direction: row;
+}
+
+.logo {
+    height: 6%;
+    width: 6%;
+    padding-top: 20px;
+
+}
+
+.text_page {
+    padding-top: 30px;
+    margin-left: 40px;
+    font: 16px "Open Sans", sans-serif;
+}
+
+.name {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.how_to_find_home {
+    margin: 40px 0 0;
+    font: 72px Merriweather, serif;
+    color: #0045BE;
+    font-weight: bold;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.family_photo {
+    height: 854px;
+    width: 854px;
+    border-radius: 50%;
+    margin: 40px auto 0;
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    justify-content: center;
+    margin-top: -239px;
+    width: 100%;
+    flex-wrap: wrap;
+
+}
+
+.card {
+    padding: 20px;
+    margin: 45px 45px 0 0;
+    height: 322px;
+    width: 252px;
+    background-color: white;
+    box-shadow: 1px 1px 10px 4px rgba(34, 60, 80, 0.15);
+}
+
+.internal_img {
+    margin: 25px 0 0;
+    padding: 0;
+    height: 76px;
+    width: 76px;
+}
+
+.head_text {
+    font: 24px Roboto, sans-serif;
+    font-weight: bold;
+    margin: 20px 0 0;
+    letter-spacing: 2px;
+    word-wrap: break-word;
+}
+
+.text {
+    font: 16px "Open Sans", sans-serif;
+    margin: 20px 0 0;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.freepik {
+    font: 16px "Open Sans", sans-serif;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    letter-spacing: 1px;
+    margin-left: -45px;
+}
+
+.freepik a {
+    color: #0045be;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #0045BE;
+
+}
+
+.footer {
+    margin: -8px;
+    height: 263px;
+    background-color: #333333;
+    display: flex;
+    justify-content: center;
+}
+
+.footer a {
+    margin: 49px 0 0;
+    color: white;
+    font: 14px "Open Sans", sans-serif;
+    width: 417px;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    text-align: center;
+}
+@media (max-width: 1199px) {
+    .card {
+       height: 347px;
+        width: 220px;
+    }
+    .container {
+        width: 940px;
+    }
+}
+@media (max-width: 991px) {
+    .card {
+        height: 312px;
+        width: 275px;
+    }
+    .container {
+        width: 720px;
+    }
+    .cards {
+        margin-top: -150px;
+    }
+    .how_to_find_home {
+        font: 48px Merriweather, serif;
+        font-weight: bold;
+
+    }
+    .family_photo {
+        height: 714px;
+        width: 714px;
+    }
+    .burger {
+        display: block;
+    }
+    .text_page {
+        display: none;
+    }
+}
+@media (max-width: 767px) {
+    .family_photo {
+        height: 531px;
+        width: 531px;
+    }
+    .card {
+        width: 215px;
+        height: 375px;
+        padding: 20px 15px;
+    }
+    .container {
+        width: 600px;
+    }
+    .name {
+        width: 401px;
+        margin-top: 51px;
+        margin-left: 120px;
+        margin-right: 69px;
+
+    }
+    .how_to_find_home {
+        max-width: 300px;
+        text-align: center;
+
+    }
+}
+@media (max-width: 575px) {
+    .container {
+        width: 560px;
+    }
+    .cards {
+        margin-left: 30px;
+        margin-top: -80px;
+    }
+    .card {
+        width: 310px;
+        height: 325px;
+    }
+    .family_photo {
+        height: 379px;
+        width: 379px;
+    }
+    .name {
+        width: 320px;
+        margin: 52px 120px 0;
+
+    }
+    .how_to_find_home {
+        font: 36px Merriweather, serif;
+        font-weight: bold;
+        max-width: 300px;
+        text-align: center;
+    }
+}
