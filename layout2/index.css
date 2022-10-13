@@ -212,7 +212,6 @@ body {
         max-width: 160px;
     }
 }
-
 @media (max-width: 767px) {
     .container_header {
         width: 600px;

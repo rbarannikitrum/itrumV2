@@ -21,7 +21,6 @@ div {
     display: flex;
     flex-direction: row;
     border-radius: 10px;
-
 }
 .gradient1 {
     background: linear-gradient(to top, #989898, #323232);
