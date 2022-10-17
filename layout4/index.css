@@ -1,43 +1,5 @@
 body {
     margin: 0;
-
-}
-.container {
-    width: 1140px;
-    margin: auto;
-    display: block;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.burger {
-    display: none;
-    padding-top: 26px;
-}
-
-.pages {
-    display: flex;
-    flex-direction: row;
-}
-
-.logo {
-    height: 6%;
-    width: 6%;
-    padding-top: 20px;
-
-}
-
-.text_page {
-    padding-top: 30px;
-    margin-left: 40px;
-    font: 16px "Open Sans", sans-serif;
-}
-
-.img {
     background-image: url('assets/back_img.jpg');
     background-position: 50% 50%;
     background-size: cover;
@@ -48,6 +10,7 @@ body {
     height: 100%;
     width: 100%;
 }
+
 .container_content {
     width: 1140px;
     margin: 420px auto auto;
@@ -104,22 +67,7 @@ body {
     margin-bottom: 50px;
     letter-spacing: 1px;
 }
-.footer {
-    height: 165px;
-    width: 100%;
-    background-color: #333333;
-    display: flex;
-    justify-content: center;
-}
-.footer a {
-    text-align: center;
-    color: white;
-    font: 14px "Open Sans", sans-serif;
-    width: 25%;
-    font-size: 0.875rem;
-    line-height: 1.6;
-    margin-top: 35px;
-}
+
 @media (max-width: 1199px) {
     .container {
         width: 940px;
@@ -135,9 +83,7 @@ body {
 
 }
 @media (max-width: 991px) {
-    .container {
-        width: 720px;
-    }
+
     .container_content {
         width: 720px;
     }
@@ -149,17 +95,10 @@ body {
     .cards {
         margin-top: -200px;
     }
-    .burger {
-        display: block;
-    }
-    .text_page {
-        display: none;
-    }
+
 }
 @media (max-width: 767px) {
-    .container {
-        width: 600px;
-    }
+
     .container_content {
         width: 600px;
     }
@@ -168,9 +107,7 @@ body {
     }
 }
 @media (max-width: 575px) {
-    .container {
-        width: 320px;
-    }
+
     .container_content {
         width: 320px;
     }
@@ -183,5 +120,11 @@ body {
         width: 280px;
         height: 281px;
         margin: 0 auto;
+    }
+}
+@media (max-width: 330px) {
+    .card {
+        width: 230px;
+        height: 320px;
     }
 }
