@@ -134,7 +134,7 @@ body {
     }
 
     .education {
-        width: 690px;
+        width: 600px;
     }
 
     .text_pics {
@@ -146,11 +146,10 @@ body {
     }
 
     .description {
-        width: 690px;
+        width: 600px;
     }
-    .text_pics {
-        margin-left: -100px;
-    }
+
+
 }
 
 @media (max-width: 767px) {

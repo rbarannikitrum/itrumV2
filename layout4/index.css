@@ -123,8 +123,10 @@ body {
     }
 }
 @media (max-width: 330px) {
+    .cards {
+        width: 280px;
+    }
     .card {
-        width: 230px;
-        height: 320px;
+        max-width: 100%;
     }
 }
