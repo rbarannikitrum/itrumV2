@@ -177,7 +177,7 @@ body {
     color: #4d4d4d;
     height: 30px;
     padding: 0 20px;
-    width: 80%;
+    width: 48%;
 }
 
 .edit input:focus {
@@ -187,4 +187,9 @@ body {
 .edit input::placeholder {
     color: lightslategray;
 }
-
+.hidden {
+    display: none;
+}
+.active {
+    display: flex;
+}
