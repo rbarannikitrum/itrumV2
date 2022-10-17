@@ -1,54 +1,11 @@
 body {
     margin: 0;
-}
-
-.container_header {
-    width: 1140px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-}
-
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    background-color: white;
-}
-
-.burger {
-    display: none;
-    height: 35px;
-    width: 35px;
-    margin-top: 13px;
-}
-
-.pages {
-    display: flex;
-    flex-direction: row;
-}
-
-.logo {
-    height: 25px;
-    width: 50px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-
-}
-
-.text_page {
-    padding-top: 25px;
-    margin-right: 45px;
-    font: 16px "Open Sans", sans-serif;
-}
-
-.section {
     background-color: #e5e5e5;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+
 }
+
+
+
 .container {
     width: 1140px;
     margin: auto;
@@ -141,7 +98,6 @@ body {
     font: 16px "Open Sans", sans-serif;
     margin-bottom: 60px;
     letter-spacing: 1px;
-    margin-left: -45px;
     margin-top: 22px;
     font-weight: bold;
 }
@@ -149,31 +105,13 @@ body {
 .freepik a {
     color: #f05510;
 }
-.footer {
-    height: 165px;
-    width: 100%;
-    background-color: #333333;
-    display: flex;
-    justify-content: center;
-}
 
-.footer a {
-    margin: 49px 0 0;
-    color: white;
-    font: 14px "Open Sans", sans-serif;
-    width: 417px;
-    font-size: 0.875rem;
-    line-height: 1.6;
-    text-align: center;
-}
 
 @media (max-width: 1199px) {
     .container {
         width: 940px;
     }
-    .container_header {
-        width: 940px;
-    }
+
     .card img {
         max-width: 155px;
     }
@@ -183,18 +121,11 @@ body {
     }
 }
 @media (max-width: 991px) {
-   .burger {
-       display: block;
-   }
-    .text_page {
-        display: none;
-    }
+
     .container {
         width: 720px;
     }
-    .container_header {
-        width: 720px;
-    }
+
     .cards {
         flex-direction: column;
     }
@@ -213,9 +144,7 @@ body {
     }
 }
 @media (max-width: 767px) {
-    .container_header {
-        width: 600px;
-    }
+
     .container {
         width: 600px;
     }
@@ -233,9 +162,7 @@ body {
      .container {
          width: 90%;
      }
-     .container_header {
-         width: 90%;
-     }
+
      .card {
          flex-direction: column;
          height: 468px;
@@ -244,7 +171,8 @@ body {
      }
 
      .card img {
-         max-width: 90%;
+         min-width: 70%;
+         max-height: 216px;
          margin: 0 auto;
      }
  }
