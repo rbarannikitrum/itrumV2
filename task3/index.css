@@ -7,19 +7,27 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
-.circle1 {
-    height: 200px;
-    width: 200px;
+
+.circle {
     border-radius: 50%;
-    border:  40px solid #A2CB92;
-    border-right: 40px solid #D5E5C0;
-    background-color: #EEF5E6;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.bg {
+    height: 200px;
+    width: 200px;
+    background-image: conic-gradient(#a1ca91 0deg, #a1ca91 45deg, #d4e4bf 45deg, #d4e4bf 135deg, #a1ca91 135deg);
+}
+
+.sm {
+    height: 120px;
+    width: 120px;
+    background-color: #edf4e5;
+}
+
 .circle1 span {
     font-size: 64px;
 }
