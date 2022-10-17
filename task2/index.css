@@ -14,14 +14,15 @@ div {
     display: flex;
     flex-direction: column;
 }
+
 .load {
     max-height: 20px;
     max-width: 100%;
     border: 2px solid black;
     display: flex;
     flex-direction: row;
-    border-radius: 10px;    background: linear-gradient(to top, #989898, #323232);
-
+    border-radius: 10px;
+    background: linear-gradient(to top, #989898, #323232);
 }
 
 .progress_part {
