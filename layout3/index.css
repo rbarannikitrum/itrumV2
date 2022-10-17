@@ -3,88 +3,43 @@
 }
 
 body {
-    margin: 0;
-}
-
-.container_header {
-    width: 1140px;
-    margin: auto;
+    background: linear-gradient(180deg, hsla(216, 11%, 18%, 1) 70%, hsla(0, 0%, 100%, 1) 70%) no-repeat;
     display: flex;
-    justify-content: space-between;
-}
-
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    background-color: white;
-    padding: 5px;
-}
-
-.burger {
-    display: none;
-    height: 35px;
-    width: 35px;
-    margin-top: 13px;
-}
-
-.pages {
-    display: flex;
-    flex-direction: row;
-}
-
-.logo {
-    height: 30px;
-    width: 60px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-
-}
-
-.text_page {
-    padding: 25px 20px;
-    margin-right: 45px;
-    font: 16px "Open Sans", sans-serif;
-    color: #478ac9;
-}
-.container {
-    width: 60%;
-    display: flex;
-    margin: 0 auto;
-}
-
-.black {
-    background-color: #292d33;
-    min-height: 487px;
+    justify-content: center;
+    margin-top: 50px;
 }
 
 .content {
-    width: 60%;
+    width: 1062px;
     display: flex;
     flex-direction: row;
-    margin-top: -417px;
+    align-items: center;
 }
+
 .big_picture {
-    width: 514px;
-    height: 551px;
+    width: 554px;
+    height: 591px;
     padding: 20px;
     object-fit: cover;
 }
+
 .row {
     display: flex;
-    flex-direction: row;
 }
+
 .text_pics {
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
 }
 
 .texts {
-    width: 100%;
+    width: 90%;
     margin-left: 10px;
     flex: 1 1 auto;
 
 }
+
 .education {
     margin: 20px 0 0;
     font-weight: 700;
@@ -92,8 +47,9 @@ body {
     color: #f1c50e !important;
     word-wrap: break-word;
     font-family: Roboto, sans-serif;
-    width: 100%;
+    width: 90%;
 }
+
 .description {
     font-style: italic;
     word-wrap: break-word;
@@ -101,127 +57,155 @@ body {
     font-family: 'Open Sans', sans-serif;
     width: 70%;
 }
+
 .two_pics {
     display: flex;
-    flex-direction: row;
     margin-bottom: 10px;
 }
+
 .people_pic {
-    width: 188px;
-    height: 205px;
+    width: 208px;
+    height: 225px;
     object-fit: cover;
     padding: 10px;
 }
+
 .freepik {
     font: 16px "Open Sans", sans-serif;
     color: white;
-    margin: 12px -29px 0 1px;
+    margin: 12px -29px 50px 0;
 }
+
 .freepik a {
     border-bottom: 1px solid white;
 }
-.footer {
-    margin-top: 35px;
-    height: 165px;
-    width: 100%;
-    background-color: #333333;
-    display: flex;
-    justify-content: center;
-}
-.footer a {
-    margin: 49px 0 0;
-    color: white;
-    font: 14px "Open Sans", sans-serif;
-    width: 30%;
-    font-size: 0.875rem;
-    line-height: 1.6;
-    text-align: center;
-}
+
 @media (max-width: 1199px) {
-    .container {
-        width: 50%;
-        margin: 0 150px;
-        justify-content: center;
+
+    .big_picture {
+        width: 463px;
+        height: 496px;
     }
-   .big_picture {
-       width: 463px;
-       height: 496px;
-   }
-   .education {
-       width: 90%;
-   }
-   .people_pic {
-       width: 168px;
-       height: 182px;
-   }
+
+    .people_pic {
+        width: 168px;
+        height: 182px;
+    }
+
+    .text_pics {
+        width: 470px;
+        margin: 0;
+    }
+
+    .big_picture {
+        width: 503px;
+        height: 536px;
+    }
+
+    .content {
+        width: auto;
+    }
+
+    body {
+        background: linear-gradient(180deg, hsla(216, 11%, 18%, 1) 80%, hsla(0, 0%, 100%, 1) 80%) no-repeat;
+    }
 
 
 }
-@media (max-width: 991px) {
 
-    .black {
-        height: 1231px;
+@media (max-width: 991px) {
+    body {
+        background: linear-gradient(180deg, hsla(216, 11%, 18%, 1) 85%, hsla(0, 0%, 100%, 1) 85%) no-repeat;
     }
-    .row {
-        flex-direction: column;
-    }
-    .big_picture {
-        width: 680px;
-        height: 718px;
-    }
-    .people_pic {
-        width: 325px;
-        height: 345px;
-    }
+
     .content {
-        margin-top: -1161px;
+        flex-direction: column;
+        width: 800px;
     }
+
+    .big_picture {
+        width: 720px;
+        height: 758px;
+    }
+
+    .people_pic {
+        width: 345px;
+        height: 365px;
+    }
+
     .education {
-        width: 100%;
+        width: 690px;
     }
-    .description {
-        width: 95%;
+
+    .text_pics {
+        width: 75%;
     }
+
     .freepik {
         margin-bottom: 30px;
     }
-    .container {
-        margin: 0 50px;
 
+    .description {
+        width: 690px;
+    }
+    .text_pics {
+        margin-left: -100px;
     }
 }
+
 @media (max-width: 767px) {
+    body {
+        background: linear-gradient(180deg, hsla(216, 11%, 18%, 1) 60%, hsla(0, 0%, 100%, 1) 60%) no-repeat;
+    }
+
     .big_picture {
-        width: 500px;
-        height: 521px;
+        width: 540px;
+        height: 561px;
+        padding: 0;
     }
+
     .education {
-        width: 80%;
+        width: 100%;
     }
+
     .description {
-        width: 75%;
+        width: 100%;
     }
+
     .people_pic {
-        width: 500px;
-        height: 523px;
+        width: 540px;
+        height: 561px;
     }
+
     .two_pics {
         flex-direction: column;
     }
 
 }
+
 @media (max-width: 575px) {
-   .black {
-       height: 853px;
-   }
+
     .big_picture,
     .people_pic {
         width: 300px;
         height: 302px;
+        margin: 0 auto;
     }
+
+    .education {
+        font-size: 36px;
+    }
+
     .content {
-        margin-top: -783px;
+        width: 360px;
     }
 
+    .text_pics {
+        width: 100%;
+    }
 
+    .texts {
+        margin: 30px;
+        width: 300px;
+    }
 }
