@@ -21,18 +21,14 @@ body {
     display: flex;
     justify-content: center;
     background-color: #3A91EC;
-
-}
-
-.date p {
     font-weight: bold;
     font-size: 36px;
     margin: 0;
     color: white;
     padding: 5px 20px;
-
 }
-.img_temperature {
+
+.card_img {
     display: flex;
     justify-content: center;
 }
@@ -42,6 +38,7 @@ body {
     height: 50%;
     margin-top: 10px
 }
+
 .temp {
     margin: 10px auto;
     font-size: 48px;
