@@ -4,27 +4,10 @@
     display: block;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.burger {
-    display: none;
-    max-width: 30px;
-    max-height: 30px;
-}
-
-.pages {
-    display: flex;
-    flex-direction: row;
-}
-
 .logo {
     height: 6%;
     width: 6%;
     padding-top: 20px;
-
 }
 
 .text_page {
@@ -37,11 +20,10 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 40px;
+    margin: 40px auto;
 }
 
 .how_to_find_home {
-    margin: 40px 0 0;
     font: 72px Merriweather, serif;
     color: #0045BE;
     font-weight: bold;
@@ -116,23 +98,6 @@
 
 }
 
-.footer {
-    margin: -8px;
-    height: 263px;
-    background-color: #333333;
-    display: flex;
-    justify-content: center;
-}
-
-.footer a {
-    margin: 49px 0 0;
-    color: white;
-    font: 14px "Open Sans", sans-serif;
-    width: 417px;
-    font-size: 0.875rem;
-    line-height: 1.6;
-    text-align: center;
-}
 @media (max-width: 1199px) {
     .card {
        height: 347px;
@@ -162,12 +127,7 @@
         height: 714px;
         width: 714px;
     }
-    .burger {
-        display: block;
-    }
-    .text_page {
-        display: none;
-    }
+
 }
 @media (max-width: 767px) {
     .family_photo {
@@ -185,9 +145,7 @@
     .name {
         width: 401px;
         margin-top: 51px;
-        margin-left: 120px;
-        margin-right: 69px;
-
+        justify-content: center;
     }
     .how_to_find_home {
         max-width: 300px;
@@ -197,7 +155,7 @@
 }
 @media (max-width: 575px) {
     .container {
-        width: 560px;
+        width: 300px;
     }
     .cards {
         margin-left: 30px;
@@ -213,7 +171,6 @@
     }
     .name {
         width: 320px;
-        margin: 52px 120px 0;
 
     }
     .how_to_find_home {
@@ -221,5 +178,10 @@
         font-weight: bold;
         max-width: 300px;
         text-align: center;
+    }
+}
+@media (max-width: 370px) {
+    .card {
+        height: 20%;
     }
 }
