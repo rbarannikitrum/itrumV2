@@ -17,4 +17,5 @@ body {
     box-shadow : 1px 1px 3px 3px rgba(0, 0, 0, 0.1);
     color: #bb0202;
     background: linear-gradient(to top,#EAEBD3, #FCFEF4);
+    cursor: pointer;
 }
