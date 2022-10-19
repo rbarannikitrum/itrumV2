@@ -73,6 +73,7 @@ body {
 .card_description {
     font: 16px "Open Sans", sans-serif;
     margin: 20px 0 0 auto;
+    word-break: break-word;
     font-style: italic;
 }
 
