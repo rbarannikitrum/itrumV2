@@ -48,13 +48,13 @@
     justify-content: center;
     margin-top: -239px;
     width: 100%;
-    flex-wrap: wrap;
+    gap: 40px;
 
+    flex-wrap: wrap;
 }
 
 .card {
     padding: 20px;
-    margin: 45px 45px 0 0;
     height: 322px;
     width: 252px;
     background-color: white;
@@ -150,7 +150,9 @@
     .how_to_find_home {
         max-width: 300px;
         text-align: center;
-
+    }
+    .cards {
+        width: 100%;
     }
 }
 @media (max-width: 575px) {
@@ -158,11 +160,11 @@
         width: 300px;
     }
     .cards {
-        margin-left: 30px;
         margin-top: -80px;
     }
     .card {
-        width: 310px;
+        gap: 40px;
+        width: 80%;
         height: 325px;
     }
     .family_photo {
