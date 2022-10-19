@@ -62,7 +62,7 @@ body {
 .card_info {
     display: flex;
     flex-direction: column;
-    padding: 0 19px;
+    padding: 0 30px;
 }
 
 .card_name {
@@ -80,9 +80,8 @@ body {
 .card_price {
     font: 18px Roboto, sans-serif;
     color: #f12c0e;
-    margin: 20px 0 0;
+    margin: 20px 0;
     font-weight: 700;
-    flex: 1 1 auto;
 }
 
 .buy {
@@ -129,19 +128,24 @@ body {
 }
 @media (max-width: 991px) {
     .container {
-        width: 80%;
+        width: 70%;
     }
 
     .cards {
         flex-direction: column;
     }
-
+    .description {
+        width: 90%;
+    }
     .card {
         width: 92%;
     }
 
     .card img {
         max-width: 255px;
+    }
+    .card_description {
+        margin: 20px 0 0 30px;
     }
 
 }
@@ -150,15 +154,9 @@ body {
     .container {
         width: 600px;
     }
-
-    .description {
-        width: 90%;
-    }
-
     .card_description {
-        margin: 20px 0 0;
+        margin: 20px 0 0 0;
     }
-
     .card {
         width: 90%;
     }
@@ -166,7 +164,8 @@ body {
  @media (max-width: 575px) {
 
      .container {
-         width: 90%;
+         width: 70%;
+
      }
 
      .card {
@@ -174,6 +173,8 @@ body {
          height: 468px;
          padding: 5px;
          justify-content: center;
+         width: 100%;
+         margin-left: 0;
      }
 
      .card img {
