@@ -140,7 +140,7 @@
         padding: 20px 15px;
     }
     .container {
-        width: 600px;
+        width: 100%;
     }
     .name {
         width: 401px;
@@ -185,5 +185,12 @@
 @media (max-width: 370px) {
     .card {
         height: 20%;
+    }
+    .family_photo {
+        height: 250px;
+        width: 250px;
+    }
+    .cards {
+        margin-top: -50px;
     }
 }
