@@ -64,6 +64,10 @@ body {
     font-size: 0.875rem;
     width: 45%;
 }
+.card button:hover {
+    cursor: pointer;
+    color: #bdbdbd;
+}
 
 .freepik {
     font: 16px "Open Sans", sans-serif;
