@@ -1,10 +1,7 @@
 body {
     margin: 0;
     background-color: #e5e5e5;
-
 }
-
-
 
 .container {
     width: 1140px;
@@ -12,7 +9,6 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
-
 }
 
 .menu {
@@ -26,24 +22,28 @@ body {
     color: #f12c0e;
     font-weight: bold;
 }
+
 .description {
     display: flex;
-    margin-left: 16%;
+    margin: 0 auto;
     justify-content: center;
     width: 68%;
 }
+
 .description p {
     font: 16px "Open Sans", sans-serif;
     font-style: italic;
     text-align: center;
     line-height: 1.6;
 }
+
 .cards {
     display: flex;
     flex-direction: row;
     width: 100%;
     flex-wrap: wrap;
 }
+
 .card {
     background-color: white;
     display: flex;
@@ -52,34 +52,37 @@ body {
     height: 249px;
     padding: 30px 0 30px 30px;
     margin: 15px;
-
-
 }
+
 .card img {
     max-width: 255px;
     object-fit: cover;
 }
+
 .card_info {
     display: flex;
     flex-direction: column;
     padding: 0 19px;
 }
+
 .card_name {
     font: 30px Oswald, sans-serif;
     margin: 20px 0 0;
 }
+
 .card_description {
     font: 16px "Open Sans", sans-serif;
     margin: 20px 0 0 auto;
     font-style: italic;
 }
+
 .card_price {
     font: 18px Roboto, sans-serif;
     color: #f12c0e;
     margin: 20px 0 0;
     font-weight: 700;
-
 }
+
 .buy {
     font: 14px "Open Sans", sans-serif;
     background: #e5e5e5;
@@ -88,12 +91,17 @@ body {
     text-transform: uppercase;
     font-size: 0.875rem;
 }
+
+.buy:hover {
+    background: #d5d4d4;
+    cursor: pointer;
+}
+
 .name {
     display: flex;
     justify-content: center;
-    width: 100%;
-
 }
+
 .freepik {
     font: 16px "Open Sans", sans-serif;
     margin-bottom: 60px;
@@ -106,7 +114,6 @@ body {
     color: #f05510;
 }
 
-
 @media (max-width: 1199px) {
     .container {
         width: 940px;
@@ -115,26 +122,25 @@ body {
     .card img {
         max-width: 155px;
     }
-    .description {
 
-        margin: 0 auto;
-    }
 }
 @media (max-width: 991px) {
-
     .container {
-        width: 720px;
+        width: 80%;
     }
 
     .cards {
         flex-direction: column;
     }
+
     .card {
-        width: 100%;
+        width: 92%;
     }
+
     .card img {
         max-width: 255px;
     }
+
     .card_description {
         margin: 20px 0 0 42px;
     }
@@ -148,17 +154,21 @@ body {
     .container {
         width: 600px;
     }
+
     .description {
         width: 90%;
     }
+
     .card_description {
         margin: 20px 0 0;
     }
+
     .card {
         width: 90%;
     }
 }
  @media (max-width: 575px) {
+
      .container {
          width: 90%;
      }

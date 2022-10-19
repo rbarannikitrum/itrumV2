@@ -73,7 +73,8 @@ body {
 .freepik {
     font: 16px "Open Sans", sans-serif;
     color: white;
-    margin: 12px -29px 50px 0;
+    margin-top: 10px;
+    margin-bottom: 50px;
 }
 
 .freepik a {
@@ -124,8 +125,9 @@ body {
     }
 
     .big_picture {
-        width: 720px;
-        height: 758px;
+        padding: 0;
+        width: 90%;
+        height: 90%;
     }
 
     .people_pic {
@@ -133,12 +135,17 @@ body {
         height: 365px;
     }
 
-    .education {
-        width: 600px;
+    .freepik {
+        margin: 0;
     }
 
     .text_pics {
-        width: 75%;
+        width: 90%;
+    }
+
+    .texts {
+        width: 100%;
+        margin: 0;
     }
 
     .freepik {
@@ -149,6 +156,10 @@ body {
         width: 600px;
     }
 
+    .two_pics {
+        display: flex;
+        justify-content: space-between;
+    }
 
 }
 
@@ -167,8 +178,21 @@ body {
         width: 100%;
     }
 
+    .text_pics {
+        width: 540px;
+    }
+
+    .texts {
+        margin-left: 0;
+        width: 100%;
+    }
+
     .description {
         width: 100%;
+    }
+
+    .freepik {
+        margin: 0 0 15px 0;
     }
 
     .people_pic {
@@ -178,6 +202,8 @@ body {
 
     .two_pics {
         flex-direction: column;
+        width: 0;
+        gap: 40px;
     }
 
 }
@@ -188,7 +214,7 @@ body {
     .people_pic {
         width: 300px;
         height: 302px;
-        margin: 0 auto;
+        margin: 0 30px;
     }
 
     .education {
@@ -207,4 +233,15 @@ body {
         margin: 30px;
         width: 300px;
     }
+}
+
+@media (max-width: 370px) {
+    .content {
+        width: 300px;
+    }
+
+    .big_picture, .texts, .people_pic {
+        margin: 0;
+    }
+
 }
