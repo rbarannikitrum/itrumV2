@@ -82,15 +82,18 @@ body {
     color: #f12c0e;
     margin: 20px 0 0;
     font-weight: 700;
+    flex: 1 1 auto;
 }
 
 .buy {
     font: 14px "Open Sans", sans-serif;
     background: #e5e5e5;
     margin: 20px 0 0;
-    padding: 10px 30px;
     text-transform: uppercase;
+    min-height: 38px;
     font-size: 0.875rem;
+    border: 0;
+
 }
 
 .buy:hover {
@@ -146,9 +149,6 @@ body {
         margin: 20px 0 0 42px;
     }
 
-    .buy {
-        max-width: 160px;
-    }
 }
 @media (max-width: 767px) {
 
