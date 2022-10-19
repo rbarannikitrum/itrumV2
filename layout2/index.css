@@ -88,7 +88,6 @@ body {
 .buy {
     font: 14px "Open Sans", sans-serif;
     background: #e5e5e5;
-    margin: 20px 0 0;
     text-transform: uppercase;
     min-height: 38px;
     font-size: 0.875rem;
@@ -143,10 +142,6 @@ body {
 
     .card img {
         max-width: 255px;
-    }
-
-    .card_description {
-        margin: 20px 0 0 42px;
     }
 
 }
