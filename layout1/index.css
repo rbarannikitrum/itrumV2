@@ -143,14 +143,14 @@
 }
 @media (max-width: 575px) {
     .container {
-        width: 300px;
+        width: 360px;
     }
     .cards {
         margin-top: -80px;
     }
     .card {
         gap: 40px;
-        width: 80%;
+        width: 310px;
         height: 325px;
     }
     .family_photo {
