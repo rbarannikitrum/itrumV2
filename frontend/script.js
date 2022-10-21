@@ -8,6 +8,7 @@ async function fetchData() {
         method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
       }).then(res => res.json())
   render()
+
 }
 
 
@@ -15,12 +16,12 @@ function getTask() {
   taskInput = document.querySelector("input").value
 }
 
-function getEdit() {
-  text = document.getElementById('change').value
+function getEdit(i) {
+  text = document.getElementById(`change-${i}`).value
 }
 
 async function setEditedTask(i) {
-  getEdit()
+  getEdit(i)
   if (!text) {
     text = taskArr[i].text
   }
@@ -79,7 +80,7 @@ function render() {
   taskArr = taskArr.sort((a, b) => a.isCheck - b.isCheck)
   taskArr.forEach((el, i) => {
     elem += `<div class="edit hidden" id = 'edit-${i}' >
-<input id = 'change' type="text" value="${taskArr[i].text}" onchange="getEdit()" class="edit_text"/>
+<input id = 'change-${i}' type="text" value="${taskArr[i].text}" onchange="getEdit(${i})" class="edit_text"/>
 <div class="operators">
 <input type="checkbox" onclick="setActive(${i})" ${el.isCheck ? 'checked' : ''} style="width: 20px; height: 20px;">
 
