@@ -1,13 +1,18 @@
 let taskInput
 let taskArr = []
 let text
-
 async function fetchData() {
   taskArr = await fetch('http://localhost:8000/allTasks',
       {method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-  }).then(res => res.json()).then(res => res.data)
-
+      }).then(res => res.json()).then(res => res.data)
   render()
+}
+window.onload = async function fetchData() {
+  taskArr = await fetch('http://localhost:8000/allTasks',
+      {method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+      }).then(res => res.json()).then(res => res.data)
+  render()
+
 }
 
 function getTask() {
@@ -26,11 +31,10 @@ async function setEditedTask(i) {
   taskArr[i].text = text
   taskArr = await fetch('http://localhost:8000/updateTask', {
     method: 'PATCH',
-    body: JSON.stringify({id: taskArr[i].id, text: text, isCheck: false}),
+    body: JSON.stringify({id: taskArr[i]._id, text: text, isCheck: false}),
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
   }).then(res => res.json()).then(res => res.data)
-  render()
-  console.log(taskArr)
+  fetchData()
 }
 
 async function addTask() {
@@ -49,14 +53,12 @@ async function addTask() {
     body: JSON.stringify({text: taskInput, isCheck: false}),
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
   }).then(res => res.json()).then(res => res.data)
-  render()
-  console.log(taskArr)
+  fetchData()
 }
 
 async function deleteElem(i) {
-  taskArr = await fetch(`http://localhost:8000/deleteTask?id=${taskArr[i].id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
-  console.log(taskArr)
-  render()
+  taskArr = await fetch(`http://localhost:8000/deleteTask?id=${taskArr[i]._id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
+  fetchData()
 }
 
 async function setActive(i) {
@@ -77,6 +79,7 @@ function setEdit(i) {
 
 
 function render() {
+
   let elem = ''
   taskArr = taskArr.sort((a, b) => a.isCheck - b.isCheck)
   taskArr.forEach((el, i) => {

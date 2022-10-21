@@ -7,34 +7,36 @@ app.use(express.json())
 
 
 const taskScheme = new mongoose.Schema({
-  text : String,
-  isCheck : Boolean
+  text: String,
+  isCheck: Boolean
 })
 
 const uri = 'mongodb+srv://rbarannikitrum:restart987@cluster0.lzarcb4.mongodb.net/?retryWrites=true&w=majority'
 
-mongoose.connect(uri, {useNewURLParser : true, useUnifiedTopology : true})
+mongoose.connect(uri, {useNewURLParser: true, useUnifiedTopology: true})
 
 const Task = mongoose.model('tasks', taskScheme)
 
 app.post('/createTask', (req, res) => {
   const task = new Task(req.body)
-  console.log(req.body)
   task.save().then(result => res.send(result))
 })
 
 app.get('/allTasks', (req, res) => {
-  Task.find().then(result => {res.send({data : result})})
+  Task.find().then(result => {
+    res.send(result)
+  })
 })
 
-app.put('/updateTask', (req, res) => {
-
+app.patch('/updateTask', (req, res) => {
+  Task.findByIdAndUpdate(req.query.id, req.body).then(result => {res.send(result)})
 })
 
 app.delete('/deleteTask', (req, res) => {
-  Task.findOne({_id: req.body._id}, (err, result) => {res.send(result)})
+  Task.findByIdAndDelete({_id: req.query.id}).then(result => res.send(result))
 })
 
 
-
-app.listen(8000, () => {console.log('hello')})
+app.listen(8000, () => {
+  console.log('hello')
+})
