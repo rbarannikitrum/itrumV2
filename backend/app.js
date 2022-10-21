@@ -13,17 +13,19 @@ mongoose.connect(uri, {useNewURLParser : true, useUnifiedTopology : true})
 
 const Task = mongoose.model('tasks', taskScheme)
 
-app.get('/', (req, res) => {
-  const task = new Task({
-    text : 't123',
-    isCheck : false
-  })
-  task.save().then(result => res.send(result))
+app.post('/createTask', (req, res) => {
+  const task = new Task(req.body)
+  task.save().then(result => res.send('task created'))
 })
 
-app.get('/all', (req, res) => {
-  Task.find().then(result => {res.send(result)})
+app.get('/allTasks', (req, res) => {
+  Task.find().then(result => {res.send({data : result})})
 })
+
+app.put('/updateTask', (req, res) => {
+  Task.find(req.body._id).then(result => console.log(result))
+})
+
 
 
 app.listen(8000, () => {console.log('hello')})
