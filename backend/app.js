@@ -1,6 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
+const cors = require('cors')
+app.use(cors())
+app.use(express.json())
+
 
 const taskScheme = new mongoose.Schema({
   text : String,
@@ -15,7 +19,8 @@ const Task = mongoose.model('tasks', taskScheme)
 
 app.post('/createTask', (req, res) => {
   const task = new Task(req.body)
-  task.save().then(result => res.send('task created'))
+  console.log(req.body)
+  task.save().then(result => res.send(result))
 })
 
 app.get('/allTasks', (req, res) => {
@@ -23,7 +28,11 @@ app.get('/allTasks', (req, res) => {
 })
 
 app.put('/updateTask', (req, res) => {
-  Task.find(req.body._id).then(result => console.log(result))
+
+})
+
+app.delete('/deleteTask', (req, res) => {
+  Task.findOne({_id: req.body._id}, (err, result) => {res.send(result)})
 })
 
 

@@ -3,8 +3,10 @@ let taskArr = []
 let text
 
 async function fetchData() {
-  taskArr = await fetch('http://localhost:8000/allTasks', {method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+  taskArr = await fetch('http://localhost:8000/allTasks',
+      {method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
   }).then(res => res.json()).then(res => res.data)
+
   render()
 }
 
