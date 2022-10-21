@@ -2,8 +2,8 @@ let taskInput
 let taskArr = []
 let text
 
-async function fetchData () {
-  taskArr = await fetch('http://localhost:8000/allTasks', {method : 'GET'}).then(res => res.json()).then(res => res.data)
+async function fetchData() {
+  taskArr = await fetch('http://localhost:8000/allTasks', {method: 'GET'}).then(res => res.json()).then(res => res.data)
   render()
 }
 
@@ -21,7 +21,11 @@ async function setEditedTask(i) {
     text = taskArr[i].text
   }
   taskArr[i].text = text
-  taskArr = await fetch('http://localhost:8000/updateTask', {method : 'PATCH', body : JSON.stringify({id: taskArr[i].id, text: text, isCheck: false}), headers : {"Content-Type" : "application/json;charset=utf-8", "Access-Control-Allow-Origin" : "*"}}).then(res => res.json()).then(res => res.data)
+  taskArr = await fetch('http://localhost:8000/updateTask', {
+    method: 'PATCH',
+    body: JSON.stringify({id: taskArr[i].id, text: text, isCheck: false}),
+    headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+  }).then(res => res.json()).then(res => res.data)
   render()
   console.log(taskArr)
 }
@@ -37,28 +41,36 @@ async function addTask() {
   taskInput = taskInput.trim()
   document.querySelector('input').focus()
   document.querySelector('input').value = ''
-  taskArr = await fetch('http://localhost:8000/createTask', {method : 'POST', body : JSON.stringify({text: taskInput, isCheck: false}), headers : {"Content-Type" : "application/json;charset=utf-8", "Access-Control-Allow-Origin" : "*"}}).then(res => res.json()).then(res => res.data)
+  taskArr = await fetch('http://localhost:8000/createTask', {
+    method: 'POST',
+    body: JSON.stringify({text: taskInput, isCheck: false}),
+    headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+  }).then(res => res.json()).then(res => res.data)
   render()
   console.log(taskArr)
 }
 
 async function deleteElem(i) {
-  taskArr = await fetch(`http://localhost:8000/deleteTask?id=${taskArr[i].id}`, {method : 'DELETE'}).then(res => res.json()).then(res => res.data)
+  taskArr = await fetch(`http://localhost:8000/deleteTask?id=${taskArr[i].id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
   console.log(taskArr)
   render()
 }
 
 async function setActive(i) {
-  taskArr = await fetch('http://localhost:8000/updateTask', {method : 'PATCH', body : JSON.stringify({id: taskArr[i].id, text: taskArr[i].text, isCheck: !taskArr[i].isCheck}), headers : {"Content-Type" : "application/json;charset=utf-8", "Access-Control-Allow-Origin" : "*"}}).then(res => res.json()).then(res => res.data)
+  taskArr = await fetch('http://localhost:8000/updateTask', {
+    method: 'PATCH',
+    body: JSON.stringify({id: taskArr[i].id, text: taskArr[i].text, isCheck: !taskArr[i].isCheck}),
+    headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+  }).then(res => res.json()).then(res => res.data)
   console.log(taskArr)
   render()
 }
-function setEdit (i) {
+
+function setEdit(i) {
   render()
   document.getElementById(`task-${i}`).classList.toggle('hidden')
   document.getElementById(`edit-${i}`).classList.toggle('active')
 }
-
 
 
 function render() {
@@ -77,7 +89,7 @@ function render() {
 </div>
 <div id = 'task-${i}' class="task">
 <div class="task_text">
-<p style="${el.isCheck ? 'text-decoration : line-through; color : #5C6672' : ''}">${i+1}.${el.text}</p>
+<p style="${el.isCheck ? 'text-decoration : line-through; color : #5C6672' : ''}">${i + 1}.${el.text}</p>
 </div>
 <div class="operators">
 
