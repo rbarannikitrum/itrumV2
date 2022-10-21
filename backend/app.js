@@ -29,7 +29,7 @@ app.get('/allTasks', (req, res) => {
 })
 
 app.patch('/updateTask', (req, res) => {
-  Task.findByIdAndUpdate(req.query.id, req.body).then(result => {res.send(result)})
+  Task.findByIdAndUpdate(req.body.id, req.body).then(result => {res.send(result)})
 })
 
 app.delete('/deleteTask', (req, res) => {

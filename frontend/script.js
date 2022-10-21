@@ -1,19 +1,15 @@
 let taskInput
 let taskArr = []
 let text
+
 async function fetchData() {
   taskArr = await fetch('http://localhost:8000/allTasks',
-      {method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-      }).then(res => res.json()).then(res => res.data)
+      {
+        method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+      }).then(res => res.json())
   render()
 }
-window.onload = async function fetchData() {
-  taskArr = await fetch('http://localhost:8000/allTasks',
-      {method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-      }).then(res => res.json()).then(res => res.data)
-  render()
 
-}
 
 function getTask() {
   taskInput = document.querySelector("input").value
@@ -33,7 +29,7 @@ async function setEditedTask(i) {
     method: 'PATCH',
     body: JSON.stringify({id: taskArr[i]._id, text: text, isCheck: false}),
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-  }).then(res => res.json()).then(res => res.data)
+  }).then(res => res.json())
   fetchData()
 }
 
@@ -53,6 +49,7 @@ async function addTask() {
     body: JSON.stringify({text: taskInput, isCheck: false}),
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
   }).then(res => res.json()).then(res => res.data)
+
   fetchData()
 }
 
@@ -64,11 +61,10 @@ async function deleteElem(i) {
 async function setActive(i) {
   taskArr = await fetch('http://localhost:8000/updateTask', {
     method: 'PATCH',
-    body: JSON.stringify({id: taskArr[i].id, text: taskArr[i].text, isCheck: !taskArr[i].isCheck}),
+    body: JSON.stringify({id: taskArr[i]._id, text: taskArr[i].text, isCheck: !taskArr[i].isCheck}),
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
   }).then(res => res.json()).then(res => res.data)
-  console.log(taskArr)
-  render()
+  fetchData()
 }
 
 function setEdit(i) {
@@ -79,7 +75,6 @@ function setEdit(i) {
 
 
 function render() {
-
   let elem = ''
   taskArr = taskArr.sort((a, b) => a.isCheck - b.isCheck)
   taskArr.forEach((el, i) => {
@@ -107,7 +102,6 @@ function render() {
 </div>
 
 `
-
   })
   document.querySelector('#tasks').innerHTML = elem
 }
