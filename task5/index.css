@@ -1,0 +1,21 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.link {
+    border: 1px solid black;
+    padding: 5px 15px 5px 15px;
+}
+.link:hover {
+    box-shadow : 1px 1px 3px 3px rgba(0, 0, 0, 0.1);
+    color: #bb0202;
+    background: linear-gradient(to top,#EAEBD3, #FCFEF4);
+    cursor: pointer;
+}

@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    background-image: url('assets/back_img.jpg');
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.container_content {
+    width: 1140px;
+    margin: 420px auto auto;
+
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 30px;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 304px;
+    padding: 30px;
+    background-color: #292d33;
+}
+
+.card h4 {
+    margin-top: 20px;
+    margin-bottom: 0;
+    color: #ffffff;
+    font: 20px "Open Sans", sans-serif;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.card p {
+    font: 16px "Open Sans", sans-serif;
+    margin-top: 30px;
+    word-wrap: break-word;
+    color: white;
+    margin-bottom: 0;
+}
+
+.card button {
+    padding: 10px 10px;
+    font: 14px "Open Sans", sans-serif;
+    margin-top: 20px;
+    margin-bottom: 0;
+    border-color: #fda820;
+    background-color: transparent;
+    color: white;
+    border-style: solid;
+    letter-spacing: 1px;
+    font-size: 0.875rem;
+    width: 45%;
+}
+.card button:hover {
+    cursor: pointer;
+    color: #bdbdbd;
+}
+
+.freepik {
+    font: 16px "Open Sans", sans-serif;
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 50px;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 1199px) {
+
+    .container_content {
+        width: 940px;
+    }
+
+}
+
+@media (max-width: 991px) {
+
+    .container_content {
+        width: 750px;
+    }
+
+    .cards {
+        margin-top: -200px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        row-gap: 30px;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .container_content {
+        width: 540px;
+    }
+
+
+    .card {
+        height: 332px;
+        width: 195px;
+    }
+    .card button {
+        padding: 10px 0;
+    }
+
+}
+
+@media (max-width: 575px) {
+
+    .container_content {
+        width: 340px;
+    }
+
+    .cards {
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: none;
+    }
+
+    .card {
+        width: 280px;
+        height: 281px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 340px) {
+    .container_content {
+        width: 280px;
+    }
+
+    .card {
+        width: 220px;
+        height: 300px;
+    }
+}
