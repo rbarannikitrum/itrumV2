@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body onload="fetchData()">
+<div class="input_field">
+    <div class="inputs">
+        <input maxlength="300" placeholder="куда было потрачено" id = 'where' onchange="inputWhere()"/>
+        <input maxlength="15" placeholder="сколько было потрачено" id = 'how_many' onchange="inputHowMany()"/>
+
+    </div>
+    <button onclick="addSpend()">Добавить</button>
+</div>
+<div class="all_spends" id = 'all_spends'>
+
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>
