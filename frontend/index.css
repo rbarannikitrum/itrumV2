@@ -1,4 +1,56 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 20px;
+    border: 1px solid red;
+    margin-top: 100px;
+    width: 800px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .input_field {
     display: flex;
     justify-content: center;
+}
+
+.all_spends {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.input{
+    background: url("assets/search.svg") no-repeat;
+
+    display: flex;
+    justify-content: center;
+    padding: 12px 20px;
+    margin: 8px 10px;
+    box-sizing: border-box;
+    font: 14px "Roboto Light", sans-serif;
+    border: 2px solid rgb(136, 136, 136);
+    width: 30px;
+    border-radius: 5px;
+
+    transition: width 0.4s ease-in-out;
+}
+.input:focus {
+
+    outline: none;
+    width: 250px;
+    background: #f2f7fd;
+
+}
+.input_field input::placeholder {
+    color: #455159;
 }

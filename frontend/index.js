@@ -65,26 +65,36 @@ function setEdit (i) {
   render()
   const task = document.querySelector(`#task-${i}`)
   task.innerHTML = ''
+
+
   const editWhereInput = document.createElement('input')
   editWhereInput.placeholder = 'Где'
   editWhereInput.maxLength = 300
   editWhereInput.id = `edit_where_input-${i}`
   editWhereInput.value = spendArr[i].place
   task.appendChild(editWhereInput)
+
+
   const editTimeInput = document.createElement('input')
   editTimeInput.id = `edit_time_input-${i}`
   editTimeInput.type = 'date'
   task.appendChild(editTimeInput)
+
+
   const editPriceInput = document.createElement('input')
   editPriceInput.placeholder = 'Потрачено'
   editPriceInput.id = `edit_price_input-${i}`
   editPriceInput.type = 'number'
   editPriceInput.value = spendArr[i].price
   task.appendChild(editPriceInput)
+
+
   const saveButton = document.createElement('button')
   saveButton.innerText = 'save'
   saveButton.addEventListener('click', () => saveChanges(i))
   task.appendChild(saveButton)
+
+
   const cancelButton = document.createElement('button')
   cancelButton.innerText = 'cancel'
   cancelButton.addEventListener('click', () => render())
