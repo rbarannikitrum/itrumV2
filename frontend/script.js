@@ -1,6 +1,8 @@
 let taskInput
 let taskArr = []
 let text
+const tasks = document.querySelector('#tasks')
+
 
 async function fetchData() {
   taskArr = await fetch('http://localhost:8000/allTasks',
@@ -8,7 +10,6 @@ async function fetchData() {
         method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
       }).then(res => res.json())
   render()
-
 }
 
 
@@ -31,7 +32,8 @@ async function setEditedTask(i) {
     body: JSON.stringify({id: taskArr[i]._id, text: text, isCheck: false}),
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
   }).then(res => res.json())
-  fetchData()
+  await fetchData()
+
 }
 
 async function addTask() {
@@ -51,12 +53,14 @@ async function addTask() {
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
   }).then(res => res.json()).then(res => res.data)
 
-  fetchData()
+  await fetchData()
+
 }
 
 async function deleteElem(i) {
   taskArr = await fetch(`http://localhost:8000/deleteTask?id=${taskArr[i]._id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
-  fetchData()
+  await fetchData()
+
 }
 
 async function setActive(i) {
@@ -65,7 +69,8 @@ async function setActive(i) {
     body: JSON.stringify({id: taskArr[i]._id, text: taskArr[i].text, isCheck: !taskArr[i].isCheck}),
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
   }).then(res => res.json()).then(res => res.data)
-  fetchData()
+  await fetchData()
+
 }
 
 function setEdit(i) {
@@ -76,33 +81,82 @@ function setEdit(i) {
 
 
 function render() {
-  let elem = ''
   taskArr = taskArr.sort((a, b) => a.isCheck - b.isCheck)
+  tasks.innerHTML = ''
   taskArr.forEach((el, i) => {
-    elem += `<div class="edit hidden" id = 'edit-${i}' >
-<input id = 'change-${i}' type="text" value="${taskArr[i].text}" onchange="getEdit(${i})" class="edit_text"/>
-<div class="operators">
-<input type="checkbox" onclick="setActive(${i})" ${el.isCheck ? 'checked' : ''} style="width: 20px; height: 20px;">
 
-<button onclick="setEditedTask(${i})">Save</button>
-<button onclick="render()">Cancel</button>
-</div>
+    const editDiv = document.createElement('div')
+    editDiv.classList.add('edit')
+    editDiv.classList.add('hidden')
+    editDiv.id = `edit-${i}`
+    tasks.appendChild(editDiv)
 
-</div>
-<div id = 'task-${i}' class="task">
-<div class="task_text">
-<p style="${el.isCheck ? 'text-decoration : line-through; color : #5C6672' : ''}">${i + 1}.${el.text}</p>
-</div>
-<div class="operators">
+    const inputEdit = document.createElement('input')
+    inputEdit.id = `change-${i}`
+    inputEdit.type = 'text'
+    inputEdit.value = taskArr[i].text
+    inputEdit.onchange = () => getEdit(i)
+    inputEdit.classList.add('edit_text')
+    editDiv.appendChild(inputEdit)
 
-<input type="checkbox" onclick="setActive(${i})" ${el.isCheck ? 'checked' : ''} style="width: 20px; height: 20px;">
+    const operatorsDiv = document.createElement('div')
+    operatorsDiv.classList.add('operators')
+    editDiv.appendChild(operatorsDiv)
+
+    const checkbox = document.createElement('input')
+    checkbox.type = 'checkbox'
+    checkbox.classList.add('checkbox')
+    checkbox.onclick = () => setActive(i)
+    el.isCheck ? checkbox.checked = true : checkbox.checked = false
+    operatorsDiv.appendChild(checkbox)
+
+    const saveButton = document.createElement('button')
+    saveButton.onclick = () => setEditedTask(i)
+    saveButton.innerText = 'Save'
+    operatorsDiv.appendChild(saveButton)
+
+    const cancelButton = document.createElement('button')
+    cancelButton.onclick = () => render()
+    cancelButton.innerText = 'Cancel'
+    operatorsDiv.appendChild(cancelButton)
 
 
-<button style=" ${el.isCheck ? 'display : none' : ''}" onclick="setEdit(${i})">Edit</button>
-<button onclick="deleteElem(${i})">Delete</button></div>
-</div>
 
-`
+    const taskDiv = document.createElement('div')
+    taskDiv.id = `task-${i}`
+    taskDiv.classList.add('task')
+    tasks.appendChild(taskDiv)
+
+    const taskText = document.createElement('div')
+    taskText.classList.add('task_text')
+    taskDiv.appendChild(taskText)
+
+    const text = document.createElement('p')
+    el.isCheck ? text.classList.add('completed') : ''
+    text.innerText = `${i + 1}. ${el.text}`
+    taskText.appendChild(text)
+
+    const operators = document.createElement('div')
+    operators.classList.add('operators')
+    taskDiv.appendChild(operators)
+
+    const inputCheck = document.createElement('input')
+    inputCheck.type = 'checkbox'
+    inputCheck.onclick = () => setActive(i)
+    el.isCheck ? inputCheck.checked = true : inputCheck.checked = false
+    operators.appendChild(inputCheck)
+
+    const editButton = document.createElement('button')
+    el.isCheck ? editButton.classList.add('hidden') : ''
+    console.log(el.isCheck)
+    editButton.onclick = () => setEdit(i)
+    editButton.innerText = 'Edit'
+    operators.appendChild(editButton)
+
+    const deleteButton = document.createElement('button')
+    deleteButton.onclick = () => deleteElem(i)
+    deleteButton.innerText = 'Delete'
+    operators.appendChild(deleteButton)
+
   })
-  document.querySelector('#tasks').innerHTML = elem
 }
