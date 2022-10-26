@@ -3,7 +3,6 @@ let taskArr = []
 let text
 const tasks = document.querySelector('#tasks')
 
-
 async function fetchData() {
   taskArr = await fetch('http://localhost:8000/allTasks',
       {
@@ -33,7 +32,6 @@ async function setEditedTask(i) {
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
   }).then(res => res.json())
   await fetchData()
-
 }
 
 async function addTask() {
@@ -58,7 +56,8 @@ async function addTask() {
 }
 
 async function deleteElem(i) {
-  taskArr = await fetch(`http://localhost:8000/deleteTask?id=${taskArr[i]._id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
+  taskArr = await fetch(`http://localhost:8000/deleteTask?id=${taskArr[i]._id}`,
+      {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
   await fetchData()
 
 }
@@ -147,8 +146,7 @@ function render() {
     operators.appendChild(inputCheck)
 
     const editButton = document.createElement('button')
-    el.isCheck ? editButton.classList.add('hidden') : ''
-    console.log(el.isCheck)
+    el.isCheck ? editButton.classList.add('hide_button') : ''
     editButton.onclick = () => setEdit(i)
     editButton.innerText = 'Edit'
     operators.appendChild(editButton)
@@ -157,6 +155,5 @@ function render() {
     deleteButton.onclick = () => deleteElem(i)
     deleteButton.innerText = 'Delete'
     operators.appendChild(deleteButton)
-
   })
 }

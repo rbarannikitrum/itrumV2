@@ -74,9 +74,8 @@ body {
 }
 
 .tasks {
-    max-width: 80%;
+    width: 80%;
     margin: 0 auto;
-    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -105,12 +104,12 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
 }
 .operators button {
     background-color: rgba(58, 145, 236, 0.22);
     margin-left: 10px;
     color: black;
-    width: 100px;
     max-height: 30px;
     align-items: center;
     border-radius: 10px;
@@ -201,7 +200,26 @@ body {
 .hidden {
     display: none;
 }
-
+.hide_button {
+    visibility: hidden;
+}
 .active {
     display: flex;
+}
+
+@media (max-width: 1200px) {
+    .container {
+        width: 60%;
+    }
+}
+
+@media (max-width: 950px) {
+    .container {
+        width: 75%;
+    }
+}
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
 }
