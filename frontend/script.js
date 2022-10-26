@@ -80,6 +80,7 @@ function setEdit(i) {
 
 
 function render() {
+
   taskArr = taskArr.sort((a, b) => a.isCheck - b.isCheck)
   tasks.innerHTML = ''
   taskArr.forEach((el, i) => {
