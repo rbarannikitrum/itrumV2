@@ -18,7 +18,7 @@ const uri = 'mongodb+srv://rbarannikitrum:restart987@cluster0.lzarcb4.mongodb.ne
 mongoose.connect (uri, {useNewURLParser: true, useUnifiedTopology: true})
 
 app.post('/createSpend', (req, res) => {
-  req.body.time = new Date()
+  req.body.time = new Date().toLocaleDateString()
   const spend = new Spend(req.body)
   spend.save().then(result => res.send(result))
 })
@@ -30,6 +30,7 @@ app.get('/allSpends', (req, res) => {
 })
 
 app.patch('/updateSpend', (req, res) => {
+  console.log(req.body)
   Spend.findByIdAndUpdate(req.body._id, req.body).then(result => res.send(result))
 })
 

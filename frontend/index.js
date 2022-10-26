@@ -1,7 +1,5 @@
 let where = ''
-let editWhereInput = ''
-let editPriceInput = ''
-let editTimeInput = ''
+let editInput = ''
 
 let howMany = 0
 let spendArr = []
@@ -13,6 +11,7 @@ async function fetchData() {
         method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
       }).then(res => res.json())
   render()
+  console.log(spendArr)
 
 }
 
@@ -22,6 +21,7 @@ function inputWhere () {
 function inputHowMany () {
   howMany = document.querySelector('#how_many').value.trim()
 }
+
 async function addSpend () {
   if (where && howMany) {
     await fetch('http://localhost:8000/createSpend', {
@@ -36,70 +36,54 @@ async function deleteElement (i) {
   await fetch(`http://localhost:8000/deleteSpend?_id=${spendArr[i]._id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
   await fetchData()
 }
-function getInput (i) {
-  editWhereInput = document.querySelector(`#edit_where_input-${i}`).value.trim()
-  editPriceInput = document.querySelector(`#edit_price_input-${i}`).value.trim()
-  editTimeInput = document.querySelector(`#edit_time_input-${i}`).value
-  if (editPriceInput < 1) {
-    editPriceInput = ''
-  }
 
+function getInput (elem, i) {
+  editInput = document.querySelector(`#edit-${elem.split('-')[0]}-${i}`).value
 
 }
-async function saveChanges (i) {
-  getInput(i)
-  if (editWhereInput || editPriceInput) {
-
+async function saveChanges (elem, i) {
+  getInput(elem, i)
+  console.log(editInput, elem, spendArr[i].time)
+  const type = elem.split('-')[0]
+  spendArr[i][type] = editInput
     spendArr = await fetch('http://localhost:8000/updateSpend', {
       method: 'PATCH',
-      body: JSON.stringify({_id: spendArr[i]._id, place: editWhereInput, time: editTimeInput, price : editPriceInput}),
+      body: JSON.stringify({_id: spendArr[i]._id, place : spendArr[i].place, time : spendArr[i].time, price : spendArr[i].price}),
       headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
     }).then(res => res.json())
     await fetchData()
-  } else render()
+   render()
 
 }
 
 
-function setEdit (i) {
-  console.log(i)
+function setEdit (elem, i) {
+
+  console.log(elem, i)
   render()
-  const task = document.querySelector(`#task-${i}`)
-  task.innerHTML = ''
+  const field = document.querySelector(`#${elem}`)
+  const text = document.querySelector(`#text-${i}`)
+  text.className = 'task';
+  field.innerHTML = ''
+  const input = document.createElement('input')
+  input.type = `${elem.split('-')[0] === 'price' ? 'number' : elem.split('-')[0] === 'time' ? 'date' : 'text'}`
+  input.type === 'date' ? input.valueAsDate = new Date(spendArr[i][elem.split('-')[0]]) : input.value = `${spendArr[i][elem.split('-')[0]]}`
+  input.id = `edit-${elem.split('-')[0]}-${i}`
+  console.log(input.type)
+  text.appendChild(input)
 
+  const cancel = document.createElement('button')
+  cancel.innerText = 'cancel'
+  cancel.addEventListener('click', () => {render()})
 
-  const editPlaceInput = document.createElement('input')
-  editPlaceInput.placeholder = 'Где'
-  editPlaceInput.maxLength = 300
-  editPlaceInput.id = `edit_place_input-${i}`
-  editPlaceInput.value = spendArr[i].place
-  task.appendChild(editPlaceInput)
+  text.appendChild(cancel)
 
+  const accept = document.createElement('button')
+  accept.innerText = 'accept'
+  accept.addEventListener('click', () => {saveChanges(elem, i)})
 
-  const editTimeInput = document.createElement('input')
-  editTimeInput.id = `edit_time_input-${i}`
-  editTimeInput.type = 'date'
-  task.appendChild(editTimeInput)
+  text.appendChild(accept)
 
-
-  const editPriceInput = document.createElement('input')
-  editPriceInput.placeholder = 'Потрачено'
-  editPriceInput.id = `edit_price_input-${i}`
-  editPriceInput.type = 'number'
-  editPriceInput.value = spendArr[i].price
-  task.appendChild(editPriceInput)
-
-
-  const saveButton = document.createElement('button')
-  saveButton.innerText = 'save'
-  saveButton.addEventListener('click', () => saveChanges(i))
-  task.appendChild(saveButton)
-
-
-  const cancelButton = document.createElement('button')
-  cancelButton.innerText = 'cancel'
-  cancelButton.addEventListener('click', () => render())
-  task.appendChild(cancelButton)
 }
 
 
@@ -109,41 +93,39 @@ function render () {
     const container = document.createElement('div')
     container.id = `task-${i}`
     container.classList.add('container_task')
+    container.addEventListener('blur', () => {
+      render();
+    });
 
-    const taskContainer = document.createElement('div')
-    container.appendChild(taskContainer)
 
-    const place = document.createElement('div')
+    const text = document.createElement('div')
+    text.id = `text-${i}`
+    container.appendChild(text)
+
+    const place = document.createElement('span')
     place.innerText = `${el.place}`
-    place.onclick = () => {setEdit(place.id)}
-    taskContainer.appendChild(place)
+    place.addEventListener('click', () => setEdit(place.id, i))
+    text.appendChild(place)
     place.id = `place-${i}`
 
-    const date = document.createElement('div')
-    date.innerText =`${new Date(el.time).toLocaleDateString('ru-ru')}`
-    taskContainer.appendChild(date)
-    date.id = `date-${i}`
+    const time = document.createElement('span')
+    time.innerText =` ${new Date(el.time).toLocaleDateString('ru-ru')}  `
+    text.appendChild(time)
+    time.addEventListener('click', () => setEdit(time.id, i))
+    time.id = `time-${i}`
 
-    const price = document.createElement('div')
+    const price = document.createElement('span')
     price.innerText = `${el.price}`
-    taskContainer.appendChild(price)
+    price.addEventListener('click', () => setEdit(price.id, i))
+    text.appendChild(price)
     price.id = `price-${i}`
-
-    const operators = document.createElement('div')
-    container.appendChild(operators)
-
-    const edit = document.createElement('button')
-    edit.innerText = 'edit'
-    edit.id = `edit-${i}`
-    operators.appendChild(edit)
-    edit.addEventListener('click', () => {setEdit(i)})
 
 
 
     const deleteEl = document.createElement('button')
     deleteEl.innerText = 'delete'
     deleteEl.addEventListener('click',() => deleteElement(i))
-    operators.appendChild(deleteEl)
+    container.appendChild(deleteEl)
     deleteEl.id = `delete-${i}`
 
 

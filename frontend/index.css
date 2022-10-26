@@ -74,5 +74,18 @@ body {
 }
 
 .container_task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.task {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.task span {
+    width: 50px;
+    margin: 10px 30px ;
 }
