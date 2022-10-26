@@ -1,3 +1,5 @@
+require('dotenv').config({path:'../.env'});
+
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
@@ -7,10 +9,8 @@ app.use(cors())
 app.use(express.json())
 app.use('/', apiRoutes)
 
-const uri = 'mongodb+srv://rbarannikitrum:restart987@cluster0.lzarcb4.mongodb.net/?retryWrites=true&w=majority'
+mongoose.connect(process.env.URI, {useNewURLParser: true, useUnifiedTopology: true})
 
-mongoose.connect(uri, {useNewURLParser: true, useUnifiedTopology: true})
-
-app.listen(8000, () => {
+app.listen(process.env.PORT, () => {
   console.log('hello')
 })
