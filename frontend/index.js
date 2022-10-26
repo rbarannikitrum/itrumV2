@@ -62,17 +62,18 @@ async function saveChanges (i) {
 
 
 function setEdit (i) {
+  console.log(i)
   render()
   const task = document.querySelector(`#task-${i}`)
   task.innerHTML = ''
 
 
-  const editWhereInput = document.createElement('input')
-  editWhereInput.placeholder = 'Где'
-  editWhereInput.maxLength = 300
-  editWhereInput.id = `edit_where_input-${i}`
-  editWhereInput.value = spendArr[i].place
-  task.appendChild(editWhereInput)
+  const editPlaceInput = document.createElement('input')
+  editPlaceInput.placeholder = 'Где'
+  editPlaceInput.maxLength = 300
+  editPlaceInput.id = `edit_place_input-${i}`
+  editPlaceInput.value = spendArr[i].place
+  task.appendChild(editPlaceInput)
 
 
   const editTimeInput = document.createElement('input')
@@ -107,19 +108,34 @@ function render () {
   spendArr.forEach((el, i) => {
     const container = document.createElement('div')
     container.id = `task-${i}`
+    container.classList.add('container_task')
 
+    const taskContainer = document.createElement('div')
+    container.appendChild(taskContainer)
 
+    const place = document.createElement('div')
+    place.innerText = `${el.place}`
+    place.onclick = () => {setEdit(place.id)}
+    taskContainer.appendChild(place)
+    place.id = `place-${i}`
 
-    const div = document.createElement('div')
-    div.innerText = `${el.place},     ||| ${new Date(el.time).toLocaleDateString('ru-ru')}, |||      ${el.price}`
-    container.appendChild(div)
-    div.id = `text-${i}`
+    const date = document.createElement('div')
+    date.innerText =`${new Date(el.time).toLocaleDateString('ru-ru')}`
+    taskContainer.appendChild(date)
+    date.id = `date-${i}`
 
+    const price = document.createElement('div')
+    price.innerText = `${el.price}`
+    taskContainer.appendChild(price)
+    price.id = `price-${i}`
+
+    const operators = document.createElement('div')
+    container.appendChild(operators)
 
     const edit = document.createElement('button')
     edit.innerText = 'edit'
     edit.id = `edit-${i}`
-    container.appendChild(edit)
+    operators.appendChild(edit)
     edit.addEventListener('click', () => {setEdit(i)})
 
 
@@ -127,7 +143,7 @@ function render () {
     const deleteEl = document.createElement('button')
     deleteEl.innerText = 'delete'
     deleteEl.addEventListener('click',() => deleteElement(i))
-    container.appendChild(deleteEl)
+    operators.appendChild(deleteEl)
     deleteEl.id = `delete-${i}`
 
 

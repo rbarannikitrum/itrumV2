@@ -7,6 +7,7 @@ body {
     justify-content: center;
     margin: 0;
     padding: 0;
+
 }
 
 .container {
@@ -17,6 +18,11 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    background: repeating-linear-gradient(-55deg,
+    #ffffff,
+    #ffffff 10px,
+    #eeeeee 10px,
+    #eeeeee 20px)
 }
 
 .input_field {
@@ -28,10 +34,10 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    border-radius: 10px;
+    border: 2px solid rgb(136, 136, 136);
 }
 .input{
-    background: url("assets/search.svg") no-repeat;
-
     display: flex;
     justify-content: center;
     padding: 12px 20px;
@@ -39,18 +45,34 @@ body {
     box-sizing: border-box;
     font: 14px "Roboto Light", sans-serif;
     border: 2px solid rgb(136, 136, 136);
-    width: 30px;
-    border-radius: 5px;
-
+    width: 85px;
+    border-radius: 10px;
     transition: width 0.4s ease-in-out;
 }
 .input:focus {
-
     outline: none;
     width: 250px;
     background: #f2f7fd;
+    border: 2px solid black;
 
 }
 .input_field input::placeholder {
     color: #455159;
+}
+
+.button_add {
+    width: 72px;
+    margin: 8px 10px;
+    outline: 0;
+    border: 2px solid rgb(136, 136, 136);
+    border-radius: 10px 10px 10px 2px;
+    background-color: white;
+}
+.button_add:hover {
+    background-color:#f2f7fd;
+    border: 2px solid black;
+}
+
+.container_task {
+
 }
