@@ -36,7 +36,6 @@ async function addSpend() {
     }).then(res => res.json()).then(res => res.data)
     deleteLoader()
     howMany = Number(howMany)
-    total = total + howMany
     await fetchData()
   }
 }
@@ -45,10 +44,7 @@ async function deleteElement(i) {
   setLoader()
   await fetch(`http://localhost:8000/deleteSpend?_id=${spendArr[i]._id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
   deleteLoader()
-  total = total - spendArr[i].price
-  if (total < 0 || spendArr.length === 0) {
-    total = 0
-  }
+
   await fetchData()
 }
 
@@ -132,6 +128,9 @@ function deleteLoader() {
 }
 
 function render() {
+
+  total = spendArr.reduce((accum,el) => accum + el.price, 0)
+
   spends.innerHTML = ''
   const sum = document.createElement('div')
   sum.classList.add('sum')
