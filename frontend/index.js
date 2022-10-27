@@ -1,7 +1,7 @@
 let where = ''
 let editInput = ''
-
 let howMany = 0
+let total = 0
 let spendArr = []
 const spends = document.querySelector('#all_spends')
 
@@ -26,6 +26,8 @@ function inputHowMany() {
 
 async function addSpend() {
   if (where && howMany) {
+    document.querySelector('#where').value = ''
+    document.querySelector('#how_many').value = ''
     setLoader()
     await fetch('http://localhost:8000/createSpend', {
       method: 'POST',
@@ -33,6 +35,8 @@ async function addSpend() {
       headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
     }).then(res => res.json()).then(res => res.data)
     deleteLoader()
+    howMany = Number(howMany)
+    total = total + howMany
     await fetchData()
   }
 }
@@ -41,6 +45,10 @@ async function deleteElement(i) {
   setLoader()
   await fetch(`http://localhost:8000/deleteSpend?_id=${spendArr[i]._id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
   deleteLoader()
+  total = total - spendArr[i].price
+  if (total < 0) {
+    total = 0
+  }
   await fetchData()
 }
 
@@ -51,7 +59,6 @@ function getInput(elem, i) {
 
 async function saveChanges(elem, i) {
   getInput(elem, i)
-  console.log(editInput, elem, spendArr[i].time)
   const type = elem.split('-')[0]
   spendArr[i][type] = editInput
   setLoader()
@@ -78,25 +85,23 @@ function setEdit(elem, i) {
   const field = document.querySelector(`#${elem}`)
   const task = field.parentNode
   task.className = 'task';
+  console.log(task)
   field.remove()
   const input = document.createElement('input')
   input.type = `${elem.split('-')[0] === 'price' ? 'number' : elem.split('-')[0] === 'time' ? 'date' : 'text'}`
   input.type === 'date' ? input.valueAsDate = new Date(spendArr[i][elem.split('-')[0]]) : input.value = `${spendArr[i][elem.split('-')[0]]}`
   input.id = `edit-${elem.split('-')[0]}-${i}`
-  input.onblur = () => {
-    saveChanges(elem, i)
-  }
   task.appendChild(input)
+  task.addEventListener('focusout', () => render())
 
-  const cancel = document.createElement('button')
-  cancel.addEventListener('click', () => {
-    render()
+  input.addEventListener('keyup', (event) => {
+    if (event.keyCode === 13) {
+      event.preventDefault()
+      saveChanges(elem, i)
+    }
   })
-  cancel.classList.add('cancel')
-  task.appendChild(cancel)
-
-
 }
+
 
 function setLoader() {
   const ring = document.createElement('div')
@@ -124,8 +129,12 @@ function deleteLoader() {
 
 function render() {
   spends.innerHTML = ''
-  spendArr.forEach((el, i) => {
+  const sum = document.createElement('div')
+  sum.classList.add('sum')
+  sum.innerText = `Всего денег потрачено было : ${total} рублей`
 
+
+  spendArr.forEach((el, i) => {
     // вся задача
     const container = document.createElement('div')
     container.id = `task-${i}`
@@ -150,7 +159,7 @@ function render() {
 
 
     const time = document.createElement('span')
-    time.innerText = ` ${new Date(el.time).toLocaleDateString('ru-ru')}  `
+    time.innerText = `${new Date(el.time).toLocaleDateString('ru-ru')}`
     timeContainer.appendChild(time)
     time.addEventListener('click', () => setEdit(time.id, i))
     time.id = `time-${i}`
@@ -161,7 +170,7 @@ function render() {
 
 
     const price = document.createElement('span')
-    price.innerText = `${el.price}`
+    price.innerText = `${el.price} ₽`
     price.addEventListener('click', () => setEdit(price.id, i))
     priceContainer.appendChild(price)
     price.id = `price-${i}`
@@ -177,6 +186,8 @@ function render() {
 
     // див со всеми задачами
     spends.appendChild(container)
+    spends.appendChild(sum)
+
 
   })
 }
