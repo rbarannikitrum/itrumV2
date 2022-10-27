@@ -13,8 +13,8 @@ function getInputForAll (i) {
   editWhereInput = document.querySelector(`#edit_place_input-${i}`).value.trim()
   editPriceInput = document.querySelector(`#edit_price_input-${i}`).value.trim()
   editTimeInput = document.querySelector(`#edit_time_input-${i}`).value
-  if (editPriceInput < 1) {
-    editPriceInput = ''
+  if (editPriceInput <= 0) {
+    editPriceInput = 0
   }
 }
 
@@ -22,6 +22,12 @@ function getInputForAll (i) {
 // сохранить изменения в случае когда открывается 3 инпута
 async function saveChangesForAll (i) {
   getInputForAll(i)
+  if (editPriceInput === 0) {
+    return
+  }
+  if (editWhereInput === '') {
+    return
+  }
   if (editWhereInput || editPriceInput) {
     spendArr = await fetch('http://localhost:8000/updateSpend', {
       method: 'PATCH',
