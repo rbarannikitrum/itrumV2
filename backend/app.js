@@ -30,7 +30,7 @@ app.get('/allSpends', (req, res) => {
 })
 
 app.patch('/updateSpend', (req, res) => {
-  console.log(req.body)
+
   Spend.findByIdAndUpdate(req.body._id, req.body).then(result => res.send(result))
 })
 

@@ -24,12 +24,14 @@ function inputHowMany () {
 
 async function addSpend () {
   if (where && howMany) {
+
     await fetch('http://localhost:8000/createSpend', {
       method: 'POST',
       body: JSON.stringify({place : where, price : howMany}),
       headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
     }).then(res => res.json()).then(res => res.data)
     await fetchData()
+
   }
 }
 async function deleteElement (i) {
