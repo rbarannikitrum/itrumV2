@@ -192,8 +192,14 @@ function render() {
     deleteEl.innerText = 'Delete'
     deleteEl.addEventListener('click', () => deleteElement(i))
     container.appendChild(deleteEl)
-    deleteEl.classList.add('delete')
+    deleteEl.classList.add('btn')
     deleteEl.id = `delete-${i}`
+
+    const editTask = document.createElement('button')
+    editTask.innerText = 'Edit'
+    container.appendChild(editTask)
+    editTask.classList.add('btn')
+    editTask.id = `edit-${i}`
 
 
     // див со всеми задачами
