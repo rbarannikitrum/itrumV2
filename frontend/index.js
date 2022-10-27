@@ -58,31 +58,26 @@ async function saveChanges (elem, i) {
 
 
 function setEdit (elem, i) {
-
   console.log(elem, i)
   render()
   const field = document.querySelector(`#${elem}`)
-  const text = document.querySelector(`#text-${i}`)
-  text.className = 'task';
-  field.innerHTML = ''
+  const task = field.parentNode
+  task.className = 'task';
+  field.remove()
   const input = document.createElement('input')
   input.type = `${elem.split('-')[0] === 'price' ? 'number' : elem.split('-')[0] === 'time' ? 'date' : 'text'}`
   input.type === 'date' ? input.valueAsDate = new Date(spendArr[i][elem.split('-')[0]]) : input.value = `${spendArr[i][elem.split('-')[0]]}`
   input.id = `edit-${elem.split('-')[0]}-${i}`
-  console.log(input.type)
-  text.appendChild(input)
+  input.onblur = () => {
+    saveChanges(elem, i)
+  }
+  task.appendChild(input)
 
   const cancel = document.createElement('button')
-  cancel.innerText = 'cancel'
   cancel.addEventListener('click', () => {render()})
+  cancel.classList.add('cancel')
+  task.appendChild(cancel)
 
-  text.appendChild(cancel)
-
-  const accept = document.createElement('button')
-  accept.innerText = 'accept'
-  accept.addEventListener('click', () => {saveChanges(elem, i)})
-
-  text.appendChild(accept)
 
 }
 
@@ -90,46 +85,59 @@ function setEdit (elem, i) {
 function render () {
   spends.innerHTML = ''
   spendArr.forEach((el, i) => {
+
+    // вся задача
     const container = document.createElement('div')
     container.id = `task-${i}`
     container.classList.add('container_task')
-    container.addEventListener('blur', () => {
-      render();
-    });
 
 
-    const text = document.createElement('div')
-    text.id = `text-${i}`
-    container.appendChild(text)
+    const placeContainer = document.createElement('div')
+    placeContainer.classList.add('element')
+    container.appendChild(placeContainer)
+
 
     const place = document.createElement('span')
     place.innerText = `${el.place}`
     place.addEventListener('click', () => setEdit(place.id, i))
-    text.appendChild(place)
+    placeContainer.appendChild(place)
     place.id = `place-${i}`
+
+
+    const timeContainer = document.createElement('div')
+    timeContainer.classList.add('element')
+    container.appendChild(timeContainer)
+
 
     const time = document.createElement('span')
     time.innerText =` ${new Date(el.time).toLocaleDateString('ru-ru')}  `
-    text.appendChild(time)
+    timeContainer.appendChild(time)
     time.addEventListener('click', () => setEdit(time.id, i))
     time.id = `time-${i}`
+
+    const priceContainer = document.createElement('div')
+    container.appendChild(priceContainer)
+    priceContainer.classList.add('element')
+
+
 
     const price = document.createElement('span')
     price.innerText = `${el.price}`
     price.addEventListener('click', () => setEdit(price.id, i))
-    text.appendChild(price)
+    priceContainer.appendChild(price)
     price.id = `price-${i}`
 
 
 
     const deleteEl = document.createElement('button')
-    deleteEl.innerText = 'delete'
+    deleteEl.innerText = 'Delete'
     deleteEl.addEventListener('click',() => deleteElement(i))
     container.appendChild(deleteEl)
+    deleteEl.classList.add('delete')
     deleteEl.id = `delete-${i}`
 
 
-
+    // див со всеми задачами
     spends.appendChild(container)
 
   })

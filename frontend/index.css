@@ -7,22 +7,57 @@ body {
     justify-content: center;
     margin: 0;
     padding: 0;
-
+    height: 100vh;
+    background: linear-gradient(180deg, #273b9d, #09133c) no-repeat;
 }
 
 .container {
     padding: 20px;
-    border: 1px solid red;
     margin-top: 100px;
-    width: 800px;
+    width: 1000px;
+    height: fit-content;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background: repeating-linear-gradient(-55deg,
-    #ffffff,
-    #ffffff 10px,
-    #eeeeee 10px,
-    #eeeeee 20px)
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    z-index: -2;
+    left: -50%;
+    top: -50%;
+    width: 200%;
+    height: 200%;
+    background-color: #BFE2FF;
+    background-repeat: no-repeat;
+    background-size: 50% 50%, 50% 50%;
+    background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+    background-image: linear-gradient(#BFE2FF, #BFE2FF), linear-gradient(#337AB7, #337AB7), linear-gradient(#BFE2FF, #BFE2FF), linear-gradient(#337AB7, #337AB7);
+    animation: anim-ramka-5 10s linear infinite;
+}
+.container::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 6px;
+    top: 6px;
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+    background: #f2f7fd;
+    border-radius: 5px;
+}
+@keyframes anim-ramka-5 {
+    100% {
+        transform: rotate(1turn);
+    }
 }
 
 .input_field {
@@ -34,10 +69,10 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    border-radius: 10px;
-    border: 2px solid rgb(136, 136, 136);
+
 }
-.input{
+
+.input {
     display: flex;
     justify-content: center;
     padding: 12px 20px;
@@ -47,17 +82,20 @@ body {
     border: 2px solid rgb(136, 136, 136);
     width: 85px;
     border-radius: 10px;
+    background: #f2f7fd;
     transition: width 0.4s ease-in-out;
 }
+
 .input:focus {
     outline: none;
     width: 250px;
-    background: #f2f7fd;
     border: 2px solid black;
 
 }
+
 .input_field input::placeholder {
     color: #455159;
+
 }
 
 .button_add {
@@ -66,26 +104,98 @@ body {
     outline: 0;
     border: 2px solid rgb(136, 136, 136);
     border-radius: 10px 10px 10px 2px;
-    background-color: white;
+    background-color: #f2f7fd;
+    color: #455159;
 }
+
 .button_add:hover {
-    background-color:#f2f7fd;
+    background-color: #f2f7fd;
     border: 2px solid black;
 }
 
 .container_task {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    margin-top: 20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 15px;
     align-items: center;
+    justify-items: stretch;
 }
 
+.element {
+    border: 2px solid rgb(136, 136, 136);
+    border-radius: 10px;
+    display: flex;
+    color: #455159;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+.element:hover {
+    background-color: #f2f7fd;
+    border: 2px solid black;
+    color: black;
+}
+
+.delete {
+    justify-self: center;
+    height: 50px;
+    width: 100px;
+    outline: 0;
+    color: #455159;
+    border: 2px solid rgb(136, 136, 136);
+    border-radius: 10px 10px 10px 10px;
+    background: transparent;
+    padding: 0;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.delete:hover {
+    color: black;
+    background-color: #f2f7fd;
+    border: 2px solid black;
+}
+
+.container_task span {
+    width: 100%;
+    text-align: center;
+}
+
+
+/*edit window */
 .task {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 15px;
+    flex-direction: row;
 }
-.task span {
+
+.cancel {
     width: 50px;
-    margin: 10px 30px ;
+    height: 50px;
+    align-self: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    outline: 0;
+    border: 0;
+    background: url("assets/cancel.svg") no-repeat;
+
+}
+
+.task input {
+    width: 170px;
+    height: 50px;
+    padding: 12px 20px;
+    align-self: center;
+    box-sizing: border-box;
+    font: 14px "Roboto Light", sans-serif;
+    border: 2px solid rgb(136, 136, 136);
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.task input:focus {
+    outline: none;
+    background: #f2f7fd;
+    border: 2px solid black;
 }

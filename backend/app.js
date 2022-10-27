@@ -18,7 +18,7 @@ const uri = 'mongodb+srv://rbarannikitrum:restart987@cluster0.lzarcb4.mongodb.ne
 mongoose.connect (uri, {useNewURLParser: true, useUnifiedTopology: true})
 
 app.post('/createSpend', (req, res) => {
-  req.body.time = new Date().toLocaleDateString()
+  req.body.time = new Date()
   const spend = new Spend(req.body)
   spend.save().then(result => res.send(result))
 })
