@@ -6,60 +6,73 @@ let spendArr = []
 const spends = document.querySelector('#all_spends')
 
 async function fetchData() {
+  setLoader()
   spendArr = await fetch('http://localhost:8000/allSpends',
       {
         method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
       }).then(res => res.json())
+  deleteLoader()
   render()
-  console.log(spendArr)
 
 }
 
-function inputWhere () {
+function inputWhere() {
   where = document.querySelector('#where').value.trim()
 }
-function inputHowMany () {
+
+function inputHowMany() {
   howMany = document.querySelector('#how_many').value.trim()
 }
 
-async function addSpend () {
+async function addSpend() {
   if (where && howMany) {
-
+    setLoader()
     await fetch('http://localhost:8000/createSpend', {
       method: 'POST',
-      body: JSON.stringify({place : where, price : howMany}),
+      body: JSON.stringify({place: where, price: howMany}),
       headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
     }).then(res => res.json()).then(res => res.data)
+    deleteLoader()
     await fetchData()
-
   }
 }
-async function deleteElement (i) {
+
+async function deleteElement(i) {
+  setLoader()
   await fetch(`http://localhost:8000/deleteSpend?_id=${spendArr[i]._id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
+  deleteLoader()
   await fetchData()
 }
 
-function getInput (elem, i) {
+function getInput(elem, i) {
   editInput = document.querySelector(`#edit-${elem.split('-')[0]}-${i}`).value
 
 }
-async function saveChanges (elem, i) {
+
+async function saveChanges(elem, i) {
   getInput(elem, i)
   console.log(editInput, elem, spendArr[i].time)
   const type = elem.split('-')[0]
   spendArr[i][type] = editInput
-    spendArr = await fetch('http://localhost:8000/updateSpend', {
-      method: 'PATCH',
-      body: JSON.stringify({_id: spendArr[i]._id, place : spendArr[i].place, time : spendArr[i].time, price : spendArr[i].price}),
-      headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-    }).then(res => res.json())
-    await fetchData()
-   render()
+  setLoader()
+  spendArr = await fetch('http://localhost:8000/updateSpend', {
+    method: 'PATCH',
+    body: JSON.stringify({
+      _id: spendArr[i]._id,
+      place: spendArr[i].place,
+      time: spendArr[i].time,
+      price: spendArr[i].price
+    }),
+    headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+  }).then(res => res.json())
+  deleteLoader()
+  await fetchData()
+  render()
 
 }
 
 
-function setEdit (elem, i) {
+function setEdit(elem, i) {
   console.log(elem, i)
   render()
   const field = document.querySelector(`#${elem}`)
@@ -76,15 +89,40 @@ function setEdit (elem, i) {
   task.appendChild(input)
 
   const cancel = document.createElement('button')
-  cancel.addEventListener('click', () => {render()})
+  cancel.addEventListener('click', () => {
+    render()
+  })
   cancel.classList.add('cancel')
   task.appendChild(cancel)
 
 
 }
 
+function setLoader() {
+  const ring = document.createElement('div')
+  ring.id = 'ring'
+  ring.classList.add('lds-ring')
+  spends.before(ring)
 
-function render () {
+  let firstDiv = document.createElement('div')
+  ring.appendChild(firstDiv)
+
+  let secondDiv = document.createElement('div')
+  ring.appendChild(secondDiv)
+
+  let thirdDiv = document.createElement('div')
+  ring.appendChild(thirdDiv)
+
+  let fourthDiv = document.createElement('div')
+  ring.appendChild(fourthDiv)
+}
+
+function deleteLoader() {
+  let load = document.getElementById('ring')
+  load.remove()
+}
+
+function render() {
   spends.innerHTML = ''
   spendArr.forEach((el, i) => {
 
@@ -112,7 +150,7 @@ function render () {
 
 
     const time = document.createElement('span')
-    time.innerText =` ${new Date(el.time).toLocaleDateString('ru-ru')}  `
+    time.innerText = ` ${new Date(el.time).toLocaleDateString('ru-ru')}  `
     timeContainer.appendChild(time)
     time.addEventListener('click', () => setEdit(time.id, i))
     time.id = `time-${i}`
@@ -122,7 +160,6 @@ function render () {
     priceContainer.classList.add('element')
 
 
-
     const price = document.createElement('span')
     price.innerText = `${el.price}`
     price.addEventListener('click', () => setEdit(price.id, i))
@@ -130,10 +167,9 @@ function render () {
     price.id = `price-${i}`
 
 
-
     const deleteEl = document.createElement('button')
     deleteEl.innerText = 'Delete'
-    deleteEl.addEventListener('click',() => deleteElement(i))
+    deleteEl.addEventListener('click', () => deleteElement(i))
     container.appendChild(deleteEl)
     deleteEl.classList.add('delete')
     deleteEl.id = `delete-${i}`
