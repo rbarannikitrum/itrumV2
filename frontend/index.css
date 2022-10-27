@@ -23,7 +23,7 @@ body {
     z-index: 0;
     border-radius: 10px;
     overflow: hidden;
-    font-size: 24px;
+    font-size: 20px;
     font-family: 'Roboto', sans-serif;
 
 }
@@ -187,14 +187,22 @@ body {
     padding: 12px 20px;
     align-self: center;
     box-sizing: border-box;
-    font: 14px "Roboto Light", sans-serif;
     border: 2px solid rgb(136, 136, 136);
     border-radius: 10px;
     background: #ffffff;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+
 }
 
 .task input:focus {
     outline: none;
     background: #f2f7fd;
     border: 2px solid black;
+}
+
+@media (max-width: 1000px) {
+    .container {
+        width: 700px;
+    }
 }
