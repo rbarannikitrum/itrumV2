@@ -46,7 +46,7 @@ async function deleteElement(i) {
   await fetch(`http://localhost:8000/deleteSpend?_id=${spendArr[i]._id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
   deleteLoader()
   total = total - spendArr[i].price
-  if (total < 0) {
+  if (total < 0 || spendArr.length === 0) {
     total = 0
   }
   await fetchData()
@@ -54,12 +54,16 @@ async function deleteElement(i) {
 
 function getInput(elem, i) {
   editInput = document.querySelector(`#edit-${elem.split('-')[0]}-${i}`).value
+  if (editInput < 1) {
+    editInput = 0
+  }
 
 }
 
 async function saveChanges(elem, i) {
   getInput(elem, i)
   const type = elem.split('-')[0]
+
   spendArr[i][type] = editInput
   setLoader()
   spendArr = await fetch('http://localhost:8000/updateSpend', {

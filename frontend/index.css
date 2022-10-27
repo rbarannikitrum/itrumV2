@@ -84,7 +84,7 @@ body {
     box-sizing: border-box;
     font: 14px "Roboto Light", sans-serif;
     border: 2px solid rgb(136, 136, 136);
-    width: 85px;
+    width: 100px;
     border-radius: 10px;
     background: #f2f7fd;
     transition: width 0.4s ease-in-out;
