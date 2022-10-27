@@ -279,3 +279,18 @@ body {
         width: 700px;
     }
 }
+@media (max-width: 700px) {
+    .container {
+        width: 500px;
+    }
+}
+@media (max-width: 500px) {
+    .container {
+        width: 300px;
+    }
+    .container_task {
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+
+    }
+}
