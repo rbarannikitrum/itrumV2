@@ -4,7 +4,35 @@ let howMany = 0
 let total = 0
 let spendArr = []
 const spends = document.querySelector('#all_spends')
+let editWhereInput = ''
+let editPriceInput = ''
+let editTimeInput = ''
 
+// получить инпут в случае когда открывается 3 инпута
+function getInputForAll (i) {
+  editWhereInput = document.querySelector(`#edit_place_input-${i}`).value.trim()
+  editPriceInput = document.querySelector(`#edit_price_input-${i}`).value.trim()
+  editTimeInput = document.querySelector(`#edit_time_input-${i}`).value
+  if (editPriceInput < 1) {
+    editPriceInput = ''
+  }
+}
+
+
+// сохранить изменения в случае когда открывается 3 инпута
+async function saveChangesForAll (i) {
+  getInputForAll(i)
+  if (editWhereInput || editPriceInput) {
+    spendArr = await fetch('http://localhost:8000/updateSpend', {
+      method: 'PATCH',
+      body: JSON.stringify({_id: spendArr[i]._id, place: editWhereInput, time: editTimeInput, price: editPriceInput}),
+      headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+    }).then(res => res.json())
+    await fetchData()
+  } else render()
+}
+
+// получение задачек
 async function fetchData() {
   setLoader()
   spendArr = await fetch('http://localhost:8000/allSpends',
@@ -13,13 +41,13 @@ async function fetchData() {
       }).then(res => res.json())
   deleteLoader()
   render()
-
 }
 
+// инпут места для добавления новой задачи
 function inputWhere() {
   where = document.querySelector('#where').value.trim()
 }
-
+// инпут цены для добавления новой задачи
 function inputHowMany() {
   howMany = document.querySelector('#how_many').value.trim()
   if (howMany < 0) {
@@ -27,6 +55,8 @@ function inputHowMany() {
   }
 }
 
+
+// добавить задачу
 async function addSpend() {
   if (where && howMany) {
     if (where === '') {
@@ -46,6 +76,7 @@ async function addSpend() {
   }
 }
 
+// удалить задачу
 async function deleteElement(i) {
   setLoader()
   await fetch(`http://localhost:8000/deleteSpend?_id=${spendArr[i]._id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
@@ -54,14 +85,16 @@ async function deleteElement(i) {
   await fetchData()
 }
 
+// получить инпут когда открыто одно поле ввода
 function getInput(elem, i) {
   editInput = document.querySelector(`#edit-${elem.split('-')[0]}-${i}`).value
   if (editInput <= 0) {
     editInput = 0
   }
-
 }
 
+
+// сохранить изменения когда открыто одно поле ввода
 async function saveChanges(elem, i) {
   getInput(elem, i)
   if (editInput === 0) {
@@ -87,7 +120,7 @@ async function saveChanges(elem, i) {
 
 }
 
-
+// открыть окно редактирования с одним полем ввода
 function setEdit(elem, i) {
   console.log(elem, i)
   render()
@@ -99,6 +132,7 @@ function setEdit(elem, i) {
   const input = document.createElement('input')
   input.type = `${elem.split('-')[0] === 'price' ? 'number' : elem.split('-')[0] === 'time' ? 'date' : 'text'}`
   input.type === 'date' ? input.valueAsDate = new Date(spendArr[i][elem.split('-')[0]]) : input.value = `${spendArr[i][elem.split('-')[0]]}`
+  input.classList.add('input_edit')
   input.id = `edit-${elem.split('-')[0]}-${i}`
   task.appendChild(input)
   task.addEventListener('focusout', () => render())
@@ -111,7 +145,53 @@ function setEdit(elem, i) {
   })
 }
 
+// открыть окно редактирования с 3 полями ввода
+function openEdit(i) {
+  console.log(i)
+  render()
+  const task = document.querySelector(`#task-${i}`)
+  task.innerHTML = ''
 
+
+  const editPlaceInput = document.createElement('input')
+  editPlaceInput.placeholder = 'Где'
+  editPlaceInput.maxLength = 300
+  editPlaceInput.id = `edit_place_input-${i}`
+  editPlaceInput.value = spendArr[i].place
+  editPlaceInput.classList.add('input_edit')
+  task.appendChild(editPlaceInput)
+
+
+  const editTimeInput = document.createElement('input')
+  editTimeInput.id = `edit_time_input-${i}`
+  editTimeInput.type = 'date'
+  editTimeInput.classList.add('input_edit')
+  task.appendChild(editTimeInput)
+
+  const editPriceInput = document.createElement('input')
+  editPriceInput.placeholder = 'Потрачено'
+  editPriceInput.id = `edit_price_input-${i}`
+  editPriceInput.type = 'number'
+  editPriceInput.classList.add('input_edit')
+  editPriceInput.value = spendArr[i].price
+  task.appendChild(editPriceInput)
+
+  const saveButton = document.createElement('button')
+  saveButton.innerText = 'save'
+  saveButton.classList.add('btn')
+  saveButton.addEventListener('click', () => saveChangesForAll(i))
+  task.appendChild(saveButton)
+
+  const cancelButton = document.createElement('button')
+  cancelButton.innerText = 'cancel'
+  cancelButton.classList.add('btn')
+  cancelButton.addEventListener('click', () => render())
+  task.appendChild(cancelButton)
+
+}
+
+
+// создал лоадер
 function setLoader() {
   const ring = document.createElement('div')
   ring.id = 'ring'
@@ -131,14 +211,18 @@ function setLoader() {
   ring.appendChild(fourthDiv)
 }
 
+
+// удалил лоадер
 function deleteLoader() {
   let load = document.getElementById('ring')
   load.remove()
 }
 
+
+// рендер
 function render() {
 
-  total = spendArr.reduce((accum,el) => accum + el.price, 0)
+  total = spendArr.reduce((accum, el) => accum + el.price, 0)
 
   spends.innerHTML = ''
   const sum = document.createElement('div')
@@ -200,6 +284,9 @@ function render() {
     container.appendChild(editTask)
     editTask.classList.add('btn')
     editTask.id = `edit-${i}`
+    editTask.addEventListener('click', () => {
+      openEdit(i)
+    })
 
 
     // див со всеми задачами

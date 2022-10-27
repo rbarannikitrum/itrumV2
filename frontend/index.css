@@ -185,7 +185,7 @@ body {
 
 }
 
-.task input {
+.input_edit {
     width: 100%;
     height: 50px;
     padding: 12px 20px;
@@ -199,7 +199,7 @@ body {
 
 }
 
-.task input:focus {
+.input_edit:focus {
     outline: none;
     background: #f2f7fd;
     border: 2px solid black;
