@@ -22,10 +22,16 @@ function inputWhere() {
 
 function inputHowMany() {
   howMany = document.querySelector('#how_many').value.trim()
+  if (howMany < 0) {
+    howMany = 0
+  }
 }
 
 async function addSpend() {
   if (where && howMany) {
+    if (where === '') {
+      return
+    }
     document.querySelector('#where').value = ''
     document.querySelector('#how_many').value = ''
     setLoader()
@@ -50,7 +56,7 @@ async function deleteElement(i) {
 
 function getInput(elem, i) {
   editInput = document.querySelector(`#edit-${elem.split('-')[0]}-${i}`).value
-  if (editInput < 1) {
+  if (editInput <= 0) {
     editInput = 0
   }
 
@@ -58,6 +64,9 @@ function getInput(elem, i) {
 
 async function saveChanges(elem, i) {
   getInput(elem, i)
+  if (editInput === 0) {
+    return
+  }
   const type = elem.split('-')[0]
 
   spendArr[i][type] = editInput
