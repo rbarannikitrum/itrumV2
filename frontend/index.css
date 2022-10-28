@@ -106,6 +106,7 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 .operators button {
     background-color: rgba(58, 145, 236, 0.22);
     margin-left: 10px;
@@ -126,9 +127,10 @@ body {
     text-align: center;
     font-family: 'Raleway', sans-serif;
 }
+
 .completed {
-    text-decoration : line-through;
-    color : #5C6672;
+    text-decoration: line-through;
+    color: #5C6672;
 }
 
 .edit {
@@ -160,6 +162,7 @@ body {
     display: flex;
     flex-direction: row;
 }
+
 .operators button {
     background-color: rgba(58, 145, 236, 0.22);
     margin-left: 10px;
@@ -174,6 +177,7 @@ body {
     display: flex;
     justify-content: center;
 }
+
 .checkbox {
     width: 20px !important;
     height: 20px !important;
@@ -197,12 +201,15 @@ body {
 .edit input::placeholder {
     color: lightslategray;
 }
+
 .hidden {
     display: none;
 }
+
 .hide_button {
     visibility: hidden;
 }
+
 .active {
     display: flex;
 }
@@ -218,6 +225,7 @@ body {
         width: 75%;
     }
 }
+
 @media (max-width: 600px) {
     .container {
         width: 90%;

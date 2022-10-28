@@ -121,7 +121,6 @@ function render() {
     operatorsDiv.appendChild(cancelButton)
 
 
-
     const taskDiv = document.createElement('div')
     taskDiv.id = `task-${i}`
     taskDiv.classList.add('task')
