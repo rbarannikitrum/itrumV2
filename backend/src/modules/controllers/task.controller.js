@@ -5,10 +5,9 @@ module.exports.getAllTasks = (req, res) => {
     Task.find().then(result => {
       res.send(result)
     })
+  } catch (error) {
+    res.status(500).send(`server error : ${error}`)
   }
- catch (error) {
-   res.status(500).send(`server error : ${error}`)
- }
 }
 
 module.exports.createNewTask = (req, res) => {
@@ -21,8 +20,7 @@ module.exports.createNewTask = (req, res) => {
           .then(result => res.send(result))
           .catch(error => res.send(error))
     } else res.status(400).send('error')
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).send(`server error : ${error}`)
   }
 
@@ -37,8 +35,7 @@ module.exports.changeTaskInfo = (req, res, next) => {
           .then(result => res.send(result))
           .catch(error => next(error))
     } else res.status(400).send('error')
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).send(`error : ${error}`)
   }
 
@@ -49,8 +46,7 @@ module.exports.deleteTask = (req, res) => {
   try {
     Task.findByIdAndDelete({_id: req.query.id})
         .then(result => res.send(result))
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).send(`error : ${error}`)
   }
 
