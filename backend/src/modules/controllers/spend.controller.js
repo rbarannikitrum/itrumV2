@@ -7,8 +7,8 @@ module.exports.createSpend = (req, res) => {
         req.body.price &&
         req.body.price > 0
     ) {
-      req.body.time = new Date()
-      const spend = new Spend(req.body)
+      time = new Date()
+      const spend = new Spend({place : req.body.place, time, price : req.body.price})
       spend.save().then(result => res.send(result))
     } else {
       res.status(400).send ('uncorrected data')
@@ -42,7 +42,7 @@ module.exports.updateSpend = (req, res) => {
         req.body.price > 0 &&
         date != 'Invalid Date'
     ) {
-      Spend.findByIdAndUpdate(req.body._id, req.body).then(result => res.send(result))
+      Spend.findByIdAndUpdate(req.body._id, {place : req.body.place, time : req.body.time, price : req.body.price}).then(result => res.send(result))
     } else res.status(400).send('uncorrected data')
   }
   catch (error) {

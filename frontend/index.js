@@ -30,7 +30,7 @@ async function saveChangesForAll(i) {
   }
   if (editWhereInput || editPriceInput) {
     setLoader()
-    spendArr = await fetch('http://localhost:8000/updateSpend', {
+    spendArr = await fetch('http://localhost:8000/spend', {
       method: 'PATCH',
       body: JSON.stringify({_id: spendArr[i]._id, place: editWhereInput, time: editTimeInput, price: editPriceInput}),
       headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
@@ -77,7 +77,7 @@ async function addSpend() {
     document.querySelector('#where').value = ''
     document.querySelector('#how_many').value = ''
     setLoader()
-    await fetch('http://localhost:8000/createSpend', {
+    await fetch('http://localhost:8000/spend', {
       method: 'POST',
       body: JSON.stringify({place: where, price: howMany}),
       headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
@@ -89,9 +89,9 @@ async function addSpend() {
 }
 
 // удалить задачу
-async function deleteElement(i) {
+async function deleteElement(id) {
   setLoader()
-  await fetch(`http://localhost:8000/deleteSpend?_id=${spendArr[i]._id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
+  await fetch(`http://localhost:8000/spend?_id=${id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
   deleteLoader()
   await fetchData()
 }
@@ -114,7 +114,7 @@ async function saveChanges(elem, i) {
   const type = elem.split('-')[0]
   spendArr[i][type] = editInput
   setLoader()
-  spendArr = await fetch('http://localhost:8000/updateSpend', {
+  spendArr = await fetch('http://localhost:8000/spend', {
     method: 'PATCH',
     body: JSON.stringify({
       _id: spendArr[i]._id,
@@ -277,7 +277,7 @@ function render() {
 
     const deleteEl = document.createElement('button')
     deleteEl.innerText = 'Delete'
-    deleteEl.addEventListener('click', () => deleteElement(i))
+    deleteEl.addEventListener('click', () => deleteElement(el._id))
     container.appendChild(deleteEl)
     deleteEl.classList.add('btn')
     deleteEl.id = `delete-${i}`

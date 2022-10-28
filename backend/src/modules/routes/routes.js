@@ -9,8 +9,8 @@ const {
 } = require('../controllers/spend.controller')
 
 router.get('/allSpends', getAllSpends)
-router.post('/createSpend', createSpend)
-router.patch('/updateSpend', updateSpend)
-router.delete('/deleteSpend', deleteSpend)
+router.post('/spend', createSpend)
+router.patch('/spend', updateSpend)
+router.delete('/spend', deleteSpend)
 
 module.exports = router
