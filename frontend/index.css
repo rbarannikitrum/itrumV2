@@ -86,7 +86,7 @@ body {
 }
 
 .all_spends::-webkit-scrollbar-track {
-    background-color: transparent;
+    background-color: #BFE2FFFF;
 }
 
 .all_spends::-webkit-scrollbar-thumb {
@@ -291,8 +291,8 @@ body {
         width: 700px;
     }
     .all_spends {
-        padding-right: 30px;
-        padding-left: 20px;
+        padding-right: 35px;
+        width: 103%;
     }
 
 }
@@ -300,12 +300,18 @@ body {
     .container {
         width: 500px;
     }
+    .all_spends {
+        width: 104%;
+    }
 
 }
 @media (max-width: 500px) {
     .container {
         width: 300px;
         margin-top: 50px;
+    }
+    .all_spends {
+        width: 107.5%;
     }
     .container_task {
         grid-template-rows: 1fr 1fr;

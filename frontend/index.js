@@ -56,7 +56,7 @@ function inputWhere() {
 // инпут цены для добавления новой задачи
 function inputHowMany() {
   howMany = document.querySelector('#how_many').value.trim()
-  if (howMany < 0) {
+  if (howMany <= 0) {
     howMany = 0
   }
 }
@@ -66,6 +66,9 @@ function inputHowMany() {
 async function addSpend() {
   if (where && howMany) {
     if (where === '') {
+      return
+    }
+    if (!howMany) {
       return
     }
     document.querySelector('#where').value = ''
