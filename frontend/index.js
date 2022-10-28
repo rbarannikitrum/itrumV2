@@ -67,25 +67,23 @@ function inputHowMany() {
 
 // добавить задачу
 async function addSpend() {
-  if (where && howMany) {
-    if (where === '') {
-      return
-    }
-    if (!howMany) {
-      return
-    }
-    document.querySelector('#where').value = ''
-    document.querySelector('#how_many').value = ''
-    setLoader()
-    await fetch('http://localhost:8000/spend', {
-      method: 'POST',
-      body: JSON.stringify({place: where, price: howMany}),
-      headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-    }).then(res => res.json()).then(res => res.data)
-    deleteLoader()
-    howMany = Number(howMany)
-    await fetchData()
+
+  if (!where || !howMany) {
+    return
   }
+  document.querySelector('#where').value = ''
+  document.querySelector('#how_many').value = ''
+  setLoader()
+  await fetch('http://localhost:8000/spend', {
+    method: 'POST',
+    body: JSON.stringify({place: where, price: howMany}),
+    headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+  }).then(res => res.json()).then(res => res.data)
+  deleteLoader()
+  howMany = ''
+  where = ''
+  await fetchData()
+
 }
 
 // удалить задачу
