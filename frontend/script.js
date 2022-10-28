@@ -4,10 +4,12 @@ let text
 const tasks = document.querySelector('#tasks')
 
 async function fetchData() {
+  setLoader()
   taskArr = await fetch('http://localhost:8000/allTasks',
       {
         method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
       }).then(res => res.json())
+  deleteLoader()
   render()
 }
 
@@ -26,11 +28,13 @@ async function setEditedTask(i) {
     text = taskArr[i].text
   }
   taskArr[i].text = text
+  setLoader()
   taskArr = await fetch('http://localhost:8000/updateTask', {
     method: 'PATCH',
     body: JSON.stringify({id: taskArr[i]._id, text: text, isCheck: false}),
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
   }).then(res => res.json())
+  deleteLoader()
   await fetchData()
 }
 
@@ -45,29 +49,34 @@ async function addTask() {
   taskInput = taskInput.trim()
   document.querySelector('input').focus()
   document.querySelector('input').value = ''
+  setLoader()
   taskArr = await fetch('http://localhost:8000/createTask', {
     method: 'POST',
     body: JSON.stringify({text: taskInput, isCheck: false}),
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
   }).then(res => res.json()).then(res => res.data)
-
+  deleteLoader()
   await fetchData()
 
 }
 
 async function deleteElem(i) {
+  setLoader()
   taskArr = await fetch(`http://localhost:8000/deleteTask?id=${taskArr[i]._id}`,
       {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
+  deleteLoader()
   await fetchData()
 
 }
 
 async function setActive(i) {
+  setLoader()
   taskArr = await fetch('http://localhost:8000/updateTask', {
     method: 'PATCH',
     body: JSON.stringify({id: taskArr[i]._id, text: taskArr[i].text, isCheck: !taskArr[i].isCheck}),
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
   }).then(res => res.json()).then(res => res.data)
+  deleteLoader()
   await fetchData()
 
 }
@@ -78,6 +87,29 @@ function setEdit(i) {
   document.getElementById(`edit-${i}`).classList.toggle('active')
 }
 
+function setLoader () {
+  const ring = document.createElement('div')
+  ring.id = 'ring'
+  ring.classList.add('lds-ring')
+  tasks.before(ring)
+
+  let firstDiv = document.createElement('div')
+  ring.appendChild(firstDiv)
+
+  let secondDiv = document.createElement('div')
+  ring.appendChild(secondDiv)
+
+  let thirdDiv = document.createElement('div')
+  ring.appendChild(thirdDiv)
+
+  let fourthDiv = document.createElement('div')
+  ring.appendChild(fourthDiv)
+}
+
+function deleteLoader () {
+  let load = document.getElementById('ring')
+  load.remove()
+}
 
 function render() {
 
