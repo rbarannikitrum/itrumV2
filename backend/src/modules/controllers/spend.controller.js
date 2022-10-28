@@ -42,7 +42,6 @@ module.exports.updateSpend = (req, res) => {
         req.body.price > 0 &&
         date != 'Invalid Date'
     ) {
-      console.log(req.body._id, req.body)
       Spend.findByIdAndUpdate(req.body._id, req.body).then(result => res.send(result))
     } else res.status(400).send('uncorrected data')
   }
