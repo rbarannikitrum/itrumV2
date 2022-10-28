@@ -29,7 +29,7 @@ async function setEditedTask(i) {
   }
   taskArr[i].text = text
   setLoader()
-  taskArr = await fetch('http://localhost:8000/updateTask', {
+  taskArr = await fetch('http://localhost:8000/task', {
     method: 'PATCH',
     body: JSON.stringify({id: taskArr[i]._id, text: text, isCheck: false}),
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
@@ -50,7 +50,7 @@ async function addTask() {
   document.querySelector('input').focus()
   document.querySelector('input').value = ''
   setLoader()
-  taskArr = await fetch('http://localhost:8000/createTask', {
+  taskArr = await fetch('http://localhost:8000/task', {
     method: 'POST',
     body: JSON.stringify({text: taskInput, isCheck: false}),
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
@@ -60,9 +60,9 @@ async function addTask() {
 
 }
 
-async function deleteElem(i) {
+async function deleteElem(id) {
   setLoader()
-  taskArr = await fetch(`http://localhost:8000/deleteTask?id=${taskArr[i]._id}`,
+  taskArr = await fetch(`http://localhost:8000/task?id=${id}`,
       {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
   deleteLoader()
   await fetchData()
@@ -71,7 +71,7 @@ async function deleteElem(i) {
 
 async function setActive(i) {
   setLoader()
-  taskArr = await fetch('http://localhost:8000/updateTask', {
+  taskArr = await fetch('http://localhost:8000/task', {
     method: 'PATCH',
     body: JSON.stringify({id: taskArr[i]._id, text: taskArr[i].text, isCheck: !taskArr[i].isCheck}),
     headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
@@ -184,7 +184,7 @@ function render() {
     operators.appendChild(editButton)
 
     const deleteButton = document.createElement('button')
-    deleteButton.addEventListener('click', () => deleteElem(i))
+    deleteButton.addEventListener('click', () => deleteElem(el._id))
     deleteButton.innerText = 'Delete'
     operators.appendChild(deleteButton)
   })

@@ -15,26 +15,24 @@ module.exports.createNewTask = (req, res) => {
     if (typeof req.body.isCheck === 'boolean' &&
         req.body.text &&
         typeof req.body.text === 'string') {
-      const task = new Task(req.body)
+      const task = new Task({text: req.body.text, isCheck: req.body.isCheck})
       task.save()
           .then(result => res.send(result))
-          .catch(error => res.send(error))
-    } else res.status(400).send('error')
+    } else res.status(400).send('uncorrected data')
   } catch (error) {
     res.status(500).send(`server error : ${error}`)
   }
 
 }
 
-module.exports.changeTaskInfo = (req, res, next) => {
+module.exports.changeTaskInfo = (req, res) => {
   try {
     if (typeof req.body.isCheck === 'boolean' &&
         req.body.text &&
         typeof req.body.text === 'string') {
       Task.findByIdAndUpdate(req.body.id, {text: req.body.text, isCheck: req.body.isCheck})
           .then(result => res.send(result))
-          .catch(error => next(error))
-    } else res.status(400).send('error')
+    } else res.status(400).send('uncorrected data')
   } catch (error) {
     res.status(500).send(`error : ${error}`)
   }
