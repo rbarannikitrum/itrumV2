@@ -29,11 +29,13 @@ async function saveChangesForAll(i) {
     return
   }
   if (editWhereInput || editPriceInput) {
+    setLoader()
     spendArr = await fetch('http://localhost:8000/updateSpend', {
       method: 'PATCH',
       body: JSON.stringify({_id: spendArr[i]._id, place: editWhereInput, time: editTimeInput, price: editPriceInput}),
       headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
     }).then(res => res.json())
+    deleteLoader()
     await fetchData()
   } else render()
 }
