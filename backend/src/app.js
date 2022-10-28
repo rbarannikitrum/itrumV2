@@ -8,7 +8,7 @@ app.use(cors())
 app.use(express.json())
 app.use('/', apiRoutes)
 
-mongoose.connect (process.env.URI, {useNewURLParser: true, useUnifiedTopology: true})
+mongoose.connect (process.env.URI_SPEND, {useNewURLParser: true, useUnifiedTopology: true})
 
 
 
