@@ -9,7 +9,7 @@ let editPriceInput = ''
 let editTimeInput = ''
 
 // получить инпут в случае когда открывается 3 инпута
-function getInputForAll (i) {
+function getInputForAll(i) {
   editWhereInput = document.querySelector(`#edit_place_input-${i}`).value.trim()
   editPriceInput = document.querySelector(`#edit_price_input-${i}`).value.trim()
   editTimeInput = document.querySelector(`#edit_time_input-${i}`).value
@@ -20,7 +20,7 @@ function getInputForAll (i) {
 
 
 // сохранить изменения в случае когда открывается 3 инпута
-async function saveChangesForAll (i) {
+async function saveChangesForAll(i) {
   getInputForAll(i)
   if (editPriceInput === 0) {
     return
@@ -53,6 +53,7 @@ async function fetchData() {
 function inputWhere() {
   where = document.querySelector('#where').value.trim()
 }
+
 // инпут цены для добавления новой задачи
 function inputHowMany() {
   howMany = document.querySelector('#how_many').value.trim()
@@ -90,7 +91,6 @@ async function deleteElement(i) {
   setLoader()
   await fetch(`http://localhost:8000/deleteSpend?_id=${spendArr[i]._id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
   deleteLoader()
-
   await fetchData()
 }
 
@@ -110,7 +110,6 @@ async function saveChanges(elem, i) {
     return
   }
   const type = elem.split('-')[0]
-
   spendArr[i][type] = editInput
   setLoader()
   spendArr = await fetch('http://localhost:8000/updateSpend', {
@@ -126,17 +125,14 @@ async function saveChanges(elem, i) {
   deleteLoader()
   await fetchData()
   render()
-
 }
 
 // открыть окно редактирования с одним полем ввода
 function setEdit(elem, i) {
-  console.log(elem, i)
   render()
   const field = document.querySelector(`#${elem}`)
   const task = field.parentNode
   task.className = 'task';
-  console.log(task)
   field.remove()
   const input = document.createElement('input')
   input.type = `${elem.split('-')[0] === 'price' ? 'number' : elem.split('-')[0] === 'time' ? 'date' : 'text'}`
@@ -156,7 +152,6 @@ function setEdit(elem, i) {
 
 // открыть окно редактирования с 3 полями ввода
 function openEdit(i) {
-  console.log(i)
   render()
   const task = document.querySelector(`#task-${i}`)
   task.innerHTML = ''
@@ -197,9 +192,7 @@ function openEdit(i) {
   cancelButton.classList.add('btn')
   cancelButton.addEventListener('click', () => render())
   task.appendChild(cancelButton)
-
 }
-
 
 // создал лоадер
 function setLoader() {
@@ -221,13 +214,11 @@ function setLoader() {
   ring.appendChild(fourthDiv)
 }
 
-
 // удалил лоадер
 function deleteLoader() {
   let load = document.getElementById('ring')
   load.remove()
 }
-
 
 // рендер
 function render() {
@@ -299,11 +290,8 @@ function render() {
       openEdit(i)
     })
 
-
     // див со всеми задачами
     spends.appendChild(container)
     spends.appendChild(sum)
-
-
   })
 }

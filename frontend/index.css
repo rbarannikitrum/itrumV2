@@ -29,9 +29,7 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-
 .container::before {
-
     content: '';
     position: absolute;
     z-index: -2;
@@ -48,7 +46,6 @@ body {
 }
 
 .container::after {
-
     content: '';
     position: absolute;
     z-index: -1;
@@ -80,9 +77,9 @@ body {
     padding-right: 30px;
     padding-left: 20px;
 }
+
 .all_spends::-webkit-scrollbar {
     width: 5px;
-
 }
 
 .all_spends::-webkit-scrollbar-track {
@@ -175,9 +172,7 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.edit_btn {
-
-}
+.edit_btn {}
 
 .btn:hover {
     color: black;
@@ -190,8 +185,6 @@ body {
     text-align: center;
 }
 
-
-/*edit window */
 .task {
     display: flex;
     flex-direction: row;
@@ -273,6 +266,7 @@ body {
     margin: 10px;
     padding: 5px;
 }
+
 .notify span:hover {
     background: rgb(136, 136, 136);
     border: 1px solid black;
@@ -296,6 +290,7 @@ body {
     }
 
 }
+
 @media (max-width: 700px) {
     .container {
         width: 500px;
@@ -305,6 +300,7 @@ body {
     }
 
 }
+
 @media (max-width: 500px) {
     .container {
         width: 300px;
@@ -321,6 +317,7 @@ body {
         display: none;
     }
 }
+
 /*обнулил стрелки*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
