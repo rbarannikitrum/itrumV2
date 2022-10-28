@@ -171,6 +171,7 @@ function openEdit(i) {
   const editTimeInput = document.createElement('input')
   editTimeInput.id = `edit_time_input-${i}`
   editTimeInput.type = 'date'
+  editTimeInput.valueAsDate = new Date(spendArr[i].time)
   editTimeInput.classList.add('input_edit')
   task.appendChild(editTimeInput)
 
@@ -183,13 +184,13 @@ function openEdit(i) {
   task.appendChild(editPriceInput)
 
   const saveButton = document.createElement('button')
-  saveButton.innerText = 'save'
+  saveButton.innerText = 'Save'
   saveButton.classList.add('btn')
   saveButton.addEventListener('click', () => saveChangesForAll(i))
   task.appendChild(saveButton)
 
   const cancelButton = document.createElement('button')
-  cancelButton.innerText = 'cancel'
+  cancelButton.innerText = 'Cancel'
   cancelButton.classList.add('btn')
   cancelButton.addEventListener('click', () => render())
   task.appendChild(cancelButton)
