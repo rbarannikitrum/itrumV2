@@ -290,6 +290,7 @@ function render() {
     editTask.innerText = 'Edit'
     container.appendChild(editTask)
     editTask.classList.add('btn')
+    editTask.classList.add('edit_btn')
     editTask.id = `edit-${i}`
     editTask.addEventListener('click', () => {
       openEdit(i)
