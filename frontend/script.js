@@ -95,7 +95,7 @@ function render() {
     inputEdit.id = `change-${i}`
     inputEdit.type = 'text'
     inputEdit.value = taskArr[i].text
-    inputEdit.onchange = () => getEdit(i)
+    inputEdit.addEventListener('change', () => getEdit(i))
     inputEdit.classList.add('edit_text')
     editDiv.appendChild(inputEdit)
 
@@ -106,17 +106,17 @@ function render() {
     const checkbox = document.createElement('input')
     checkbox.type = 'checkbox'
     checkbox.classList.add('checkbox')
-    checkbox.onclick = () => setActive(i)
+    checkbox.addEventListener('click', () => setActive(i))
     el.isCheck ? checkbox.checked = true : checkbox.checked = false
     operatorsDiv.appendChild(checkbox)
 
     const saveButton = document.createElement('button')
-    saveButton.onclick = () => setEditedTask(i)
+    saveButton.addEventListener('click', () => {setEditedTask(i)})
     saveButton.innerText = 'Save'
     operatorsDiv.appendChild(saveButton)
 
     const cancelButton = document.createElement('button')
-    cancelButton.onclick = () => render()
+    cancelButton.addEventListener('click', () => render())
     cancelButton.innerText = 'Cancel'
     operatorsDiv.appendChild(cancelButton)
 
@@ -141,18 +141,18 @@ function render() {
 
     const inputCheck = document.createElement('input')
     inputCheck.type = 'checkbox'
-    inputCheck.onclick = () => setActive(i)
+    inputCheck.addEventListener('click', () => setActive(i))
     el.isCheck ? inputCheck.checked = true : inputCheck.checked = false
     operators.appendChild(inputCheck)
 
     const editButton = document.createElement('button')
     el.isCheck ? editButton.classList.add('hide_button') : ''
-    editButton.onclick = () => setEdit(i)
+    editButton.addEventListener('click', () => setEdit(i))
     editButton.innerText = 'Edit'
     operators.appendChild(editButton)
 
     const deleteButton = document.createElement('button')
-    deleteButton.onclick = () => deleteElem(i)
+    deleteButton.addEventListener('click', () => deleteElem(i))
     deleteButton.innerText = 'Delete'
     operators.appendChild(deleteButton)
   })
