@@ -40,6 +40,12 @@ async function saveChangesForAll(i) {
     return setError('Введите корректные данные')
   }
 
+
+
+  if (new Date(editTimeInput) > new Date()) {
+    return setError('Введите корректные данные')
+  }
+
   if (editWhereInput || editPriceInput) {
     try {
       setLoader()
