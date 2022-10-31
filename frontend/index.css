@@ -10,7 +10,21 @@ body {
     align-items: center;
     padding: 0;
     height: 100vh;
-    background: linear-gradient(180deg, #273b9d, #09133c) no-repeat;
+    background: linear-gradient(149deg, rgba(24, 187, 156, 1) 0%, rgba(106, 57, 175, 1) 42%, rgb(24, 62, 187) 72%, rgba(115, 53, 134, 1) 100%);
+    animation: gradient 10s infinite linear;
+    background-size: 400%;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 80% 0;
+    }
+    50% {
+        background-position: 20% 100%;
+    }
+    100% {
+        background-position: 80% 0;
+    }
 }
 
 .container {
@@ -74,6 +88,7 @@ body {
     flex-direction: column;
     overflow-y: scroll;
 }
+
 .all_spends::-webkit-scrollbar {
     display: none;
 }
@@ -157,7 +172,8 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.edit_btn {}
+.edit_btn {
+}
 
 .btn:hover {
     color: black;
@@ -276,8 +292,9 @@ body {
     border: 2px solid rgb(136, 136, 136);
     padding: 5px 10px;
 }
+
 .error span {
-    color: #721c24 ;
+    color: #721c24;
 }
 
 @media (max-width: 1000px) {
@@ -297,11 +314,22 @@ body {
         width: 300px;
         margin-top: 50px;
     }
+    .input {
+        width: 100%;
+        transition: none;
+    }
+    .input:focus {
+        width: 100%;
+    }
 
+    .button_add {
+        min-width: 45px;
+    }
     .container_task {
         grid-template-rows: 1fr 1fr;
         grid-template-columns: 1fr 1fr;
     }
+
     .edit_btn {
         display: none;
     }
