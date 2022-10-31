@@ -138,7 +138,6 @@ async function saveChanges(elem, i) {
   if (editInput === 0 || Number(editInput) > 9999999) {
     return setError('Введите корректные данные')
   }
-
   const type = elem.split('-')[0]
   spendArr[i][type] = editInput
   try {
