@@ -20,17 +20,11 @@ function getInputForAll(i) {
 // сохранить изменения в случае когда открывается 3 инпута
 async function saveChangesForAll(i) {
   getInputForAll(i)
-  if (editPriceInput <= 0) {
+  if (editPriceInput <= 0 || editPriceInput > 9999999 || editWhereInput === '') {
     return addError()
-  }
-  if (editWhereInput === '') {
-    return addError()
-  }
-  if (editPriceInput > 9999999) {
-    editPriceInput = 9999999
   }
 
-  if ( editWhereInput || editPriceInput ) {
+  if (editWhereInput || editPriceInput) {
     setLoader()
     spendArr = await fetch('http://localhost:8000/spend', {
       method: 'PATCH',
@@ -76,7 +70,7 @@ async function addSpend() {
   document.querySelector('#where').value = ''
   document.querySelector('#how_many').value = ''
   if (howMany > 9999999) {
-    howMany = 9999999
+    return addError()
   }
   setLoader()
   await fetch('http://localhost:8000/spend', {
@@ -88,7 +82,6 @@ async function addSpend() {
   howMany = ''
   where = ''
   await fetchData()
-
 }
 
 // удалить задачу
@@ -114,12 +107,9 @@ function getInput(elem, i) {
 // сохранить изменения когда открыто одно поле ввода
 async function saveChanges(elem, i) {
   getInput(elem, i)
-  if (editInput === 0) {
+  if (editInput === 0 || Number(editInput) > 9999999) {
     return addError()
   }
-    if (Number(editInput) > 9999999) {
-      editInput = 9999999
-    }
 
   const type = elem.split('-')[0]
   spendArr[i][type] = editInput
@@ -154,10 +144,10 @@ function setEdit(elem, i) {
   task.appendChild(input)
   task.addEventListener('focusout', () => render())
 
-  input.addEventListener('keyup', (event) => {
+  input.addEventListener('keyup', async (event) => {
     if (event.keyCode === 13) {
       event.preventDefault()
-      saveChanges(elem, i)
+      await saveChanges(elem, i)
     }
   })
 }
@@ -233,7 +223,7 @@ function deleteLoader() {
   load.remove()
 }
 
-function addError () {
+function addError() {
   const errorDiv = document.createElement('div')
   errorDiv.classList.add('error')
   const errorText = document.createElement('span')
