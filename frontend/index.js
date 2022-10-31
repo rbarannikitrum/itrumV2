@@ -25,8 +25,7 @@ async function fetchData() {
         }).then(res => res.json())
     deleteLoader()
     render()
-  }
-  catch (error) {
+  } catch (error) {
     deleteLoader()
     setError('Ошибка в получении данных с сервера')
   }
@@ -51,8 +50,7 @@ async function saveChangesForAll(i) {
       }).then(res => res.json())
       deleteLoader()
       await fetchData()
-    }
-    catch (error) {
+    } catch (error) {
       deleteLoader()
       setError('Ошибка в получении данных с сервера')
     }
@@ -97,9 +95,7 @@ async function addSpend() {
     howMany = ''
     where = ''
     await fetchData()
-  }
-
-  catch (error) {
+  } catch (error) {
     deleteLoader()
     setError('Ошибка в получении данных с сервера')
   }
@@ -112,8 +108,7 @@ async function deleteElement(id) {
     await fetch(`http://localhost:8000/spend?_id=${id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
     deleteLoader()
     await fetchData()
-  }
-  catch (error) {
+  } catch (error) {
     deleteLoader()
     setError('Ошибка в получении данных с сервера')
   }
@@ -155,8 +150,7 @@ async function saveChanges(elem, i) {
     deleteLoader()
     await fetchData()
     render()
-  }
-  catch (error) {
+  } catch (error) {
     deleteLoader()
     setError('Ошибка в получении данных с сервера')
   }
@@ -268,7 +262,6 @@ function setError(str) {
     errorDiv.remove()
   }, 5000)
 }
-
 
 
 // рендер
