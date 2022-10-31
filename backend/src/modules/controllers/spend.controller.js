@@ -1,13 +1,14 @@
 const Spend = require('../../db/models/spend/index')
 
 module.exports.createSpend = (req, res) => {
+  const {place, price} = req.body
   try {
-    if (typeof req.body.place === 'string' &&
-        req.body.place &&
-        req.body.price &&
-        req.body.price > 0
+    if (typeof place === 'string' &&
+        place &&
+        price &&
+        price > 0
     ) {
-      time = new Date()
+      const time = new Date()
       const spend = new Spend({place : req.body.place, time, price : req.body.price})
       spend.save().then(result => res.send(result))
     } else {
@@ -36,11 +37,12 @@ module.exports.getAllSpends = (req, res) => {
 module.exports.updateSpend = (req, res) => {
   try {
     const date = new Date(req.body.time)
-    if (typeof req.body.place === 'string' &&
-        req.body.place &&
-        req.body.price &&
-        req.body.price > 0 &&
-        date != 'Invalid Date'
+    const {place, price} = req.body
+    if (typeof place === 'string' &&
+        place &&
+        price &&
+        price > 0 &&
+        date.toString() != 'Invalid Date'
     ) {
       Spend.findByIdAndUpdate(req.body._id, {place : req.body.place, time : req.body.time, price : req.body.price}).then(result => res.send(result))
     } else res.status(400).send('uncorrected data')
