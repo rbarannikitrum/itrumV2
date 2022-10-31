@@ -36,13 +36,7 @@ async function fetchData() {
 async function saveChangesForAll(i) {
 
   getInputForAll(i)
-  if (editPriceInput <= 0 || editPriceInput > 9999999 || editWhereInput === '' || editTimeInput > new Date()) {
-    return setError('Введите корректные данные')
-  }
-
-
-
-  if (new Date(editTimeInput) > new Date()) {
+  if (editPriceInput <= 0 || editPriceInput > 9999999 || editWhereInput === '' || new Date(editTimeInput) > new Date()) {
     return setError('Введите корректные данные')
   }
 
@@ -136,7 +130,7 @@ function getInput(elem, i) {
 // сохранить изменения когда открыто одно поле ввода
 async function saveChanges(elem, i) {
   getInput(elem, i)
-  if (editInput === 0 || Number(editInput) > 9999999) {
+  if (editInput === 0 || Number(editInput) > 9999999 || new Date(editInput) > new Date()) {
     return setError('Введите корректные данные')
   }
   const type = elem.split('-')[0]
