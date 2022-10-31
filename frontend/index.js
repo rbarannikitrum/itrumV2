@@ -263,15 +263,16 @@ function setError(str) {
   }, 5000)
 }
 
+function reduceTotal () {
+  total = spendArr.reduce((accum, el) => accum + el.price, 0)
+}
 
 // рендер
 function render() {
-
-  total = spendArr.reduce((accum, el) => accum + el.price, 0)
-
   spends.innerHTML = ''
   const sum = document.createElement('div')
   sum.classList.add('sum')
+  reduceTotal()
   sum.innerText = `Всего денег потрачено было : ${total} рублей`
 
 
