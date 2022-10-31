@@ -13,39 +13,52 @@ function getInputForAll(i) {
   editWhereInput = document.querySelector(`#edit_place_input-${i}`).value.trim()
   editPriceInput = Number(document.querySelector(`#edit_price_input-${i}`).value).toFixed(2)
   editTimeInput = document.querySelector(`#edit_time_input-${i}`).value
-
-}
-
-
-// сохранить изменения в случае когда открывается 3 инпута
-async function saveChangesForAll(i) {
-  getInputForAll(i)
-  if (editPriceInput <= 0 || editPriceInput > 9999999 || editWhereInput === '') {
-    return addError()
-  }
-
-  if (editWhereInput || editPriceInput) {
-    setLoader()
-    spendArr = await fetch('http://localhost:8000/spend', {
-      method: 'PATCH',
-      body: JSON.stringify({_id: spendArr[i]._id, place: editWhereInput, time: editTimeInput, price: editPriceInput}),
-      headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-    }).then(res => res.json())
-    deleteLoader()
-    await fetchData()
-  } else render()
 }
 
 // получение задачек
 async function fetchData() {
-  setLoader()
-  spendArr = await fetch('http://localhost:8000/allSpends',
-      {
-        method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-      }).then(res => res.json())
-  deleteLoader()
-  render()
+  try {
+    setLoader()
+    spendArr = await fetch('http://localhost:8000/allSpends',
+        {
+          method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+        }).then(res => res.json())
+    deleteLoader()
+    render()
+  }
+  catch (error) {
+    deleteLoader()
+    setError('Ошибка в получении данных с сервера')
+  }
+
 }
+
+// сохранить изменения в случае когда открывается 3 инпута
+async function saveChangesForAll(i) {
+
+  getInputForAll(i)
+  if (editPriceInput <= 0 || editPriceInput > 9999999 || editWhereInput === '' || editTimeInput > new Date()) {
+    return setError('Введите корректные данные')
+  }
+
+  if (editWhereInput || editPriceInput) {
+    try {
+      setLoader()
+      spendArr = await fetch('http://localhost:8000/spend', {
+        method: 'PATCH',
+        body: JSON.stringify({_id: spendArr[i]._id, place: editWhereInput, time: editTimeInput, price: editPriceInput}),
+        headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+      }).then(res => res.json())
+      deleteLoader()
+      await fetchData()
+    }
+    catch (error) {
+      deleteLoader()
+      setError('Ошибка в получении данных с сервера')
+    }
+  } else render()
+}
+
 
 // инпут места для добавления новой задачи
 function inputWhere() {
@@ -65,31 +78,46 @@ function inputHowMany() {
 async function addSpend() {
 
   if (!where || !howMany) {
-    return addError()
+    return setError('Введите корректные данные')
   }
   document.querySelector('#where').value = ''
   document.querySelector('#how_many').value = ''
   if (howMany > 9999999) {
-    return addError()
+    return setError('Введите корректные данные')
   }
-  setLoader()
-  await fetch('http://localhost:8000/spend', {
-    method: 'POST',
-    body: JSON.stringify({place: where, price: howMany}),
-    headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-  }).then(res => res.json()).then(res => res.data)
-  deleteLoader()
-  howMany = ''
-  where = ''
-  await fetchData()
+
+  try {
+    setLoader()
+    await fetch('http://localhost:8000/spend', {
+      method: 'POST',
+      body: JSON.stringify({place: where, price: howMany}),
+      headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+    }).then(res => res.json()).then(res => res.data)
+    deleteLoader()
+    howMany = ''
+    where = ''
+    await fetchData()
+  }
+
+  catch (error) {
+    deleteLoader()
+    setError('Ошибка в получении данных с сервера')
+  }
 }
 
 // удалить задачу
 async function deleteElement(id) {
-  setLoader()
-  await fetch(`http://localhost:8000/spend?_id=${id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
-  deleteLoader()
-  await fetchData()
+  try {
+    setLoader()
+    await fetch(`http://localhost:8000/spend?_id=${id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
+    deleteLoader()
+    await fetchData()
+  }
+  catch (error) {
+    deleteLoader()
+    setError('Ошибка в получении данных с сервера')
+  }
+
 }
 
 // получить инпут когда открыто одно поле ввода
@@ -108,25 +136,32 @@ function getInput(elem, i) {
 async function saveChanges(elem, i) {
   getInput(elem, i)
   if (editInput === 0 || Number(editInput) > 9999999) {
-    return addError()
+    return setError('Введите корректные данные')
   }
 
   const type = elem.split('-')[0]
   spendArr[i][type] = editInput
-  setLoader()
-  spendArr = await fetch('http://localhost:8000/spend', {
-    method: 'PATCH',
-    body: JSON.stringify({
-      _id: spendArr[i]._id,
-      place: spendArr[i].place,
-      time: spendArr[i].time,
-      price: spendArr[i].price
-    }),
-    headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-  }).then(res => res.json())
-  deleteLoader()
-  await fetchData()
-  render()
+  try {
+    setLoader()
+    spendArr = await fetch('http://localhost:8000/spend', {
+      method: 'PATCH',
+      body: JSON.stringify({
+        _id: spendArr[i]._id,
+        place: spendArr[i].place,
+        time: spendArr[i].time,
+        price: spendArr[i].price
+      }),
+      headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+    }).then(res => res.json())
+    deleteLoader()
+    await fetchData()
+    render()
+  }
+  catch (error) {
+    deleteLoader()
+    setError('Ошибка в получении данных с сервера')
+  }
+
 }
 
 // открыть окно редактирования с одним полем ввода
@@ -223,17 +258,19 @@ function deleteLoader() {
   load.remove()
 }
 
-function addError() {
+function setError(str) {
   const errorDiv = document.createElement('div')
   errorDiv.classList.add('error')
   const errorText = document.createElement('span')
-  errorText.innerText = 'Введите корректные данные'
+  errorText.innerText = str
   errorDiv.appendChild(errorText)
   spends.appendChild(errorDiv)
   setTimeout(() => {
     errorDiv.remove()
   }, 5000)
 }
+
+
 
 // рендер
 function render() {
