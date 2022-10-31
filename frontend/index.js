@@ -71,6 +71,13 @@ function inputHowMany() {
   }
 }
 
+// добавление задачи на enter
+document.addEventListener('keyup', async (event) => {
+  if (event.keyCode === 13) {
+    event.preventDefault()
+    await addSpend()
+  }
+})
 
 // добавить задачу
 async function addSpend() {
@@ -83,7 +90,6 @@ async function addSpend() {
   if (howMany > 9999999) {
     return setError('Введите корректные данные')
   }
-
   try {
     setLoader()
     await fetch('http://localhost:8000/spend', {
@@ -131,6 +137,7 @@ function getInput(elem, i) {
 async function saveChanges(elem, i) {
   getInput(elem, i)
   if (editInput === 0 || Number(editInput) > 9999999 || new Date(editInput) > new Date() || new Date(editTimeInput) < new Date(1970)) {
+    console.log('lol')
     return setError('Введите корректные данные')
   }
   const type = elem.split('-')[0]
