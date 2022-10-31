@@ -13,16 +13,14 @@ function getInputForAll(i) {
   editWhereInput = document.querySelector(`#edit_place_input-${i}`).value.trim()
   editPriceInput = Number(document.querySelector(`#edit_price_input-${i}`).value).toFixed(2)
   editTimeInput = document.querySelector(`#edit_time_input-${i}`).value
-  if (editPriceInput <= 0) {
-    editPriceInput = 0
-  }
+
 }
 
 
 // сохранить изменения в случае когда открывается 3 инпута
 async function saveChangesForAll(i) {
   getInputForAll(i)
-  if (editPriceInput === 0) {
+  if (editPriceInput <= 0) {
     return addError()
   }
   if (editWhereInput === '') {
@@ -31,6 +29,7 @@ async function saveChangesForAll(i) {
   if (editPriceInput > 9999999) {
     editPriceInput = 9999999
   }
+
   if ( editWhereInput || editPriceInput ) {
     setLoader()
     spendArr = await fetch('http://localhost:8000/spend', {
@@ -193,6 +192,7 @@ function openEdit(i) {
   editPriceInput.classList.add('input_edit')
   editPriceInput.value = spendArr[i].price
   task.appendChild(editPriceInput)
+
 
   const saveButton = document.createElement('button')
   saveButton.innerText = 'Save'
