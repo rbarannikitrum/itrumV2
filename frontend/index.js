@@ -318,14 +318,14 @@ function render() {
 
 
     const deleteEl = document.createElement('button')
-    deleteEl.innerText = 'Delete'
+    deleteEl.innerText = 'Удалить'
     deleteEl.addEventListener('click', () => deleteElement(el._id))
     container.appendChild(deleteEl)
     deleteEl.classList.add('btn')
     deleteEl.id = `delete-${i}`
 
     const editTask = document.createElement('button')
-    editTask.innerText = 'Edit'
+    editTask.innerText = 'Изменить'
     container.appendChild(editTask)
     editTask.classList.add('btn')
     editTask.classList.add('edit_btn')
