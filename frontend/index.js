@@ -70,14 +70,14 @@ function inputHowMany() {
     howMany = 0
   }
 }
-
 // добавление задачи на enter
-document.addEventListener('keyup', async (event) => {
+async function setEnter (event) {
   if (event.keyCode === 13) {
     event.preventDefault()
     await addSpend()
   }
-})
+}
+document.addEventListener('keyup', setEnter)
 
 // добавить задачу
 async function addSpend() {
@@ -137,7 +137,6 @@ function getInput(elem, i) {
 async function saveChanges(elem, i) {
   getInput(elem, i)
   if (editInput === 0 || Number(editInput) > 9999999 || new Date(editInput) > new Date() || new Date(editTimeInput) < new Date(1970)) {
-    console.log('lol')
     return setError('Введите корректные данные')
   }
   const type = elem.split('-')[0]
@@ -166,6 +165,7 @@ async function saveChanges(elem, i) {
 
 // открыть окно редактирования с одним полем ввода
 function setEdit(elem, i) {
+  document.removeEventListener('keyup', setEnter)
   render()
   const field = document.querySelector(`#${elem}`)
   const task = field.parentNode
