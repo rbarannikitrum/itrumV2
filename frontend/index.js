@@ -23,15 +23,15 @@ function getInputForAll(i) {
 async function saveChangesForAll(i) {
   getInputForAll(i)
   if (editPriceInput === 0) {
-    return
+    return addError()
   }
   if (editWhereInput === '') {
-    return
+    return addError()
   }
   if (editPriceInput > 9999999) {
     editPriceInput = 9999999
   }
-  if ( (editWhereInput || editPriceInput) ) {
+  if ( editWhereInput || editPriceInput ) {
     setLoader()
     spendArr = await fetch('http://localhost:8000/spend', {
       method: 'PATCH',
@@ -72,7 +72,7 @@ function inputHowMany() {
 async function addSpend() {
 
   if (!where || !howMany) {
-    return
+    return addError()
   }
   document.querySelector('#where').value = ''
   document.querySelector('#how_many').value = ''
@@ -116,7 +116,7 @@ function getInput(elem, i) {
 async function saveChanges(elem, i) {
   getInput(elem, i)
   if (editInput === 0) {
-    return
+    return addError()
   }
     if (Number(editInput) > 9999999) {
       editInput = 9999999
@@ -231,6 +231,18 @@ function setLoader() {
 function deleteLoader() {
   let load = document.getElementById('ring')
   load.remove()
+}
+
+function addError () {
+  const errorDiv = document.createElement('div')
+  errorDiv.classList.add('error')
+  const errorText = document.createElement('span')
+  errorText.innerText = 'Введите корректные данные'
+  errorDiv.appendChild(errorText)
+  spends.appendChild(errorDiv)
+  setTimeout(() => {
+    errorDiv.remove()
+  }, 5000)
 }
 
 // рендер
