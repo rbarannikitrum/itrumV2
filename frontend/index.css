@@ -10,7 +10,7 @@ body {
     align-items: center;
     padding: 0;
     height: 100vh;
-    background: linear-gradient(149deg, rgba(24, 187, 156, 1) 0%, rgba(106, 57, 175, 1) 42%, rgb(24, 62, 187) 72%, rgba(115, 53, 134, 1) 100%);
+    background: linear-gradient(149deg, #BFE2FFFF 0%, #337AB7FF 42%, rgba(41, 84, 217, 0.59) 72%, rgb(0, 70, 182) 100%);
     animation: gradient 10s infinite linear;
     background-size: 400%;
 }

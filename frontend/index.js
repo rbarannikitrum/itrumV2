@@ -213,13 +213,13 @@ function openEdit(i) {
 
 
   const saveButton = document.createElement('button')
-  saveButton.innerText = 'Save'
+  saveButton.innerText = 'Сохранить'
   saveButton.classList.add('btn')
   saveButton.addEventListener('click', () => saveChangesForAll(i))
   task.appendChild(saveButton)
 
   const cancelButton = document.createElement('button')
-  cancelButton.innerText = 'Cancel'
+  cancelButton.innerText = 'Отмена'
   cancelButton.classList.add('btn')
   cancelButton.addEventListener('click', () => render())
   task.appendChild(cancelButton)
