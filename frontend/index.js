@@ -11,7 +11,7 @@ let editTimeInput = ''
 // получить инпут в случае когда открывается 3 инпута
 function getInputForAll(i) {
   editWhereInput = document.querySelector(`#edit_place_input-${i}`).value.trim()
-  editPriceInput = document.querySelector(`#edit_price_input-${i}`).value.trim()
+  editPriceInput = Number(document.querySelector(`#edit_price_input-${i}`).value).toFixed(2)
   editTimeInput = document.querySelector(`#edit_time_input-${i}`).value
   if (editPriceInput <= 0) {
     editPriceInput = 0
@@ -28,7 +28,10 @@ async function saveChangesForAll(i) {
   if (editWhereInput === '') {
     return
   }
-  if (editWhereInput || editPriceInput) {
+  if (editPriceInput > 9999999) {
+    editPriceInput = 9999999
+  }
+  if ( (editWhereInput || editPriceInput) ) {
     setLoader()
     spendArr = await fetch('http://localhost:8000/spend', {
       method: 'PATCH',
@@ -58,7 +61,7 @@ function inputWhere() {
 
 // инпут цены для добавления новой задачи
 function inputHowMany() {
-  howMany = document.querySelector('#how_many').value.trim()
+  howMany = Number(document.querySelector('#how_many').value).toFixed(2)
   if (howMany <= 0) {
     howMany = 0
   }
@@ -73,6 +76,9 @@ async function addSpend() {
   }
   document.querySelector('#where').value = ''
   document.querySelector('#how_many').value = ''
+  if (howMany > 9999999) {
+    howMany = 9999999
+  }
   setLoader()
   await fetch('http://localhost:8000/spend', {
     method: 'POST',
@@ -97,6 +103,9 @@ async function deleteElement(id) {
 // получить инпут когда открыто одно поле ввода
 function getInput(elem, i) {
   editInput = document.querySelector(`#edit-${elem.split('-')[0]}-${i}`).value
+  if (Number(editInput)) {
+    editInput = Number(editInput).toFixed(2)
+  }
   if (editInput <= 0) {
     editInput = 0
   }
@@ -109,6 +118,10 @@ async function saveChanges(elem, i) {
   if (editInput === 0) {
     return
   }
+    if (Number(editInput) > 9999999) {
+      editInput = 9999999
+    }
+
   const type = elem.split('-')[0]
   spendArr[i][type] = editInput
   setLoader()
