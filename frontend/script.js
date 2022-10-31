@@ -4,13 +4,20 @@ let text
 const tasks = document.querySelector('#tasks')
 
 async function fetchData() {
-  setLoader()
-  taskArr = await fetch('http://localhost:8000/allTasks',
-      {
-        method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-      }).then(res => res.json())
-  deleteLoader()
-  render()
+  try {
+    setLoader()
+    taskArr = await fetch('http://localhost:8000/allTasks',
+        {
+          method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+        }).then(res => res.json())
+    deleteLoader()
+    render()
+  }
+  catch (error) {
+    setError('Ошибка получения данных с сервера')
+    deleteLoader()
+  }
+
 }
 
 
@@ -25,59 +32,83 @@ function getEdit(i) {
 async function setEditedTask(i) {
   getEdit(i)
   if (!text) {
-    text = taskArr[i].text
+    return setError('Некорректные данные')
   }
   taskArr[i].text = text
-  setLoader()
-  taskArr = await fetch('http://localhost:8000/task', {
-    method: 'PATCH',
-    body: JSON.stringify({id: taskArr[i]._id, text: text, isCheck: false}),
-    headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-  }).then(res => res.json())
-  deleteLoader()
-  await fetchData()
+  try {
+    setLoader()
+    taskArr = await fetch('http://localhost:8000/task', {
+      method: 'PATCH',
+      body: JSON.stringify({id: taskArr[i]._id, text: text, isCheck: false}),
+      headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+    }).then(res => res.json())
+    deleteLoader()
+    await fetchData()
+  }
+  catch (error) {
+    setError('Ошибка получения данных с сервера')
+  }
+
 }
 
 async function addTask() {
   getTask()
   if (!taskInput.length) {
-    return
+    return setError('Некорректные данные')
   }
   if (!taskInput.trim()) {
-    return
+    return setError('Некорректные данные')
   }
   taskInput = taskInput.trim()
   document.querySelector('input').focus()
   document.querySelector('input').value = ''
-  setLoader()
-  taskArr = await fetch('http://localhost:8000/task', {
-    method: 'POST',
-    body: JSON.stringify({text: taskInput, isCheck: false}),
-    headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-  }).then(res => res.json()).then(res => res.data)
-  deleteLoader()
-  await fetchData()
+  try {
+    setLoader()
+    taskArr = await fetch('http://localhost:8000/task', {
+      method: 'POST',
+      body: JSON.stringify({text: taskInput, isCheck: false}),
+      headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+    }).then(res => res.json()).then(res => res.data)
+    deleteLoader()
+    await fetchData()
+  }
+  catch (error) {
+    setError('Ошибка получения данных с сервера')
+  }
+
 
 }
 
 async function deleteElem(id) {
-  setLoader()
-  taskArr = await fetch(`http://localhost:8000/task?id=${id}`,
-      {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
-  deleteLoader()
-  await fetchData()
+  try {
+    setLoader()
+    taskArr = await fetch(`http://localhost:8000/task?id=${id}`,
+        {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
+    deleteLoader()
+    await fetchData()
+  }
+  catch (error) {
+    setError('Ошибка получения данных с сервера')
+  }
+
 
 }
 
 async function setActive(i) {
-  setLoader()
-  taskArr = await fetch('http://localhost:8000/task', {
-    method: 'PATCH',
-    body: JSON.stringify({id: taskArr[i]._id, text: taskArr[i].text, isCheck: !taskArr[i].isCheck}),
-    headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-  }).then(res => res.json()).then(res => res.data)
-  deleteLoader()
-  await fetchData()
+  try {
+    setLoader()
+    taskArr = await fetch('http://localhost:8000/task', {
+      method: 'PATCH',
+      body: JSON.stringify({id: taskArr[i]._id, text: taskArr[i].text, isCheck: !taskArr[i].isCheck}),
+      headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+    }).then(res => res.json()).then(res => res.data)
+    deleteLoader()
+    await fetchData()
+  }
+  catch (error) {
+    setError('Ошибка получения данных с сервера')
+  }
+
 
 }
 
@@ -85,6 +116,16 @@ function setEdit(i) {
   render()
   document.getElementById(`task-${i}`).classList.toggle('hidden')
   document.getElementById(`edit-${i}`).classList.toggle('active')
+}
+
+function setError (str) {
+  const errorDiv = document.createElement('div')
+  errorDiv.classList.add('error')
+  tasks.appendChild(errorDiv)
+  const errorText = document.createElement('span')
+  errorText.innerText = str
+  errorDiv.appendChild(errorText)
+  setTimeout(() => errorDiv.remove(), 5000)
 }
 
 function setLoader () {
@@ -143,7 +184,7 @@ function render() {
     operatorsDiv.appendChild(checkbox)
 
     const saveButton = document.createElement('button')
-    saveButton.addEventListener('click', () => {setEditedTask(i)})
+    saveButton.addEventListener('click', async () => await setEditedTask(i))
     saveButton.innerText = 'Save'
     operatorsDiv.appendChild(saveButton)
 

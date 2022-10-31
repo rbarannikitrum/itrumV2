@@ -256,6 +256,19 @@ body {
     }
 }
 
+.error {
+    display: flex;
+    justify-content: center;
+    background-color: #f6d6d9;
+    width: 50%;
+    border-radius: 10px;
+    margin: 0 auto 20px;
+    border: 2px solid black;
+    padding: 5px 10px;
+}
+.error span {
+    color: #721c24;
+}
 
 @media (max-width: 1200px) {
     .container {
