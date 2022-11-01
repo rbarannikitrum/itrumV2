@@ -68,9 +68,6 @@ function inputWhere() {
 // инпут цены для добавления новой задачи
 function inputHowMany() {
   howMany = Number(document.querySelector('#how_many').value).toFixed(2)
-  if (howMany <= 0) {
-    setError(userError)
-  }
 }
 // добавление задачи на enter
 async function setEnter (event) {
@@ -85,14 +82,12 @@ document.addEventListener('keyup', setEnter)
 async function addSpend() {
   inputHowMany()
   inputWhere()
-  if (!where || !howMany) {
+  if (!where || !howMany || howMany > 9999999 || howMany <= 0) {
     return setError(userError)
   }
   document.querySelector('#where').value = ''
   document.querySelector('#how_many').value = ''
-  if (howMany > 9999999) {
-    return setError(userError)
-  }
+
   try {
     setLoader()
     await fetch('http://localhost:8000/spend', {
