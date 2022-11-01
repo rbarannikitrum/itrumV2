@@ -257,15 +257,18 @@ function deleteLoader() {
 }
 
 function setError(error) {
-  const errorDiv = document.createElement('div')
-  errorDiv.classList.add('error')
-  const errorText = document.createElement('span')
-  errorText.innerText = error
-  errorDiv.appendChild(errorText)
-  spends.appendChild(errorDiv)
-  setTimeout(() => {
-    errorDiv.remove()
-  }, 5000)
+  if (!document.querySelector('.error')) {
+    const errorDiv = document.createElement('div')
+    errorDiv.classList.add('error')
+    const errorText = document.createElement('span')
+    errorText.innerText = error
+    errorDiv.appendChild(errorText)
+    spends.prepend(errorDiv)
+    setTimeout(() => {
+      errorDiv.remove()
+    }, 5000)
+  }
+
 }
 
 function reduceTotal () {
