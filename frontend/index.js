@@ -69,7 +69,7 @@ function inputWhere() {
 function inputHowMany() {
   howMany = Number(document.querySelector('#how_many').value).toFixed(2)
   if (howMany <= 0) {
-    howMany = 0
+    setError(userError)
   }
 }
 // добавление задачи на enter
