@@ -168,7 +168,6 @@ function render() {
     inputEdit.id = `change-${i}`
     inputEdit.type = 'text'
     inputEdit.value = taskArr[i].text
-    inputEdit.addEventListener('change', () => getEdit(i))
     inputEdit.classList.add('edit_text')
     editDiv.appendChild(inputEdit)
 
