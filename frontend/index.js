@@ -83,7 +83,8 @@ document.addEventListener('keyup', setEnter)
 
 // добавить задачу
 async function addSpend() {
-
+  inputHowMany()
+  inputWhere()
   if (!where || !howMany) {
     return setError(userError)
   }
