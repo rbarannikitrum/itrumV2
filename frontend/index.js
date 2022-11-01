@@ -7,6 +7,8 @@ const spends = document.querySelector('#all_spends')
 let editWhereInput = ''
 let editPriceInput = ''
 let editTimeInput = ''
+const server_error = 'Ошибка в получении данных с сервера'
+const user_error = 'Введите корректные данные'
 
 // получить инпут в случае когда открывается 3 инпута
 function getInputForAll(i) {
@@ -27,7 +29,7 @@ async function fetchData() {
     render()
   } catch (error) {
     deleteLoader()
-    setError('Ошибка в получении данных с сервера')
+    setError(server_error)
   }
 
 }
@@ -37,7 +39,7 @@ async function saveChangesForAll(i) {
 
   getInputForAll(i)
   if (editPriceInput <= 0 || editPriceInput > 9999999 || editWhereInput === '' || new Date(editTimeInput) > new Date() || new Date(editTimeInput) < new Date(1970)) {
-    return setError('Введите корректные данные')
+    return setError(user_error)
   }
 
   if (editWhereInput || editPriceInput) {
@@ -52,7 +54,7 @@ async function saveChangesForAll(i) {
       await fetchData()
     } catch (error) {
       deleteLoader()
-      setError('Ошибка в получении данных с сервера')
+      setError(server_error)
     }
   } else render()
 }
@@ -83,12 +85,12 @@ document.addEventListener('keyup', setEnter)
 async function addSpend() {
 
   if (!where || !howMany) {
-    return setError('Введите корректные данные')
+    return setError(user_error)
   }
   document.querySelector('#where').value = ''
   document.querySelector('#how_many').value = ''
   if (howMany > 9999999) {
-    return setError('Введите корректные данные')
+    return setError(user_error)
   }
   try {
     setLoader()
@@ -103,7 +105,7 @@ async function addSpend() {
     await fetchData()
   } catch (error) {
     deleteLoader()
-    setError('Ошибка в получении данных с сервера')
+    setError(server_error)
   }
 }
 
@@ -116,7 +118,7 @@ async function deleteElement(id) {
     await fetchData()
   } catch (error) {
     deleteLoader()
-    setError('Ошибка в получении данных с сервера')
+    setError(server_error)
   }
 
 }
@@ -137,7 +139,7 @@ function getInput(elem, i) {
 async function saveChanges(elem, i) {
   getInput(elem, i)
   if (editInput === 0 || Number(editInput) > 9999999 || new Date(editInput) > new Date() || new Date(editTimeInput) < new Date(1970)) {
-    return setError('Введите корректные данные')
+    return setError(user_error)
   }
   const type = elem.split('-')[0]
   spendArr[i][type] = editInput
@@ -158,7 +160,7 @@ async function saveChanges(elem, i) {
     render()
   } catch (error) {
     deleteLoader()
-    setError('Ошибка в получении данных с сервера')
+    setError(server_error)
   }
 
 }
@@ -258,11 +260,11 @@ function deleteLoader() {
   load.remove()
 }
 
-function setError(str) {
+function setError(error) {
   const errorDiv = document.createElement('div')
   errorDiv.classList.add('error')
   const errorText = document.createElement('span')
-  errorText.innerText = str
+  errorText.innerText = error
   errorDiv.appendChild(errorText)
   spends.appendChild(errorDiv)
   setTimeout(() => {
