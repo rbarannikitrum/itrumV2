@@ -314,10 +314,12 @@ body {
         width: 300px;
         margin-top: 50px;
     }
+
     .input {
         width: 100%;
         transition: none;
     }
+
     .input:focus {
         width: 100%;
     }
@@ -325,6 +327,7 @@ body {
     .button_add {
         min-width: 45px;
     }
+
     .container_task {
         grid-template-rows: 1fr 1fr;
         grid-template-columns: 1fr 1fr;
