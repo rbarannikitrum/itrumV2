@@ -70,7 +70,7 @@ body {
     border-radius: 10px;
     border: black 2px solid;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-
+    cursor: pointer;
 }
 
 .tasks {
@@ -94,7 +94,6 @@ body {
 .task_text {
     width: 50%;
     display: flex;
-    justify-content: center;
 
 }
 
@@ -116,6 +115,7 @@ body {
     border-radius: 10px;
     border: black 2px solid;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 }
 
 
@@ -124,13 +124,16 @@ body {
     margin-left: 20px;
     font-size: 18px;
     letter-spacing: 1px;
-    text-align: center;
     font-family: 'Raleway', sans-serif;
 }
 
 .completed {
     text-decoration: line-through;
     color: #5C6672;
+}
+
+.checkbox {
+    margin: auto 10px;
 }
 
 .edit {
@@ -176,6 +179,7 @@ body {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
+    cursor: pointer;
 }
 
 .checkbox {
