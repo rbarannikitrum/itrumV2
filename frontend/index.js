@@ -127,7 +127,8 @@ async function saveChanges(elem, i) {
     spendArr[i][type] = editInput
     try {
         await patchReq(i)
-        await fetchData()
+        await getReq()
+        render()
         render()
     } catch (error) {
         setError(serverError)
@@ -138,7 +139,8 @@ async function saveChanges(elem, i) {
 async function deleteElement(id) {
     try {
         await deleteReq(id)
-        await fetchData()
+        await getReq()
+        render()
     } catch (error) {
         setError(serverError)
     }
