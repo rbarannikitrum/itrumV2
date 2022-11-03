@@ -4,8 +4,6 @@ const spends = document.querySelector('#all_spends')
 const serverError = 'Ошибка в получении данных с сервера'
 const userError = 'Введите корректные данные'
 
-
-
 async function getReq() {
     spendArr = await fetch('http://localhost:8000/allSpends',
         {
@@ -29,7 +27,8 @@ async function patchReq (i) {
             _id: spendArr[i]._id,
             place: spendArr[i].place,
             time: spendArr[i].time,
-            price: spendArr[i].price
+            price: spendArr[i].price,
+            timeStamp : spendArr[i].timeStamp
         }),
         headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
     }).then(res => res.json())
@@ -84,7 +83,11 @@ async function saveChangesForAll(i) {
     let editWhereInput = document.querySelector(`#edit_place_input-${i}`).value.trim()
     let editPriceInput = Number(document.querySelector(`#edit_price_input-${i}`).value).toFixed(2)
     let editTimeInput = document.querySelector(`#edit_time_input-${i}`).value
-    if (editPriceInput <= 0 || editPriceInput > 9999999 || editWhereInput === '' || new Date(editTimeInput) > new Date() || new Date(editTimeInput) < new Date(1970)) {
+    if (editPriceInput <= 0 ||
+        editPriceInput > 9999999 ||
+        editWhereInput === '' ||
+        Math.abs(new Date(editTimeInput) - new Date(spendArr[i].timeStamp)) / (60 * 60 * 24 * 1000) > 7)
+    {
         return setError(userError)
     }
 
@@ -105,11 +108,11 @@ async function saveChangesForAll(i) {
 // получить инпут когда открыто одно поле ввода
 function getInput(elem, i) {
     let editInput = document.querySelector(`#edit-${elem.split('-')[0]}-${i}`).value
-    if (Number(editInput)) {
+    if (elem.split('-')[0] === 'price') {
         editInput = Number(editInput).toFixed(2)
     }
     if (editInput <= 0) {
-        editInput = 0
+        setError(userError)
     }
     return editInput
 }
@@ -118,7 +121,10 @@ function getInput(elem, i) {
 // сохранить изменения когда открыто одно поле ввода
 async function saveChanges(elem, i) {
     const editInput = getInput(elem, i)
-    if (editInput === 0 || Number(editInput) > 9999999 || new Date(editInput) > new Date() || new Date(editInput) < new Date(1970)) {
+    if (Number (editInput) === 0 || Number(editInput) > 9999999) {
+        return setError(userError)
+    }
+    if (elem.split('-')[0] && Math.abs(new Date(editInput) - new Date(spendArr[i].timeStamp)) / (60 * 60 * 24 * 1000) > 7) {
         return setError(userError)
     }
     const type = elem.split('-')[0]
@@ -143,8 +149,6 @@ async function deleteElement(id) {
         setError(serverError)
     }
 }
-
-
 
 // открыть окно редактирования с одним полем ввода
 function setEdit(elem, i) {
