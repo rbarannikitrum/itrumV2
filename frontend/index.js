@@ -79,8 +79,6 @@ async function setEnter(event) {
 }
 document.addEventListener('keyup', setEnter)
 
-
-
 // сохранить изменения в случае когда открывается 3 инпута
 async function saveChangesForAll(i) {
     let editWhereInput = document.querySelector(`#edit_place_input-${i}`).value.trim()
