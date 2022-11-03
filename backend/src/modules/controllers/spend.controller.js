@@ -9,18 +9,15 @@ module.exports.createSpend = (req, res) => {
         price > 0
     ) {
       const time = new Date()
-      const timeStamp = new Date()
-      const spend = new Spend({place, time, price, timeStamp})
+      const permanentTime = new Date()
+      const spend = new Spend({place, time, price, permanentTime})
       spend.save().then(result => res.send(result))
     } else {
-      res.status(400).send ('uncorrected data')
+      res.status(400).send('uncorrected data')
     }
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).send(`server error : ${error}`)
   }
-
-
 }
 
 module.exports.getAllSpends = (req, res) => {
@@ -28,8 +25,7 @@ module.exports.getAllSpends = (req, res) => {
     Spend.find().then(result => {
       res.send(result)
     })
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).send(`server error : ${error}`)
   }
 
@@ -38,19 +34,18 @@ module.exports.getAllSpends = (req, res) => {
 module.exports.updateSpend = (req, res) => {
   try {
     const time = new Date(req.body.time)
-    const timeStamp =  new Date(req.body.timeStamp)
+    const permanentTime = new Date(req.body.permanentTime)
     const {_id, place, price} = req.body
     if (typeof place === 'string' &&
         place &&
         price &&
         price > 0 &&
         time.toString() != 'Invalid Date' &&
-        Math.abs(new Date(time) - new Date(timeStamp)) / (60 * 60 * 24 * 1000) > 7
+        Math.abs(new Date(time) - new Date(permanentTime)) / (60 * 60 * 24 * 1000) < 7
     ) {
       Spend.findByIdAndUpdate(_id, {place, time, price}).then(result => res.send(result))
     } else res.status(400).send('uncorrected data')
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).send(`server error : ${error}`)
   }
 
@@ -59,8 +54,7 @@ module.exports.updateSpend = (req, res) => {
 module.exports.deleteSpend = (req, res) => {
   try {
     Spend.findByIdAndDelete({_id: req.query._id}).then(result => res.send(result))
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).send(`server error : ${error}`)
   }
 }

@@ -4,7 +4,7 @@ const spendScheme = new mongoose.Schema({
   place: String,
   time: Date,
   price: Number,
-  timeStamp : Date /// add rn
+  permanentTime : Date
 })
 
   module.exports = Spend = mongoose.model('spends', spendScheme)

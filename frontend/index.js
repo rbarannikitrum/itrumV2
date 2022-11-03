@@ -28,7 +28,7 @@ async function patchReq (i) {
             place: spendArr[i].place,
             time: spendArr[i].time,
             price: spendArr[i].price,
-            timeStamp : spendArr[i].timeStamp
+            permanentTime : spendArr[i].permanentTime
         }),
         headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
     }).then(res => res.json())
@@ -86,7 +86,7 @@ async function saveChangesForAll(i) {
     if (editPriceInput <= 0 ||
         editPriceInput > 9999999 ||
         editWhereInput === '' ||
-        Math.abs(new Date(editTimeInput) - new Date(spendArr[i].timeStamp)) / (60 * 60 * 24 * 1000) > 7)
+        Math.abs(new Date(editTimeInput) - new Date(spendArr[i].permanentTime)) / (60 * 60 * 24 * 1000) > 7)
     {
         return setError(userError)
     }
@@ -124,7 +124,7 @@ async function saveChanges(elem, i) {
     if (Number (editInput) === 0 || Number(editInput) > 9999999) {
         return setError(userError)
     }
-    if (elem.split('-')[0] && Math.abs(new Date(editInput) - new Date(spendArr[i].timeStamp)) / (60 * 60 * 24 * 1000) > 7) {
+    if (elem.split('-')[0] && Math.abs(new Date(editInput) - new Date(spendArr[i].permanentTime)) / (60 * 60 * 24 * 1000) > 7) {
         return setError(userError)
     }
     const type = elem.split('-')[0]
