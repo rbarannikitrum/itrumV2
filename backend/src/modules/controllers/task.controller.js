@@ -52,5 +52,3 @@ module.exports.deleteTask = (req, res) => {
   }
 
 }
-
-

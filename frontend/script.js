@@ -1,93 +1,87 @@
-let taskInput
 let taskArr = []
-let text
-const tasks = document.querySelector('#tasks')
+
+async function getReq() {
+  taskArr = await fetch('http://localhost:8000/allTasks',
+      {
+        method: 'GET',
+        headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+      }).then(res => res.json())
+}
+
+async function createReq(taskInput) {
+  taskArr = await fetch('http://localhost:8000/task', {
+    method: 'POST',
+    body: JSON.stringify({text: taskInput, isCheck: false}),
+    headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+  }).then(res => res.json()).then(res => res.data)
+}
+
+async function deleteReq(id) {
+  taskArr = await fetch(`http://localhost:8000/task?id=${id}`,
+      {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
+}
+
+async function patchReq(i, text) {
+  taskArr = await fetch('http://localhost:8000/task', {
+    method: 'PATCH',
+    body: JSON.stringify({id: taskArr[i]._id, text: text, isCheck: taskArr[i].isCheck}),
+    headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+  }).then(res => res.json()).then(res => res.data)
+}
+
 
 async function fetchData() {
   try {
     setLoader()
-    taskArr = await fetch('http://localhost:8000/allTasks',
-        {
-          method: 'GET', headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-        }).then(res => res.json())
-    deleteLoader()
+    await getReq()
     render()
-  }
-  catch (error) {
+  } catch (error) {
     setError('Ошибка получения данных с сервера')
+  } finally {
     deleteLoader()
   }
 
 }
 
-
-function getTask() {
-  taskInput = document.querySelector("input").value
-}
-
-function getEdit(i) {
-  text = document.getElementById(`change-${i}`).value
-}
-
-async function setEditedTask(i) {
-  getEdit(i)
-  if (!text) {
-    return setError('Некорректные данные')
-  }
-  taskArr[i].text = text
-  try {
-    setLoader()
-    taskArr = await fetch('http://localhost:8000/task', {
-      method: 'PATCH',
-      body: JSON.stringify({id: taskArr[i]._id, text: text, isCheck: false}),
-      headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-    }).then(res => res.json())
-    deleteLoader()
-    await fetchData()
-  }
-  catch (error) {
-    setError('Ошибка получения данных с сервера')
-  }
-
-}
 
 async function addTask() {
-  getTask()
+  const taskInput = document.querySelector("input").value.trim()
   if (!taskInput.length) {
     return setError('Некорректные данные')
   }
-  if (!taskInput.trim()) {
-    return setError('Некорректные данные')
-  }
-  taskInput = taskInput.trim()
+
   document.querySelector('input').focus()
   document.querySelector('input').value = ''
   try {
-    setLoader()
-    taskArr = await fetch('http://localhost:8000/task', {
-      method: 'POST',
-      body: JSON.stringify({text: taskInput, isCheck: false}),
-      headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-    }).then(res => res.json()).then(res => res.data)
-    deleteLoader()
-    await fetchData()
-  }
-  catch (error) {
+    await createReq(taskInput)
+    await getReq()
+    render()
+  } catch (error) {
     setError('Ошибка получения данных с сервера')
   }
-
-
 }
 
 async function deleteElem(id) {
   try {
-    setLoader()
-    taskArr = await fetch(`http://localhost:8000/task?id=${id}`,
-        {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
-    deleteLoader()
-    await fetchData()
+    await deleteReq(id)
+    await getReq()
+    render()
+  } catch (error) {
+    setError('Ошибка получения данных с сервера')
   }
-  catch (error) {
+}
+
+
+async function setEditedTask(i) {
+  let text = document.getElementById(`change-${i}`).value
+  if (!text) {
+    text = taskArr[i].text
+  }
+  try {
+    await patchReq(i, text)
+    await getReq()
+    render()
+  } catch (error) {
     setError('Ошибка получения данных с сервера')
   }
 
@@ -95,17 +89,13 @@ async function deleteElem(id) {
 }
 
 async function setActive(i) {
+  taskArr[i].isCheck = !taskArr[i].isCheck
+  let text = taskArr[i].text
   try {
-    setLoader()
-    taskArr = await fetch('http://localhost:8000/task', {
-      method: 'PATCH',
-      body: JSON.stringify({id: taskArr[i]._id, text: taskArr[i].text, isCheck: !taskArr[i].isCheck}),
-      headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
-    }).then(res => res.json()).then(res => res.data)
-    deleteLoader()
-    await fetchData()
-  }
-  catch (error) {
+    await patchReq(i, text)
+    await getReq()
+    render()
+  } catch (error) {
     setError('Ошибка получения данных с сервера')
   }
 
@@ -118,17 +108,20 @@ function setEdit(i) {
   document.getElementById(`edit-${i}`).classList.toggle('active')
 }
 
-function setError (str) {
-  const errorDiv = document.createElement('div')
-  errorDiv.classList.add('error')
-  tasks.appendChild(errorDiv)
-  const errorText = document.createElement('span')
-  errorText.innerText = str
-  errorDiv.appendChild(errorText)
-  setTimeout(() => errorDiv.remove(), 5000)
+function setError(str) {
+  if (!document.querySelector('.error')) {
+    const errorDiv = document.createElement('div')
+    errorDiv.classList.add('error')
+    tasks.before(errorDiv)
+    const errorText = document.createElement('span')
+    errorText.innerText = str
+    errorDiv.appendChild(errorText)
+    setTimeout(() => errorDiv.remove(), 5000)
+  }
+
 }
 
-function setLoader () {
+function setLoader() {
   const ring = document.createElement('div')
   ring.id = 'ring'
   ring.classList.add('lds-ring')
@@ -147,13 +140,12 @@ function setLoader () {
   ring.appendChild(fourthDiv)
 }
 
-function deleteLoader () {
-  let load = document.getElementById('ring')
-  load.remove()
+function deleteLoader() {
+  document.getElementById('ring').remove()
 }
 
 function render() {
-
+  const tasks = document.querySelector('#tasks')
   taskArr = taskArr.sort((a, b) => a.isCheck - b.isCheck)
   tasks.innerHTML = ''
   taskArr.forEach((el, i) => {
@@ -175,13 +167,6 @@ function render() {
     operatorsDiv.classList.add('operators')
     editDiv.appendChild(operatorsDiv)
 
-    const checkbox = document.createElement('input')
-    checkbox.type = 'checkbox'
-    checkbox.classList.add('checkbox')
-    checkbox.addEventListener('click', () => setActive(i))
-    el.isCheck ? checkbox.checked = true : checkbox.checked = false
-    operatorsDiv.appendChild(checkbox)
-
     const saveButton = document.createElement('button')
     saveButton.addEventListener('click', async () => await setEditedTask(i))
     saveButton.innerText = 'Save'
@@ -192,11 +177,17 @@ function render() {
     cancelButton.innerText = 'Cancel'
     operatorsDiv.appendChild(cancelButton)
 
-
     const taskDiv = document.createElement('div')
     taskDiv.id = `task-${i}`
     taskDiv.classList.add('task')
     tasks.appendChild(taskDiv)
+
+    const inputCheck = document.createElement('input')
+    inputCheck.type = 'checkbox'
+    inputCheck.addEventListener('click', () => setActive(i))
+    el.isCheck ? inputCheck.checked = true : inputCheck.checked = false
+    inputCheck.classList.add('checkbox')
+    taskDiv.prepend(inputCheck)
 
     const taskText = document.createElement('div')
     taskText.classList.add('task_text')
@@ -210,12 +201,6 @@ function render() {
     const operators = document.createElement('div')
     operators.classList.add('operators')
     taskDiv.appendChild(operators)
-
-    const inputCheck = document.createElement('input')
-    inputCheck.type = 'checkbox'
-    inputCheck.addEventListener('click', () => setActive(i))
-    el.isCheck ? inputCheck.checked = true : inputCheck.checked = false
-    operators.appendChild(inputCheck)
 
     const editButton = document.createElement('button')
     el.isCheck ? editButton.classList.add('hide_button') : ''
