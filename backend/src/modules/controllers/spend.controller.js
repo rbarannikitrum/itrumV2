@@ -9,7 +9,7 @@ module.exports.createSpend = (req, res) => {
         price > 0
     ) {
       const time = new Date()
-      const spend = new Spend({place : req.body.place, time, price : req.body.price})
+      const spend = new Spend({place, time, price})
       spend.save().then(result => res.send(result))
     } else {
       res.status(400).send ('uncorrected data')
@@ -36,15 +36,15 @@ module.exports.getAllSpends = (req, res) => {
 
 module.exports.updateSpend = (req, res) => {
   try {
-    const date = new Date(req.body.time)
-    const {place, price} = req.body
+    const time = new Date(req.body.time)
+    const {_id, place, price} = req.body
     if (typeof place === 'string' &&
         place &&
         price &&
         price > 0 &&
-        date.toString() != 'Invalid Date'
+        time.toString() != 'Invalid Date'
     ) {
-      Spend.findByIdAndUpdate(req.body._id, {place : req.body.place, time : req.body.time, price : req.body.price}).then(result => res.send(result))
+      Spend.findByIdAndUpdate(_id, {place, time, price}).then(result => res.send(result))
     } else res.status(400).send('uncorrected data')
   }
   catch (error) {
