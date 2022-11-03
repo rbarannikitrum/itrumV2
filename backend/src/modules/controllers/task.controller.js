@@ -11,11 +11,12 @@ module.exports.getAllTasks = (req, res) => {
 }
 
 module.exports.createNewTask = (req, res) => {
+  const {text, isCheck} = req.body
   try {
-    if (typeof req.body.isCheck === 'boolean' &&
-        req.body.text &&
-        typeof req.body.text === 'string') {
-      const task = new Task({text: req.body.text, isCheck: req.body.isCheck})
+    if (typeof isCheck === 'boolean' &&
+        text &&
+        typeof text === 'string') {
+      const task = new Task({text, isCheck})
       task.save()
           .then(result => res.send(result))
     } else res.status(400).send('uncorrected data')
@@ -26,11 +27,13 @@ module.exports.createNewTask = (req, res) => {
 }
 
 module.exports.changeTaskInfo = (req, res) => {
+  const {id, text, isCheck} = req.body
   try {
-    if (typeof req.body.isCheck === 'boolean' &&
-        req.body.text &&
-        typeof req.body.text === 'string') {
-      Task.findByIdAndUpdate(req.body.id, {text: req.body.text, isCheck: req.body.isCheck})
+    if (typeof isCheck === 'boolean' &&
+        text &&
+        typeof text === 'string') {
+
+      Task.findByIdAndUpdate(id, {text, isCheck})
           .then(result => res.send(result))
     } else res.status(400).send('uncorrected data')
   } catch (error) {
@@ -49,3 +52,5 @@ module.exports.deleteTask = (req, res) => {
   }
 
 }
+
+
