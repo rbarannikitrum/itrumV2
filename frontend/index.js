@@ -218,13 +218,13 @@ function openEdit(i) {
 
 
     const saveButton = document.createElement('button')
-    saveButton.innerText = 'Сохранить'
+    saveButton.textContent = 'Сохранить'
     saveButton.classList.add('btn')
     saveButton.addEventListener('click', () => saveChangesForAll(i))
     task.appendChild(saveButton)
 
     const cancelButton = document.createElement('button')
-    cancelButton.innerText = 'Отмена'
+    cancelButton.textContent = 'Отмена'
     cancelButton.classList.add('btn')
     cancelButton.addEventListener('click', () => render())
     task.appendChild(cancelButton)
@@ -260,7 +260,7 @@ function setError(error) {
         const errorDiv = document.createElement('div')
         errorDiv.classList.add('error')
         const errorText = document.createElement('span')
-        errorText.innerText = error
+        errorText.textContent = error
         errorDiv.appendChild(errorText)
         spends.prepend(errorDiv)
         setTimeout(() => {
@@ -280,7 +280,7 @@ function render() {
     const sum = document.createElement('div')
     sum.classList.add('sum')
     reduceTotal()
-    sum.innerText = `Всего денег потрачено было : ${total} рублей`
+    sum.textContent = `Всего денег потрачено было : ${total} рублей`
 
 
     spendArr.forEach((el, i) => {
@@ -296,7 +296,7 @@ function render() {
 
 
         const place = document.createElement('span')
-        place.innerText = `${el.place}`
+        place.textContent = `${el.place}`
         place.addEventListener('click', () => setEdit(place.id))
         placeContainer.appendChild(place)
         place.id = `place-${i}`
@@ -308,7 +308,7 @@ function render() {
 
 
         const time = document.createElement('span')
-        time.innerText = `${new Date(el.time).toLocaleDateString('ru-ru')}`
+        time.textContent = `${new Date(el.time).toLocaleDateString('ru-ru')}`
         timeContainer.appendChild(time)
         time.addEventListener('click', () => setEdit(time.id))
         time.id = `time-${i}`
@@ -319,14 +319,14 @@ function render() {
 
 
         const price = document.createElement('span')
-        price.innerText = `${el.price} ₽`
+        price.textContent = `${el.price} ₽`
         price.addEventListener('click', () => setEdit(price.id))
         priceContainer.appendChild(price)
         price.id = `price-${i}`
 
 
         const deleteEl = document.createElement('button')
-        deleteEl.innerText = 'Удалить'
+        deleteEl.textContent = 'Удалить'
         deleteEl.addEventListener('click', async () => {
             await deleteElement(el._id)
         })
@@ -335,7 +335,7 @@ function render() {
         deleteEl.id = `delete-${i}`
 
         const editTask = document.createElement('button')
-        editTask.innerText = 'Изменить'
+        editTask.textContent = 'Изменить'
         container.appendChild(editTask)
         editTask.classList.add('btn')
         editTask.classList.add('edit_btn')
