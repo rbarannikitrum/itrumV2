@@ -13,7 +13,7 @@ async function getReq() {
 }
 
 async function createReq(where, howMany) {
-    await fetch('http://localhost:8000/spend', {
+    await fetch('http://localhost:8000/create', {
         method: 'POST',
         body: JSON.stringify({place: where, price: howMany}),
         headers
@@ -21,7 +21,7 @@ async function createReq(where, howMany) {
 }
 
 async function patchReq (i) {
-    await fetch('http://localhost:8000/spend', {
+    await fetch('http://localhost:8000/update', {
         method: 'PATCH',
         body: JSON.stringify({
             _id: spendArr[i]._id,
@@ -35,7 +35,7 @@ async function patchReq (i) {
 }
 
 async function deleteReq (id) {
-    await fetch(`http://localhost:8000/spend?_id=${id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
+    await fetch(`http://localhost:8000/delete?_id=${id}`, {method: 'DELETE'}).then(res => res.json()).then(res => res.data)
 }
 
 // получение задачек
