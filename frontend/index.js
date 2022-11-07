@@ -269,9 +269,21 @@ function setError(error) {
     }
 
 }
-
+// подсчет общей суммы
 function reduceTotal() {
     total = spendArr.reduce((accum, el) => accum + el.price, 0)
+}
+
+// проверка на отсутствие задач
+function checkEmpty() {
+    if (spendArr.length === 0) {
+        const emptyDiv = document.createElement('div')
+        emptyDiv.classList.add('empty')
+        const emptyText = document.createElement('span')
+        emptyText.textContent = 'Список трат пуст'
+        emptyDiv.appendChild(emptyText)
+        spends.appendChild(emptyDiv)
+    }
 }
 
 // рендер
@@ -282,6 +294,7 @@ function render() {
     reduceTotal()
     sum.textContent = `Всего денег потрачено было : ${total} рублей`
 
+    checkEmpty()
 
     spendArr.forEach((el, i) => {
         // вся задача
