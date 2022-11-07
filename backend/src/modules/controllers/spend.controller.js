@@ -1,4 +1,4 @@
-const Spend = require('../../db/models/spend/index')
+const Spend = require('../../db/models/spend/spend.schema')
 
 module.exports.createSpend = (req, res) => {
   const {place, price} = req.body
