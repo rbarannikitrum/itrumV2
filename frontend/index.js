@@ -106,8 +106,8 @@ async function saveChangesForAll(i) {
 }
 
 // получить инпут когда открыто одно поле ввода
-function getInput(elem, i) {
-    let editInput = document.querySelector(`#edit-${elem.split('-')[0]}-${i}`).value
+function getInput(elem) {
+    let editInput = document.querySelector(`#edit-${elem}`).value
     if (elem.split('-')[0] === 'price') {
         editInput = Number(editInput).toFixed(2)
     }
@@ -119,15 +119,17 @@ function getInput(elem, i) {
 
 
 // сохранить изменения когда открыто одно поле ввода
-async function saveChanges(elem, i) {
-    const editInput = getInput(elem, i)
+async function saveChanges(elem) {
+    const i = elem.split('-')[1]
+    const type = elem.split('-')[0]
+    const editInput = getInput(elem)
     if (Number (editInput) === 0 || Number(editInput) > 9999999) {
         return setError(userError)
     }
-    if (elem.split('-')[0] && Math.abs(new Date(editInput) - new Date(spendArr[i].permanentTime)) / (60 * 60 * 24 * 1000) > 7) {
+    if (type && Math.abs(new Date(editInput) - new Date(spendArr[i].permanentTime)) / (60 * 60 * 24 * 1000) > 7) {
         return setError(userError)
     }
-    const type = elem.split('-')[0]
+
     spendArr[i][type] = editInput
     try {
         await patchReq(i)
