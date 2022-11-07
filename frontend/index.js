@@ -3,12 +3,12 @@ let spendArr = []
 const spends = document.querySelector('#all_spends')
 const serverError = 'Ошибка в получении данных с сервера'
 const userError = 'Введите корректные данные'
+const headers = {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
 
 async function getReq() {
     spendArr = await fetch('http://localhost:8000/allSpends',
         {
-            method: 'GET',
-            headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+            method: 'GET'
         }).then(res => res.json())
 }
 
@@ -16,7 +16,7 @@ async function createReq(where, howMany) {
     await fetch('http://localhost:8000/spend', {
         method: 'POST',
         body: JSON.stringify({place: where, price: howMany}),
-        headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+        headers
     }).then(res => res.json()).then(res => res.data)
 }
 
@@ -30,7 +30,7 @@ async function patchReq (i) {
             price: spendArr[i].price,
             permanentTime : spendArr[i].permanentTime
         }),
-        headers: {"Content-Type": "application/json;charset=utf-8", "Access-Control-Allow-Origin": "*"}
+        headers
     }).then(res => res.json())
 }
 
@@ -53,7 +53,7 @@ async function fetchData() {
 
 // добавить задачу
 async function addSpend() {
-    let howMany = Number(document.querySelector('#how_many').value).toFixed(2)
+    let howMany = Number(document.querySelector('#howMany').value).toFixed(2)
     let where = document.querySelector('#where').value.trim()
     if (!where || !howMany || howMany > 9999999 || howMany <= 0) {
         return setError(userError)
@@ -66,7 +66,7 @@ async function addSpend() {
         setError(serverError)
     }
     document.querySelector('#where').value = ''
-    document.querySelector('#how_many').value = ''
+    document.querySelector('#howMany').value = ''
 }
 
 // добавление задачи на enter
@@ -151,7 +151,9 @@ async function deleteElement(id) {
 }
 
 // открыть окно редактирования с одним полем ввода
-function setEdit(elem, i) {
+function setEdit(elem) {
+    const inputType = elem.split('-')[0]
+    const i = elem.split('-')[1]
     document.removeEventListener('keyup', setEnter)
     render()
     const field = document.querySelector(`#${elem}`)
@@ -159,10 +161,19 @@ function setEdit(elem, i) {
     task.className = 'task';
     field.remove()
     const input = document.createElement('input')
-    input.type = `${elem.split('-')[0] === 'price' ? 'number' : elem.split('-')[0] === 'time' ? 'date' : 'text'}`
-    input.type === 'date' ? input.valueAsDate = new Date(spendArr[i][elem.split('-')[0]]) : input.value = `${spendArr[i][elem.split('-')[0]]}`
+    if (inputType === 'price') {
+        input.type = 'number'
+    } else if (inputType === 'time') {
+        input.type = 'date'
+    } else {
+        input.type = 'text'
+    }
+
+    if (input.type === 'date') {
+        input.valueAsDate = new Date(spendArr[i][inputType])
+    } else input.value = spendArr[i][inputType]
     input.classList.add('input_edit')
-    input.id = `edit-${elem.split('-')[0]}-${i}`
+    input.id = `edit-${inputType}-${i}`
     task.appendChild(input)
     task.addEventListener('focusout', () => render())
 
@@ -286,7 +297,7 @@ function render() {
 
         const place = document.createElement('span')
         place.innerText = `${el.place}`
-        place.addEventListener('click', () => setEdit(place.id, i))
+        place.addEventListener('click', () => setEdit(place.id))
         placeContainer.appendChild(place)
         place.id = `place-${i}`
 
@@ -299,7 +310,7 @@ function render() {
         const time = document.createElement('span')
         time.innerText = `${new Date(el.time).toLocaleDateString('ru-ru')}`
         timeContainer.appendChild(time)
-        time.addEventListener('click', () => setEdit(time.id, i))
+        time.addEventListener('click', () => setEdit(time.id))
         time.id = `time-${i}`
 
         const priceContainer = document.createElement('div')
@@ -309,7 +320,7 @@ function render() {
 
         const price = document.createElement('span')
         price.innerText = `${el.price} ₽`
-        price.addEventListener('click', () => setEdit(price.id, i))
+        price.addEventListener('click', () => setEdit(price.id))
         priceContainer.appendChild(price)
         price.id = `price-${i}`
 
