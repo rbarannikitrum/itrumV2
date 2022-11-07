@@ -327,7 +327,9 @@ function render() {
 
         const deleteEl = document.createElement('button')
         deleteEl.innerText = 'Удалить'
-        deleteEl.addEventListener('click', () => deleteElement(el._id))
+        deleteEl.addEventListener('click', async () => {
+            await deleteElement(el._id)
+        })
         container.appendChild(deleteEl)
         deleteEl.classList.add('btn')
         deleteEl.id = `delete-${i}`
@@ -338,7 +340,8 @@ function render() {
         editTask.classList.add('btn')
         editTask.classList.add('edit_btn')
         editTask.id = `edit-${i}`
-        editTask.addEventListener('click', () => {
+        editTask.addEventListener('click', (event) => {
+            event.stopPropagation()
             openEdit(i)
         })
 
