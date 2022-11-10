@@ -339,7 +339,6 @@ function render() {
         priceContainer.appendChild(price)
         price.id = `price-${i}`
 
-
         const deleteEl = document.createElement('button')
         deleteEl.textContent = 'Удалить'
         deleteEl.addEventListener('click', async () => {
