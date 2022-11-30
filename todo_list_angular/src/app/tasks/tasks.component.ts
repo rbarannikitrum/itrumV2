@@ -1,3 +1,4 @@
+import { TaskService } from './../task.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent {
+  constructor(public taskService: TaskService) {
 
+  }
 }

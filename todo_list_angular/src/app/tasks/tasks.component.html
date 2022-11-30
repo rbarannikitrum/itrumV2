@@ -1,1 +1,3 @@
-<p>tasks works!</p>
+<div *ngFor="let task of this.taskService.allTasks">
+  <div>{{task.text}}</div>
+</div>
