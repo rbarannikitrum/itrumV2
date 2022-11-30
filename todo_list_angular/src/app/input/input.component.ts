@@ -22,12 +22,8 @@ export class InputComponent  implements OnInit {
     this.taskService.getAllTasks().subscribe(res => this.taskService.allTasks = res)
   }
   addTask (task: string) {
-    const obj: ITask = {
-      text: task,
-      isCheck: false
-    }
-    this.taskService.createTask(obj).subscribe((el) => this.taskService.allTasks.push(el as ITask))
-    console.log(this.taskService.allTasks)
+
+    this.taskService.createTask(task).subscribe((el) => this.taskService.allTasks.push(el as ITask))
   }
 
 }

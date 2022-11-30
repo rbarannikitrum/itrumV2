@@ -1,3 +1,7 @@
-<div *ngFor="let task of this.taskService.allTasks">
+<div *ngFor="let task of this.taskService.allTasks; let i = index">
+<div style="display: flex; gap: 100px">
+
   <div>{{task.text}}</div>
+  <button (click)="this.delete(task._id)">X</button>
+</div>
 </div>
