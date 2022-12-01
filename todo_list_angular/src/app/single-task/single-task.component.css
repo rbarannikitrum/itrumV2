@@ -1,0 +1,8 @@
+.check {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.not_check {
+  color: black
+}
