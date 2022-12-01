@@ -5,5 +5,8 @@
       <input matInput #task>
     </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="addTask(task.value); task.value = ''">add task</button>
+
+  <button mat-mini-fab color="primary" (click)="addTask(task.value); task.value = ''">
+   <span class="add">+</span>
+  </button>
 </div>
