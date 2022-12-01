@@ -21,7 +21,9 @@ export class InputComponent  implements OnInit {
   }
   addTask (task: string) {
     this.taskService.createTask(task).subscribe((el) => this.taskService.allTasks.push(el as ITask))
-    
+  }
+  addTaskOnEnter(event: Event) {
+    this.addTask((event.target as HTMLTextAreaElement).value)
   }
 
 }
