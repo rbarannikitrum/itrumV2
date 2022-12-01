@@ -27,7 +27,6 @@ module.exports.createNewTask = (req, res) => {
 }
 
 module.exports.changeTaskInfo = (req, res) => {
-  console.log(req.body)
   const {_id, text, isCheck} = req.body
   try {
     if (typeof isCheck === 'boolean' &&

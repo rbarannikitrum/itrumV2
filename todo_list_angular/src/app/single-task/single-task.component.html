@@ -1,7 +1,7 @@
 <div *ngIf="!edit" [class.check] = "isCheck === true" [class.not_check] = "isCheck === false">
   <div (click)="edit = true">{{task}}</div>
   <button (click)="this.delete(id)">X</button>
-  <input type="checkbox" (click)="editCheck()"/>
+  <input type="checkbox" (click)="editCheck()" [checked]="isCheck"/>
 </div>
 <div *ngIf="edit">
   <input type="text" #task/>
