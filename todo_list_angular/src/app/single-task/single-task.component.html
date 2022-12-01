@@ -8,8 +8,18 @@
     </div>
 </mat-card>
 
-<div *ngIf="edit">
-  <input type="text" #task/>
-  <button (click)="saveNew(task.value, id, isCheck)">save</button>
-  <button (click)="edit = false">Cancel</button>
+<div *ngIf="edit" class="edit">
+  <mat-form-field color="primary" class="input">
+    <mat-label style="color: black">Enter New</mat-label>
+    <input matInput #change value={{task}}>
+  </mat-form-field>
+  <div class="operators_edit">
+    <button mat-mini-fab color="primary" (click)="saveNew(change.value, id, isCheck)">
+      <span class="font">✓</span>
+    </button>
+    <button mat-mini-fab color="primary" (click)="edit = false">
+      <span class="font">X</span>
+    </button>
+  </div>
+
 </div>

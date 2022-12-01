@@ -28,3 +28,20 @@
   gap: 10px;
   flex-direction: row;
 }
+.font {
+  font-size: 18px
+}
+
+.input {
+  width: 70%;
+}
+.edit {
+  display: flex;
+  justify-content: space-between;
+}
+
+.operators_edit {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
