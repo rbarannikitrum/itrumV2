@@ -1,7 +1,7 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskService } from './../task.service';
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ITask } from '../input/taskInterface';
-import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-single-task',
@@ -10,41 +10,42 @@ import { fromEvent } from 'rxjs';
 })
 export class SingleTaskComponent {
 
-constructor(public taskService: TaskService) {
-
-}
+constructor(public taskService: TaskService, private _snackBar: MatSnackBar) {}
 
 edit: boolean = false
 @Input() task: string = ''
 @Input() id: string = ''
 @Input() isCheck: boolean = false
 
-public delete(id: string, event: Event) {
+public delete(id: string, event: Event): void {
   event.stopPropagation()
   this.taskService.deleteTask(id).subscribe((deleting: any) => {
     this.taskService.allTasks = this.taskService.allTasks.filter(el =>
       el._id !== deleting._id
     )
   })
+  this._snackBar.open('Task deleted', 'close', {duration: 5000})
 }
-public editCheck (event: Event) {
+public editCheck (event: Event): void {
   event.stopPropagation()
   this.isCheck = !this.isCheck
-  this.saveNew(this.task, this.id, this.isCheck)
+  return this.saveNew(this.task, this.id, this.isCheck)
 }
-public saveNew (task: string, id: string, isCheck: boolean) {
+public saveNew (task: string, id: string, isCheck: boolean): void {
   const obj = {
     _id: id,
     text: task,
     isCheck: isCheck
   }
-  this.taskService.changeTaskInfo(obj).subscribe(patching => this.taskService.allTasks = this.taskService.allTasks.map(el => {
+  this.taskService.changeTaskInfo(obj).subscribe(patching =>
+     this.taskService.allTasks = this.taskService.allTasks.map(el => {
     if (patching._id === el._id) {
      return patching
     }
     return el
   }))
   this.edit = false
+  this._snackBar.open('Task edited', 'close', {duration: 5000})
 }
 }
 

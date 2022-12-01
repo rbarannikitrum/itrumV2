@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
-import { from, map, Observable, Subject, switchMap, tap } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ITask } from './input/taskInterface';
 
 @Injectable({
@@ -11,8 +11,6 @@ export class TaskService {
   allTasks: Array<ITask> = []
 
   constructor(private http: HttpClient) { }
-
-
 
   public getAllTasks (): Observable<Array<ITask>> {
     return this.http.get<Array<ITask>>('http://localhost:8000/allTasks')
