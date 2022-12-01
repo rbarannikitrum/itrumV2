@@ -1,8 +1,30 @@
 .check {
   text-decoration: line-through;
   color: gray;
+  margin-top: -5px;
 }
 
 .not_check {
-  color: black
+  color: black;
+  margin-top: -5px;
+
+}
+
+.card {
+  cursor: pointer;
+  font-size: 30px;
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 15px;
+}
+.card:hover {
+  background: rgb(220, 218, 218);
+}
+
+.operators {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
 }

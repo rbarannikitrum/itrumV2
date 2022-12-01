@@ -8,19 +8,27 @@ import { TasksComponent } from './tasks/tasks.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SingleTaskComponent } from './single-task/single-task.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material/input'
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
     AppComponent,
     InputComponent,
     TasksComponent,
-    SingleTaskComponent
+    SingleTaskComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatCardModule,
+    MatButtonModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

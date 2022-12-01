@@ -1,2 +1,9 @@
-<input type="text" #task/>
-<button class="a" (click)="addTask(task.value)">add task</button>
+<div class="container">
+
+    <mat-form-field color="primary" class="input">
+      <mat-label style="color: black">Enter Task</mat-label>
+      <input matInput #task>
+    </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="addTask(task.value); task.value = ''">add task</button>
+</div>

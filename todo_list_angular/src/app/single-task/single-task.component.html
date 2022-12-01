@@ -1,9 +1,15 @@
-<div *ngIf="!edit" [class.check] = "isCheck === true" [class.not_check] = "isCheck === false">
-  <div (click)="edit = true">{{task}}</div>
-  <button (click)="this.delete(id)">X</button>
-  <input type="checkbox" (click)="editCheck()" [checked]="isCheck"/>
-</div>
+<mat-card (click)="edit = true" class="card" *ngIf="!edit" >
+    <mat-card-content [class.check] = "isCheck === true" [class.not_check] = "isCheck === false">{{task}}</mat-card-content>
+    <div class="operators">
+      <mat-checkbox color="primary" (click)="editCheck($event)" [checked]="isCheck" #checkbox></mat-checkbox>
+      <button mat-mini-fab color="primary" (click)="this.delete(id, $event)">
+        X
+      </button>
+    </div>
+</mat-card>
+
 <div *ngIf="edit">
   <input type="text" #task/>
   <button (click)="saveNew(task.value, id, isCheck)">save</button>
+  <button (click)="edit = false">Cancel</button>
 </div>

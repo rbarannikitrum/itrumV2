@@ -1,5 +1,3 @@
-<div *ngFor="let task of this.taskService.allTasks; let i = index">
-<div style="display: flex; gap: 100px">
+<div *ngFor="let task of this.taskService.allTasks; let i = index" >
   <app-single-task [task] = "task.text" [id] = "task._id" [isCheck] = "task.isCheck"></app-single-task>
-</div>
 </div>
