@@ -12,17 +12,7 @@ import { ITask } from '../input/taskInterface';
 export class TasksComponent {
   constructor(public taskService: TaskService) {
   }
-newArr: any = []
 
-  delete(id: string) {
+edit: boolean = false
 
-    this.taskService.deleteTask(id).subscribe((deleting: any) => {
-      this.taskService.allTasks = this.taskService.allTasks.filter  (el =>
-        el._id !== deleting._id
-      )
-      return this.newArr
-
-    })
-
-  }
 }

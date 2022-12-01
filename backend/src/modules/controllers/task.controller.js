@@ -27,13 +27,14 @@ module.exports.createNewTask = (req, res) => {
 }
 
 module.exports.changeTaskInfo = (req, res) => {
-  const {id, text, isCheck} = req.body
+  console.log(req.body)
+  const {_id, text, isCheck} = req.body
   try {
     if (typeof isCheck === 'boolean' &&
         text &&
         typeof text === 'string') {
 
-      Task.findByIdAndUpdate(id, {text, isCheck})
+      Task.findByIdAndUpdate(_id, {text, isCheck}, {new: true})
           .then(result => res.send(result))
     } else res.status(400).send('uncorrected data')
   } catch (error) {

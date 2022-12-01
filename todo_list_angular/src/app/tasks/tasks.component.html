@@ -1,7 +1,5 @@
 <div *ngFor="let task of this.taskService.allTasks; let i = index">
 <div style="display: flex; gap: 100px">
-
-  <div>{{task.text}}</div>
-  <button (click)="this.delete(task._id)">X</button>
+  <app-single-task [task] = "task.text" [id] = "task._id"></app-single-task>
 </div>
 </div>

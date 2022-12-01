@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { InputComponent } from './input/input.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SingleTaskComponent } from './single-task/single-task.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InputComponent,
-    TasksComponent
+    TasksComponent,
+    SingleTaskComponent
   ],
   imports: [
     BrowserModule,
