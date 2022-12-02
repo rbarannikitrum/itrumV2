@@ -1,7 +1,11 @@
+import { MatDialog } from '@angular/material/dialog';
+import { EditDialogComponent } from './../edit-dialog/edit-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskService } from './../task.service';
 import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-single-task',
@@ -10,7 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class SingleTaskComponent {
 
-constructor(public taskService: TaskService, private _snackBar: MatSnackBar) {}
+constructor(public taskService: TaskService, private _snackBar: MatSnackBar, public dialog: MatDialog) {}
 
 edit: boolean = false
 @Input() task: string = ''
@@ -53,6 +57,19 @@ public saveNew (task: string, id: string, isCheck: boolean): void {
   }))
   this.edit = false
   this._snackBar.open('Task edited', 'close', {duration: 5000})
+}
+
+openDialog() {
+  this.dialog.open(EditDialogComponent, {
+    data: {
+      task: this.task,
+      save: this.saveNew,
+      id: this.id,
+      isCheck: this.isCheck,
+      taskService: this.taskService,
+      _snackBar: this._snackBar
+    },
+  });
 }
 }
 

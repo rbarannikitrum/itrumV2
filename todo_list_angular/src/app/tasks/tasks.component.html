@@ -1,3 +1,7 @@
-<div *ngFor="let task of this.taskService.allTasks" >
-  <app-single-task [task] = "task.text" [id] = "task._id" [isCheck] = "task.isCheck"></app-single-task>
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+  <div *ngFor="let task of taskService.allTasks" cdkDrag>
+    <app-single-task [task] = "task.text" [id] = "task._id" [isCheck] = "task.isCheck"></app-single-task>
+  </div>
 </div>
+
+

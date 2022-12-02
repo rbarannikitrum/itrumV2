@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Edit task</h1>
+<div mat-dialog-content>
+  New task text:
+<input value={{data.task}} #text/>
+<button (click)="data.save(text.value, data.id, data.isCheck)">save</button>
+
+
+</div>

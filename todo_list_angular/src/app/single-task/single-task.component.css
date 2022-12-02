@@ -1,13 +1,32 @@
 .check {
   text-decoration: line-through;
   color: gray;
-  margin-top: -5px;
+  margin-top: 10px;
+  line-height: 1.5;
+  word-break: break-all;
 }
 
 .not_check {
   color: black;
-  margin-top: -5px;
+  margin-top: 10px;
+  line-height: 1.5;
+  word-break: break-all;
+}
 
+.task_edit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.operators {
+  display: flex;
+  gap: 10px;
+}
+
+.pencil {
+  font-size: 24px;
 }
 
 .card {
@@ -17,19 +36,17 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   padding: 15px;
 }
 .card:hover {
   background: rgb(220, 218, 218);
 }
 
-.operators {
-  display: flex;
-  gap: 10px;
-  flex-direction: row;
-}
+
 .font {
-  font-size: 18px
+  font-size: 32px;
+
 }
 
 .input {

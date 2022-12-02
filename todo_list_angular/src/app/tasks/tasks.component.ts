@@ -1,6 +1,8 @@
 import { TaskService } from './../task.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ITask } from '../input/taskInterface';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -9,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class TasksComponent implements OnInit {
   constructor(public taskService: TaskService) {}
 
+
   ngOnInit () {
     this.getTasks()
   }
@@ -16,6 +19,9 @@ export class TasksComponent implements OnInit {
     return this.taskService.getAllTasks().subscribe(res => {
       this.taskService.allTasks = res
     })
+  }
+  drop(event: CdkDragDrop<ITask[]>) {
+    moveItemInArray(this.taskService.allTasks, event.previousIndex, event.currentIndex);
   }
 }
 

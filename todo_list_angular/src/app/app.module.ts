@@ -13,6 +13,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBarModule} from '@angular/material/snack-bar'
+import {DragDropModule} from '@angular/cdk/drag-drop'
+import {MatDialogModule} from '@angular/material/dialog';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar'
     InputComponent,
     TasksComponent,
     SingleTaskComponent,
+    EditDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar'
     MatButtonModule,
     MatCheckboxModule,
     MatDividerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    DragDropModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -26,8 +26,9 @@ export class TaskService {
       text: task,
       isCheck: false
     }
-   return this.http.post<ITask>('http://localhost:8000/task', obj, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })})
+    return this.http.post<ITask>('http://localhost:8000/task', obj, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })})
   }
+
   public deleteTask(id: string): Observable<ITask> {
     return this.http.delete<ITask>(`http://localhost:8000/task/?id=${id}`)
   }
