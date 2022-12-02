@@ -1,7 +1,20 @@
+.modal {
+  position: relative;
+}
+
 .edit {
   display: flex;
   gap: 10px;
 }
 .save {
-  margin-top: 10px
+  margin-top: 10px;
+  margin-right: -13px
+}
+.font {
+  font-size: 24px;
+}
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }

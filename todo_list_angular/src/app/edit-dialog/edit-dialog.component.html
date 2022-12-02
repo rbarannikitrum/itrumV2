@@ -1,14 +1,20 @@
-<h1 mat-dialog-title>Edit task</h1>
-<div mat-dialog-content class="edit">
+<div class="modal">
+  <h1 mat-dialog-title>Edit task</h1>
+  <div mat-dialog-content class="edit">
 
-<mat-form-field color="primary">
-  <mat-label style="color: black">Enter Task</mat-label>
-  <input matInput #text autofocus value={{data.task}}>
-</mat-form-field>
-<button mat-raised-button color="primary"
- mat-dialog-close (click)="data.save(text.value, data.id, data.isCheck)" class="save">
- Save
-</button>
+  <mat-form-field color="primary">
+    <mat-label style="color: black">Enter Task</mat-label>
+    <input matInput #text autofocus value={{data.task}}>
+  </mat-form-field>
+  <button mat-mini-fab color="primary"
+   mat-dialog-close (click)="data.save(text.value, data.id, data.isCheck)" class="save">
+   <span class="font">✓</span>
+  </button>
+  <button mat-mini-fab color="primary"
+   mat-dialog-close class="close">
+   <span class="font">×</span>
+  </button>
 
+  </div>
 
 </div>
