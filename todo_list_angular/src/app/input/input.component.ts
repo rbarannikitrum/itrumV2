@@ -9,16 +9,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.css']
 })
-export class InputComponent  implements OnInit {
+export class InputComponent {
 
   constructor (private taskService: TaskService, private _snackBar: MatSnackBar) {}
 
-  ngOnInit () {
-    this.getTasks()
-  }
-  public getTasks (): Subscription {
-    return this.taskService.getAllTasks().subscribe(res => this.taskService.allTasks = res)
-  }
   public addTask (task: string): void {
     this.taskService.createTask(task).subscribe((el) => this.taskService.allTasks.push(el))
     this._snackBar.open('Task added', 'close', {duration: 5000})

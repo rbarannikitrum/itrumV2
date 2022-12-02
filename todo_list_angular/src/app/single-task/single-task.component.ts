@@ -1,7 +1,7 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskService } from './../task.service';
 import { Component, Input } from '@angular/core';
-import { ITask } from '../input/taskInterface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-single-task',
@@ -17,6 +17,12 @@ edit: boolean = false
 @Input() id: string = ''
 @Input() isCheck: boolean = false
 
+public getTasks (): Subscription {
+  return this.taskService.getAllTasks().subscribe(res => {
+    this.taskService.allTasks = res
+  })
+}
+
 public delete(id: string, event: Event): void {
   event.stopPropagation()
   this.taskService.deleteTask(id).subscribe((deleting: any) => {
@@ -29,7 +35,8 @@ public delete(id: string, event: Event): void {
 public editCheck (event: Event): void {
   event.stopPropagation()
   this.isCheck = !this.isCheck
-  return this.saveNew(this.task, this.id, this.isCheck)
+  this.saveNew(this.task, this.id, this.isCheck)
+  this.getTasks()
 }
 public saveNew (task: string, id: string, isCheck: boolean): void {
   const obj = {
