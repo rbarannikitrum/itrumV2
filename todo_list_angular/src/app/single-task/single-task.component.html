@@ -1,4 +1,4 @@
-<mat-card class="card" *ngIf="!edit" >
+<mat-card class="card" >
   <div class = 'task_edit'>
     <mat-checkbox color="primary" (click)="editCheck($event)" [checked]="isCheck" #checkbox></mat-checkbox>
       <mat-card-content [class.check] = "isCheck === true" [class.not_check] = "isCheck === false">{{task}}</mat-card-content>
@@ -14,18 +14,4 @@
 
 </mat-card>
 
-<div *ngIf="edit" class="edit">
-  <mat-form-field color="primary" class="input">
-    <mat-label style="color: black">Enter New</mat-label>
-    <input matInput #change value={{task}} autofocus>
-  </mat-form-field>
-  <div class="operators_edit">
-    <button mat-mini-fab color="primary" (click)="saveNew(change.value, id, isCheck)">
-      <span class="font">✓</span>
-    </button>
-    <button mat-mini-fab color="primary" (click)="edit = false">
-      <span class="font">×</span>
-    </button>
-  </div>
-</div>
 

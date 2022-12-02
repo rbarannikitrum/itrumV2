@@ -16,7 +16,6 @@ export class SingleTaskComponent {
 
 constructor(public taskService: TaskService, private _snackBar: MatSnackBar, public dialog: MatDialog) {}
 
-edit: boolean = false
 @Input() task: string = ''
 @Input() id: string = ''
 @Input() isCheck: boolean = false
@@ -55,7 +54,6 @@ public saveNew (task: string, id: string, isCheck: boolean): void {
     }
     return el
   }))
-  this.edit = false
   this._snackBar.open('Task edited', 'close', {duration: 5000})
 }
 

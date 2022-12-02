@@ -1,8 +1,14 @@
 <h1 mat-dialog-title>Edit task</h1>
-<div mat-dialog-content>
-  New task text:
-<input value={{data.task}} #text/>
-<button (click)="data.save(text.value, data.id, data.isCheck)">save</button>
+<div mat-dialog-content class="edit">
+
+<mat-form-field color="primary">
+  <mat-label style="color: black">Enter Task</mat-label>
+  <input matInput #text autofocus value={{data.task}}>
+</mat-form-field>
+<button mat-raised-button color="primary"
+ mat-dialog-close (click)="data.save(text.value, data.id, data.isCheck)" class="save">
+ Save
+</button>
 
 
 </div>
