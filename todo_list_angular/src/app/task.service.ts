@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'lodash';
+
 import { groupBy, mergeMap, Observable, tap, toArray } from 'rxjs';
 import { ITask } from './input/taskInterface';
 
@@ -11,12 +11,16 @@ export class TaskService {
 
   allTasks: Array<ITask> = []
 
+  loadStatus: boolean = false
+
   constructor(private http: HttpClient) { }
 
   public getAllTasks (): Observable<Array<ITask>> {
+    this.loadStatus = true
     return this.http.get<Array<ITask>>('http://localhost:8000/allTasks').pipe(
       tap((result: Array<ITask>) => {
         result.sort((a: ITask, b: ITask) => {return a.isCheck > b.isCheck ? 1 : -1})
+        this.loadStatus = false
       })
     )
   }

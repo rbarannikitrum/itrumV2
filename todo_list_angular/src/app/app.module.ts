@@ -16,6 +16,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar'
 import {DragDropModule} from '@angular/cdk/drag-drop'
 import {MatDialogModule} from '@angular/material/dialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
     MatDividerModule,
     MatSnackBarModule,
     DragDropModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

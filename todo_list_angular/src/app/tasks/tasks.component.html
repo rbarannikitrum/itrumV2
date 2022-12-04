@@ -1,4 +1,5 @@
-<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+<mat-spinner *ngIf="this.taskService.loadStatus" class="load"></mat-spinner>
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" *ngIf="!this.taskService.loadStatus">
   <div *ngFor="let task of taskService.allTasks" cdkDrag>
     <app-single-task [task] = "task.text" [id] = "task._id" [isCheck] = "task.isCheck"></app-single-task>
   </div>
