@@ -19,6 +19,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { TextTransformPipe } from './text-transform.pipe';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TextTransformPipe } from './text-transform.pipe';
     MatDialogModule,
     MatProgressSpinnerModule,
     InputComponent,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

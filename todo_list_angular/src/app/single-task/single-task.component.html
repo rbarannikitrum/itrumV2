@@ -2,7 +2,11 @@
   <mat-card class="card" *ngIf="!this.filterMore5 || (task | textTransform)">
     <div class = 'task_edit'>
       <mat-checkbox color="primary" (click)="editCheck($event)" [checked]="isCheck" #checkbox></mat-checkbox>
-      <mat-card-content [class.check] = "isCheck === true" [class.not_check] = "isCheck === false">{{index + 1}}) {{!this.filterMore5 ? task : task | textTransform}}</mat-card-content>
+      <mat-card-content [class.check] = "isCheck === true"
+      [class.not_check] = "isCheck === false">
+      {{index + 1}})
+      {{!this.filterMore5 ? task : task | textTransform}}
+    </mat-card-content>
     </div>
     <div class="operators">
       <button mat-mini-fab color="primary" (click)="openDialog()">

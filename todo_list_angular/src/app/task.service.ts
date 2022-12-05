@@ -10,16 +10,19 @@ import { ITask } from './input/taskInterface';
 export class TaskService {
 
   allTasks: Array<ITask> = []
-
+  completed: number = 0
+  uncompleted: number = 0
   loadStatus: boolean = false
 
   constructor(private http: HttpClient) { }
 
   public getAllTasks (): Observable<Array<ITask>> {
     this.loadStatus = true
-    return this.http.get<Array<ITask>>('http://localhost:8000/allTasks').pipe(
+     return this.http.get<Array<ITask>>('http://localhost:8000/allTasks').pipe(
       tap((result: Array<ITask>) => {
         result.sort((a: ITask, b: ITask) => {return a.isCheck > b.isCheck ? 1 : -1})
+        this.completed = result.filter(el => el.isCheck === true).length
+        this.uncompleted = result.length - this.completed
         this.loadStatus = false
       })
     )
