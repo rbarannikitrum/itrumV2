@@ -1,7 +1,7 @@
 <mat-card class="card" >
   <div class = 'task_edit'>
     <mat-checkbox color="primary" (click)="editCheck($event)" [checked]="isCheck" #checkbox></mat-checkbox>
-      <mat-card-content [class.check] = "isCheck === true" [class.not_check] = "isCheck === false">{{task}}</mat-card-content>
+      <mat-card-content [class.check] = "isCheck === true" [class.not_check] = "isCheck === false">{{index + 1}}) {{task}}</mat-card-content>
   </div>
   <div class="operators">
     <button mat-mini-fab color="primary" (click)="openDialog()">

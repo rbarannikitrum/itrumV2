@@ -19,6 +19,7 @@ constructor(public taskService: TaskService, private _snackBar: MatSnackBar, pub
 @Input() task: string = ''
 @Input() id: string = ''
 @Input() isCheck: boolean = false
+@Input() index: number = 0
 
 public getTasks (): Subscription {
   return this.taskService.getAllTasks().subscribe(res => {
