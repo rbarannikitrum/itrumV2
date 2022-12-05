@@ -1,14 +1,17 @@
+import { MatButtonModule } from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
 import { TaskService } from './../task.service';
-import { Component, OnInit } from '@angular/core';
-import { ITask } from './taskInterface';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subscription } from 'rxjs';
 
 @Component({
+  standalone: true,
   selector: 'app-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.css']
+  styleUrls: ['./input.component.css'],
+  imports: [ MatInputModule, MatButtonModule ]
 })
+
 export class InputComponent {
 
   constructor (private taskService: TaskService, private _snackBar: MatSnackBar) {}
