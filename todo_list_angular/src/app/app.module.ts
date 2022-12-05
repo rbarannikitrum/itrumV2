@@ -1,4 +1,4 @@
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +18,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop'
 import {MatDialogModule} from '@angular/material/dialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { TextTransformPipe } from './text-transform.pipe';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     TasksComponent,
     SingleTaskComponent,
     EditDialogComponent,
+    TextTransformPipe
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatDialogModule,
     MatProgressSpinnerModule,
     InputComponent,
-
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

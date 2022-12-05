@@ -20,6 +20,7 @@ constructor(public taskService: TaskService, private _snackBar: MatSnackBar, pub
 @Input() id: string = ''
 @Input() isCheck: boolean = false
 @Input() index: number = 0
+@Input() filterMore5: boolean = false
 
 public getTasks (): Subscription {
   return this.taskService.getAllTasks().subscribe(res => {

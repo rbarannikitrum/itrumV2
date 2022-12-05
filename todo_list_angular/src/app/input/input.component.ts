@@ -1,5 +1,5 @@
 import { MatButtonModule } from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { TaskService } from './../task.service';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';

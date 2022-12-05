@@ -12,6 +12,7 @@ export class TasksComponent implements OnInit {
 
   constructor(public taskService: TaskService) {}
 
+  filterMore5: boolean = false
 
   ngOnInit () {
     this.getTasks()

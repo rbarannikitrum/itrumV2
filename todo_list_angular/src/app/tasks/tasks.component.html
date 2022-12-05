@@ -1,7 +1,15 @@
 <mat-spinner *ngIf="this.taskService.loadStatus" class="load"></mat-spinner>
+
+<mat-slide-toggle color="primary" (change)="this.filterMore5 = !this.filterMore5" >Filter more than 5</mat-slide-toggle>
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" *ngIf="!this.taskService.loadStatus">
   <div *ngFor="let task of taskService.allTasks; let i = index" cdkDrag>
-    <app-single-task [task] = "task.text" [id] = "task._id" [isCheck] = "task.isCheck" [index] = "i"></app-single-task>
+    <app-single-task
+     [task] = "task.text"
+    [id] = "task._id"
+    [isCheck] = "task.isCheck"
+    [index] = "i"
+    [filterMore5] = "filterMore5"
+    ></app-single-task>
   </div>
 </div>
 
