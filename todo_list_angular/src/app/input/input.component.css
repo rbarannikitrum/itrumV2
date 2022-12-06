@@ -4,7 +4,7 @@
   align-items: center;
   margin: 0;
   gap: 30px;
-  
+
 }
 
 .input {
@@ -14,5 +14,7 @@
 }
 .add {
   font-size: 28px;
-
+}
+.input_label {
+  background: black;
 }

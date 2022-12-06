@@ -1,6 +1,6 @@
 <div class="container">
     <mat-form-field color="primary" class="input">
-      <mat-label style="color: black">Enter Task</mat-label>
+      <mat-label class="input_label">Enter Task</mat-label>
       <input matInput #task autofocus (keydown.enter)="addTaskOnEnter($event); task.value = ''">
     </mat-form-field>
   <button mat-mini-fab color="primary" (click)="addTask(task.value); task.value = ''">
