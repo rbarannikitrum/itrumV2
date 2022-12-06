@@ -1,8 +1,9 @@
-
   <mat-card class="card" *ngIf="!this.filterMore5 || (task | textTransform)">
     <div class = 'task_edit'>
       <mat-checkbox color="primary" (click)="editCheck($event)" [checked]="isCheck" #checkbox></mat-checkbox>
-      <mat-card-content [class.check] = "isCheck === true"
+      <mat-card-content
+      class="card_content"
+      [class.check] = "isCheck === true"
       [class.not_check] = "isCheck === false">
       {{index + 1}})
       {{!this.filterMore5 ? task : task | textTransform}}

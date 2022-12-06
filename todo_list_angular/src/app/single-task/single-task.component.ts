@@ -59,7 +59,7 @@ public saveNew (task: string, id: string, isCheck: boolean): void {
   this._snackBar.open('Task edited', 'close', {duration: 5000})
 }
 
-openDialog() {
+openDialog(): void {
   this.dialog.open(EditDialogComponent, {
     data: {
       task: this.task,

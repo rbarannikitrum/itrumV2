@@ -4,7 +4,7 @@
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" *ngIf="!this.taskService.loadStatus">
   <div *ngFor="let task of taskService.allTasks; let i = index" cdkDrag>
     <app-single-task
-     [task] = "task.text"
+    [task] = "task.text"
     [id] = "task._id"
     [isCheck] = "task.isCheck"
     [index] = "i"

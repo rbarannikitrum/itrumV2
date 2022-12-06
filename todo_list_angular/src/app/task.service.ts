@@ -44,6 +44,7 @@ export class TaskService {
     const options = {params: httpParams}
     return this.http.delete<ITask>(this.url, options)
   }
+
   public changeTaskInfo(obj: ITask): Observable<ITask> {
     return this.http.patch<ITask>(this.url, obj)
   }

@@ -14,7 +14,7 @@ export class TasksComponent implements OnInit {
 
   filterMore5: boolean = false
 
-   ngOnInit () {
+  ngOnInit () {
     this.getTasks()
   }
 

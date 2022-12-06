@@ -1,13 +1,13 @@
 .check {
   text-decoration: line-through;
   color: gray;
-  margin-top: 10px;
-  line-height: 1.5;
-  word-break: break-all;
 }
 
 .not_check {
   color: black;
+}
+
+.card_content {
   margin-top: 10px;
   line-height: 1.5;
   word-break: break-all;
