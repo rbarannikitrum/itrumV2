@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { groupBy, mergeMap, Observable, tap, toArray } from 'rxjs';
@@ -13,12 +13,14 @@ export class TaskService {
   completed: number = 0
   uncompleted: number = 0
   loadStatus: boolean = false
+  url: string = 'http://localhost:8000/task'
 
   constructor(private http: HttpClient) { }
 
   public getAllTasks (): Observable<Array<ITask>> {
+    const url = 'http://localhost:8000/allTasks'
     this.loadStatus = true
-     return this.http.get<Array<ITask>>('http://localhost:8000/allTasks').pipe(
+     return this.http.get<Array<ITask>>(url).pipe(
       tap((result: Array<ITask>) => {
         result.sort((a: ITask, b: ITask) => {return a.isCheck > b.isCheck ? 1 : -1})
         this.completed = result.filter(el => el.isCheck === true).length
@@ -33,13 +35,16 @@ export class TaskService {
       text: task,
       isCheck: false
     }
-    return this.http.post<ITask>('http://localhost:8000/task', obj, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })})
+    const headers = new HttpHeaders().set('Content-Type', 'application/json')
+    return this.http.post<ITask>(this.url, obj, {headers: headers})
   }
 
   public deleteTask(id: string): Observable<ITask> {
-    return this.http.delete<ITask>(`http://localhost:8000/task/?id=${id}`)
+    const httpParams = new HttpParams().set('id', id)
+    const options = {params: httpParams}
+    return this.http.delete<ITask>(this.url, options)
   }
   public changeTaskInfo(obj: ITask): Observable<ITask> {
-    return this.http.patch<ITask>('http://localhost:8000/task', obj)
+    return this.http.patch<ITask>(this.url, obj)
   }
 }
