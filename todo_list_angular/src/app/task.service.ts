@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { groupBy, mergeMap, Observable, tap, toArray } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ITask } from './input/taskInterface';
 
 @Injectable({
